@@ -1,7 +1,21 @@
 import css from "../App.css";
 import { useState } from "react";
-function Navbar() {
-  const [isChecked, setIsChecked] = useState(false);
+
+interface Props {
+  visibleComponents: { [key: string]: boolean };
+  setVisibleComponents: React.Dispatch<
+    React.SetStateAction<{ [key: string]: boolean }>
+  >;
+}
+
+function Navbar({ visibleComponents, setVisibleComponents }: Props) {
+  const handleCheckboxChange = (componentName: string) => {
+    setVisibleComponents((prevState) => ({
+      ...prevState,
+      [componentName]: !prevState[componentName],
+    }));
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -72,12 +86,17 @@ function Navbar() {
                 Faction
               </a>
               <ul className="dropdown-menu">
+                <div className="row"></div>
                 <li>
                   <div className="form-check">
                     <input
-                      className="form-check-input"
+                      className="checkbox"
+                      checked={visibleComponents.AgentsOfTheImperium}
+                      onChange={() =>
+                        handleCheckboxChange("AgentsOfTheImperium")
+                      }
                       type="checkbox"
-                      value=""
+                      value="AgentsOfTheImperium"
                       id="flexCheckDefault"
                     />
                     <label className="form-check-label">
@@ -88,7 +107,9 @@ function Navbar() {
                 <li>
                   <div className="form-check">
                     <input
-                      className="form-check-input"
+                      className="checkbox"
+                      checked={visibleComponents.AdeptusCustodes}
+                      onChange={() => handleCheckboxChange("AdeptusCustodes")}
                       type="checkbox"
                       value="adeptuscustodes"
                       id="flexCheckDefault"
@@ -99,9 +120,11 @@ function Navbar() {
                 <li>
                   <div className="form-check">
                     <input
-                      className="form-check-input"
+                      className="checkbox"
+                      checked={visibleComponents.ChaosDaemons}
+                      onChange={() => handleCheckboxChange("ChaosDaemons")}
                       type="checkbox"
-                      value=""
+                      value="chaosDaemons"
                       id="flexCheckDefault"
                     />
                     <label className="form-check-label">Chaos Daemons</label>
