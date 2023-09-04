@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { SelectedUnit } from "../types";
 
 interface Props {
   selectedUnits: SelectedUnit[];
-  updateUnitQuantity: (id: string, newQuantity: number) => void;
+  updateUnitQuantity: (id: string, increment: number) => void;
   removeUnit: (id: string) => void;
 }
 
@@ -13,16 +13,10 @@ const ArmyList: React.FC<Props> = ({
   removeUnit,
 }) => {
   const calculateTotalPointCost = (unit: SelectedUnit): number => {
-    if (unit.pointCost.length === 1) {
-      return unit.pointCost[unit.quantity] * unit.quantity;
-    } else {
-      let total = 0;
-      for (let i = 0; i < unit.quantity; i++) {
-        total += unit.pointCost[i] || unit.pointCost[unit.pointCost.length - 1];
-      }
-      return total;
-    }
+    return unit.pointCost[unit.currentIndex];
   };
+
+  const [showWargear, setShowWargear] = useState<null | string>(null);
 
   return (
     <div>
@@ -33,19 +27,19 @@ const ArmyList: React.FC<Props> = ({
             <div className="army-list-unit">
               <span>
                 <div className="army-list-quantity">
-                  {unit.quantity} x {unit.name} -{" "}
+                  {unit.numberOfModels[unit.currentIndex]} x {unit.name} -{" "}
                   {calculateTotalPointCost(unit)}p
                 </div>
               </span>
               <button
                 className="btn btn-success"
-                onClick={() => updateUnitQuantity(unit.id, unit.quantity + 1)}
+                onClick={() => updateUnitQuantity(unit.id, 1)}
               >
                 +
               </button>
               <button
                 className="btn btn-danger"
-                onClick={() => updateUnitQuantity(unit.id, unit.quantity - 1)}
+                onClick={() => updateUnitQuantity(unit.id, -1)}
               >
                 -
               </button>
@@ -55,7 +49,36 @@ const ArmyList: React.FC<Props> = ({
               >
                 X
               </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => setShowWargear(unit.id)}
+              >
+                Wargear
+              </button>
             </div>
+            {showWargear === unit.id && (
+              <div>
+                <h3>Wargear</h3>
+                <ul>
+                  {unit.rangedWeapons.map((weapon, index) => (
+                    <li key={index}>
+                      <label>
+                        <input type="checkbox" defaultChecked={index === 0} />
+                        {weapon}
+                      </label>
+                    </li>
+                  ))}
+                  {unit.meleeWeapons.map((weapon, index) => (
+                    <li key={index}>
+                      <label>
+                        <input type="checkbox" defaultChecked={index === 0} />
+                        {weapon}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </li>
         ))}
       </ul>

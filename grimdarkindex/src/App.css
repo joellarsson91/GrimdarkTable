@@ -2,3 +2,39 @@
     margin-left: 5px;
     margin-right: 6px;
 }
+
+/* Add styles for the sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Adjust the initial width of the sidebar */
+    width: 300px; /* Adjust the width of the sidebar */
+    height: 100%;
+    background-color: #f5f5f5;
+    transition: right 0.3s ease-in-out;
+  }
+  
+  .sidebar.minimized {
+    right: -300px; /* Adjust the width to match the minimized state */
+  }
+  
+  .sidebar.expanded {
+    right: 0;
+  }
+  
+  /* Add styles for the toggle button */
+  .sidebar-toggle {
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: right 0.3s ease-in-out;
+  }
+  
+  .sidebar.expanded .sidebar-toggle {
+    right: 280px; /* Adjust the position when sidebar is expanded */
+  }
+  

@@ -1,8 +1,10 @@
 export interface SelectedUnit {
-  id: string; // Add id field to uniquely identify units
+  id: string;
   name: string;
   pointCost: number[];
   quantity: number;
   numberOfModels: number[];
   currentIndex: number;
+  rangedWeapons: string[];
+  meleeWeapons: string[];
 }
