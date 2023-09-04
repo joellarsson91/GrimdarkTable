@@ -51,6 +51,27 @@ function App() {
     );
   };
 
+  const updateWargearQuantity = (
+    id: string,
+    wargearIndex: number,
+    increment: number
+  ) => {
+    setSelectedUnits((prevSelectedUnits) =>
+      prevSelectedUnits.map((unit) =>
+        unit.id === id
+          ? {
+              ...unit,
+              wargearQuantities: unit.wargearQuantities.map((quantity, index) =>
+                index === wargearIndex
+                  ? Math.max(0, quantity + increment) // Ensure quantity is not negative
+                  : quantity
+              ),
+            }
+          : unit
+      )
+    );
+  };
+
   const removeUnit = (id: string) => {
     setSelectedUnits((prevSelectedUnits) =>
       prevSelectedUnits.filter((unit) => unit.id !== id)
@@ -75,6 +96,9 @@ function App() {
         currentIndex: 0,
         rangedWeapons,
         meleeWeapons,
+        wargearQuantities: new Array(
+          rangedWeapons.length + meleeWeapons.length
+        ).fill(0),
       },
     ]);
 
@@ -102,6 +126,7 @@ function App() {
           selectedUnits={selectedUnits}
           updateUnitQuantity={updateUnitQuantity}
           removeUnit={removeUnit}
+          updateWargearQuantity={updateWargearQuantity}
           expanded={sidebarExpanded}
         />
       )}
@@ -143,21 +168,21 @@ function getComponent(
       return (
         <AgentsOfTheImperium
           setSelectedUnits={setSelectedUnits}
-          addUnitToArmyList={addUnitToArmyList} // Pass the addUnitToArmyList function
+          addUnitToArmyList={addUnitToArmyList}
         />
       );
     case "AdeptusCustodes":
       return (
         <AdeptusCustodes
           setSelectedUnits={setSelectedUnits}
-          addUnitToArmyList={addUnitToArmyList} // Pass the addUnitToArmyList function
+          addUnitToArmyList={addUnitToArmyList}
         />
       );
     case "ChaosDaemons":
       return (
         <ChaosDaemons
           setSelectedUnits={setSelectedUnits}
-          addUnitToArmyList={addUnitToArmyList} // Pass the addUnitToArmyList function
+          addUnitToArmyList={addUnitToArmyList}
         />
       );
     // ...add cases for other components

@@ -7,4 +7,5 @@ export interface SelectedUnit {
   currentIndex: number;
   rangedWeapons: string[];
   meleeWeapons: string[];
+  wargearQuantities: number[]; // Add this line for wargear quantities
 }
