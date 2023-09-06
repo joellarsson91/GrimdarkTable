@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// Unitcard.tsx
+
+import React from "react";
 import { calculateUnitComposition, formatPointCost } from "../../helpers";
 
 interface Props {
@@ -8,12 +10,14 @@ interface Props {
   unitImageUrl: string;
   rangedWeapons: { name: string; quantity: number }[];
   meleeWeapons: { name: string; quantity: number }[];
+  miscellaneous?: { name: string; quantity: number }[]; // Make 'miscellaneous' optional
   addUnitToArmyList: (
     name: string,
     pointCost: number[],
     numberOfModels: number[],
     rangedWeapons: { name: string; quantity: number }[],
-    meleeWeapons: { name: string; quantity: number }[]
+    meleeWeapons: { name: string; quantity: number }[],
+    misc?: { name: string; quantity: number }[] // Include 'miscellaneous' as an optional parameter
   ) => void;
 }
 
@@ -24,6 +28,7 @@ const Unitcard: React.FC<Props> = ({
   unitImageUrl,
   rangedWeapons,
   meleeWeapons,
+  miscellaneous,
   addUnitToArmyList,
 }) => {
   const handleAddToArmyList = () => {
@@ -32,7 +37,8 @@ const Unitcard: React.FC<Props> = ({
       pointCost,
       numberOfModels,
       rangedWeapons,
-      meleeWeapons
+      meleeWeapons,
+      miscellaneous // Include 'miscellaneous' in the function call
     );
   };
 

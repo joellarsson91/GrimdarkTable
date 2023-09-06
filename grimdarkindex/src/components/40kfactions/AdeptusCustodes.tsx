@@ -38,6 +38,11 @@ export default function AdeptusCustodes({
                   { name: "Sentinel Blade", quantity: 0 },
                   { name: "Misericordia", quantity: 0 },
                 ]}
+                miscellaneous={[
+                  { name: "Vexilla", quantity: 0 },
+                  { name: "Praesidium Shield", quantity: 0 },
+                  { name: "Misericordia", quantity: 0 },
+                ]}
                 addUnitToArmyList={addUnitToArmyList}
               />
             </div>
@@ -58,6 +63,7 @@ export default function AdeptusCustodes({
                   { name: "Guardian Spear", quantity: 3 },
                   { name: "Castellan Axe", quantity: 0 },
                 ]}
+                miscellaneous={[{ name: "Vexilla", quantity: 0 }]}
                 addUnitToArmyList={addUnitToArmyList}
               />
             </div>

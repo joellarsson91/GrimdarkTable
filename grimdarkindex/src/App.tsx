@@ -82,6 +82,7 @@ function App() {
     name: string,
     pointCost: number[],
     numberOfModels: number[],
+    miscellaneous: { name: string; quantity: number }[] = [],
     rangedWeapons: { name: string; quantity: number }[] = [],
     meleeWeapons: { name: string; quantity: number }[] = []
   ) => {
@@ -96,6 +97,7 @@ function App() {
         currentIndex: 0,
         rangedWeapons,
         meleeWeapons,
+        miscellaneous,
         wargearQuantities: new Array(
           rangedWeapons.length + meleeWeapons.length
         ).fill(0),

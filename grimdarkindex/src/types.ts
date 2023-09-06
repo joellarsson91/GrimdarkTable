@@ -1,3 +1,7 @@
+// types.ts
+
+// ...
+
 export interface SelectedUnit {
   id: string;
   name: string;
@@ -7,5 +11,6 @@ export interface SelectedUnit {
   currentIndex: number;
   rangedWeapons: { name: string; quantity: number }[];
   meleeWeapons: { name: string; quantity: number }[];
-  wargearQuantities: number[]; // Add this line for wargear quantities
+  miscellaneous: { name: string; quantity: number }[]; // Add the 'miscellaneous' property
+  wargearQuantities: number[];
 }
