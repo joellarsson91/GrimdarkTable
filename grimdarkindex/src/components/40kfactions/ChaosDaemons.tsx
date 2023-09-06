@@ -1,17 +1,19 @@
 import React from "react";
 import Unitcard from "../units/Unitcard";
-import { SelectedUnit } from "../../types"; // Import the SelectedUnit type
+import { SelectedUnit } from "../../types";
 
 interface Props {
   setSelectedUnits: React.Dispatch<React.SetStateAction<SelectedUnit[]>>;
   addUnitToArmyList: (
     name: string,
     pointCost: number[],
-    numberOfModels: number[]
+    numberOfModels: number[],
+    rangedWeapons: { name: string; quantity: number }[],
+    meleeWeapons: { name: string; quantity: number }[]
   ) => void;
 }
 
-export default function AgentsOfTheImperium({
+export default function ChaosDaemons({
   setSelectedUnits,
   addUnitToArmyList,
 }: Props) {
@@ -26,8 +28,14 @@ export default function AgentsOfTheImperium({
                 pointCost={[75, 130]}
                 numberOfModels={[3, 6]}
                 unitImageUrl="flamers.jpeg"
-                rangedWeapons={["Ranged Weapon 1", "Ranged Weapon 2"]}
-                meleeWeapons={["Melee Weapon 1", "Melee Weapon 2"]}
+                rangedWeapons={[
+                  { name: "Ranged Weapon 1", quantity: 1 },
+                  { name: "Ranged Weapon 2", quantity: 1 },
+                ]}
+                meleeWeapons={[
+                  { name: "Melee Weapon 1", quantity: 1 },
+                  { name: "Melee Weapon 2", quantity: 1 },
+                ]}
                 addUnitToArmyList={addUnitToArmyList}
               />
             </div>

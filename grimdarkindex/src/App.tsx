@@ -82,8 +82,8 @@ function App() {
     name: string,
     pointCost: number[],
     numberOfModels: number[],
-    rangedWeapons: string[] = [],
-    meleeWeapons: string[] = []
+    rangedWeapons: { name: string; quantity: number }[] = [],
+    meleeWeapons: { name: string; quantity: number }[] = []
   ) => {
     setSelectedUnits((prevSelectedUnits) => [
       ...prevSelectedUnits,

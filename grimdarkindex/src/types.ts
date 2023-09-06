@@ -5,7 +5,7 @@ export interface SelectedUnit {
   quantity: number;
   numberOfModels: number[];
   currentIndex: number;
-  rangedWeapons: string[];
-  meleeWeapons: string[];
+  rangedWeapons: { name: string; quantity: number }[];
+  meleeWeapons: { name: string; quantity: number }[];
   wargearQuantities: number[]; // Add this line for wargear quantities
 }

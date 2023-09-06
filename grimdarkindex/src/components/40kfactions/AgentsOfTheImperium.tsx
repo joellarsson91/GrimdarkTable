@@ -7,7 +7,9 @@ interface Props {
   addUnitToArmyList: (
     name: string,
     pointCost: number[],
-    numberOfModels: number[]
+    numberOfModels: number[],
+    rangedWeapons: { name: string; quantity: number }[], // Updated rangedWeapons
+    meleeWeapons: { name: string; quantity: number }[] // Updated meleeWeapons
   ) => void;
 }
 
@@ -26,8 +28,10 @@ export default function AgentsOfTheImperium({
                 pointCost={[115]}
                 numberOfModels={[1]}
                 unitImageUrl="callidusassassin.jpeg"
-                rangedWeapons={["Ranged Weapon 1", "Ranged Weapon 2"]}
-                meleeWeapons={["Melee Weapon 1", "Melee Weapon 2"]}
+                rangedWeapons={[{ name: "Neural Shredder", quantity: 1 }]}
+                meleeWeapons={[
+                  { name: "Phase sword and poison blades", quantity: 1 },
+                ]}
                 addUnitToArmyList={addUnitToArmyList}
               />
             </div>
@@ -40,18 +44,17 @@ export default function AgentsOfTheImperium({
                 numberOfModels={[5, 11]}
                 unitImageUrl="exactionsquad.webp"
                 rangedWeapons={[
-                  "Arbites combat shotgun",
-                  "Arbites grenade launcher - frag",
-                  "Arbites grenade launcher - krak",
-                  "Arbites shotpistol",
-                  "Executioner shotgun",
-                  "Heavy stubber",
-                  "Webber",
+                  { name: "Arbites combat shotgun", quantity: 5 },
+                  { name: "Arbites grenade launcher", quantity: 0 },
+                  { name: "Arbites shotpistol", quantity: 5 },
+                  { name: "Executioner shotgun", quantity: 0 },
+                  { name: "Heavy stubber", quantity: 0 },
+                  { name: "Webber", quantity: 0 },
                 ]}
                 meleeWeapons={[
-                  "Close combat weapon",
-                  "Excruciator maul",
-                  "Mechanical bite",
+                  { name: "Close combat weapon", quantity: 5 },
+                  { name: "Excruciator maul", quantity: 0 },
+                  { name: "Mechanical bite", quantity: 0 },
                 ]}
                 addUnitToArmyList={addUnitToArmyList}
               />

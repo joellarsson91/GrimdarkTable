@@ -1,68 +1,23 @@
-import React from "react";
-import { SelectedUnit } from "../../types";
-import { v4 as uuidv4 } from "uuid"; // Import the uuidv4 function
+import React, { useState } from "react";
+import { calculateUnitComposition, formatPointCost } from "../../helpers";
 
 interface Props {
   name: string;
   pointCost: number[];
   numberOfModels: number[];
   unitImageUrl: string;
-  rangedWeapons: string[];
-  meleeWeapons: string[];
+  rangedWeapons: { name: string; quantity: number }[];
+  meleeWeapons: { name: string; quantity: number }[];
   addUnitToArmyList: (
     name: string,
     pointCost: number[],
     numberOfModels: number[],
-    rangedWeapons: string[],
-    meleeWeapons: string[]
+    rangedWeapons: { name: string; quantity: number }[],
+    meleeWeapons: { name: string; quantity: number }[]
   ) => void;
 }
 
-function calculateUnitComposition(numberOfModels: number[]): string {
-  let unitComposition = "";
-
-  for (let index = 0; index < numberOfModels.length; index++) {
-    const element = numberOfModels[index];
-    if (index === 0) {
-      unitComposition = element.toString();
-    } else {
-      if (element !== numberOfModels[index - 1] + 1) {
-        unitComposition += ", " + element;
-      } else if (element === numberOfModels[index - 1] + 1) {
-        if (element + 1 !== numberOfModels[index + 1]) {
-          unitComposition += " - " + element;
-        }
-      }
-    }
-  }
-
-  return unitComposition;
-}
-
-function formatPointCost(
-  numberOfModels: number[],
-  pointCost: number[]
-): string {
-  let pointsDisplayed = "";
-
-  for (let index = 0; index < numberOfModels.length; index++) {
-    const element = numberOfModels[index];
-    if (index === 0) {
-      pointsDisplayed = pointCost[0].toString() + "p";
-    } else {
-      if (element !== numberOfModels[index - 1] + 1) {
-        pointsDisplayed += ", " + pointCost[index].toString() + "p";
-      } else if (element === numberOfModels[index - 1] + 1) {
-        if (element + 1 !== numberOfModels[index + 1]) {
-          pointsDisplayed += " - " + pointCost[index].toString() + "p";
-        }
-      }
-    }
-  }
-  return pointsDisplayed;
-}
-
-function Unitcard({
+const Unitcard: React.FC<Props> = ({
   name,
   pointCost,
   numberOfModels,
@@ -70,41 +25,40 @@ function Unitcard({
   rangedWeapons,
   meleeWeapons,
   addUnitToArmyList,
-}: Props) {
+}) => {
+  const handleAddToArmyList = () => {
+    addUnitToArmyList(
+      name,
+      pointCost,
+      numberOfModels,
+      rangedWeapons,
+      meleeWeapons
+    );
+  };
+
+  // Use the calculateUnitComposition function to display the number of models
   const unitComposition = calculateUnitComposition(numberOfModels);
+  const pointPerUnitComposition = formatPointCost(numberOfModels, pointCost);
 
   return (
     <div className="card">
-      <h5 className="card-title">{name}</h5>
       <img
         src={"./images/" + unitImageUrl}
+        alt={name}
         className="card-img-top"
-        alt="..."
       />
       <div className="card-body">
-        <div>
-          <button
-            className="btn btn-success"
-            onClick={() =>
-              addUnitToArmyList(
-                name,
-                pointCost,
-                numberOfModels,
-                rangedWeapons,
-                meleeWeapons
-              )
-            }
-          >
-            Add to Army
-          </button>
-        </div>
-        <p className="card-text">{unitComposition}</p>
-        <div className="card-footer text-body-secondary">
-          {formatPointCost(numberOfModels, pointCost)}
-        </div>
+        <h5 className="card-title">{name}</h5>
+        <h6>Point cost: </h6>
+        <p>{pointPerUnitComposition}</p>
+        <h6>Unit Composition: </h6>
+        <p>{unitComposition}</p> {/* Display unit composition */}
+        <button className="btn btn-primary" onClick={handleAddToArmyList}>
+          Add to Army List
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Unitcard;
