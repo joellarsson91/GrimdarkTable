@@ -5,6 +5,7 @@
 export interface SelectedUnit {
   id: string;
   name: string;
+  category: string;
   pointCost: number[];
   quantity: number;
   numberOfModels: number[];

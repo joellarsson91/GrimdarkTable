@@ -1,15 +1,17 @@
 import React from "react";
 import Unitcard from "../units/Unitcard";
 import { SelectedUnit } from "../../types"; // Import the SelectedUnit type
+import unitCategories from "../../unitCategories";
 
 interface Props {
   setSelectedUnits: React.Dispatch<React.SetStateAction<SelectedUnit[]>>;
   addUnitToArmyList: (
     name: string,
+    category: string,
     pointCost: number[],
     numberOfModels: number[],
-    rangedWeapons: { name: string; quantity: number }[], // Updated rangedWeapons
-    meleeWeapons: { name: string; quantity: number }[] // Updated meleeWeapons
+    rangedWeapons?: { name: string; quantity: number }[], // Updated rangedWeapons
+    meleeWeapons?: { name: string; quantity: number }[] // Updated meleeWeapons
   ) => void;
 }
 
@@ -25,6 +27,7 @@ export default function AgentsOfTheImperium({
             <div>
               <Unitcard
                 name="Callidus Assassin"
+                category={unitCategories.AlliedUnits}
                 pointCost={[115]}
                 numberOfModels={[1]}
                 unitImageUrl="callidusassassin.jpeg"
@@ -40,6 +43,7 @@ export default function AgentsOfTheImperium({
             <div>
               <Unitcard
                 name="Exaction Squad"
+                category={unitCategories.AlliedUnits}
                 pointCost={[35, 75]}
                 numberOfModels={[5, 11]}
                 unitImageUrl="exactionsquad.webp"

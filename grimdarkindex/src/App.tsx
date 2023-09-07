@@ -80,6 +80,7 @@ function App() {
 
   const addUnitToArmyList = (
     name: string,
+    category: string,
     pointCost: number[],
     numberOfModels: number[],
     miscellaneous: { name: string; quantity: number }[] = [],
@@ -91,6 +92,7 @@ function App() {
       {
         id: uuidv4(),
         name,
+        category,
         pointCost,
         quantity: numberOfModels[0],
         numberOfModels: [...numberOfModels],
@@ -161,6 +163,7 @@ function getComponent(
   setSelectedUnits: React.Dispatch<React.SetStateAction<SelectedUnit[]>>,
   addUnitToArmyList: (
     name: string,
+    category: string,
     pointCost: number[],
     numberOfModels: number[]
   ) => void

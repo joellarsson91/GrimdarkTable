@@ -1,15 +1,17 @@
 import React from "react";
 import Unitcard from "../units/Unitcard";
 import { SelectedUnit } from "../../types";
+import unitCategories from "../../unitCategories";
 
 interface Props {
   setSelectedUnits: React.Dispatch<React.SetStateAction<SelectedUnit[]>>;
   addUnitToArmyList: (
     name: string,
+    category: string,
     pointCost: number[],
     numberOfModels: number[],
-    rangedWeapons: { name: string; quantity: number }[],
-    meleeWeapons: { name: string; quantity: number }[]
+    rangedWeapons?: { name: string; quantity: number }[],
+    meleeWeapons?: { name: string; quantity: number }[]
   ) => void;
 }
 
@@ -25,6 +27,7 @@ export default function ChaosDaemons({
             <div>
               <Unitcard
                 name="Flamers"
+                category={unitCategories.OtherUnits}
                 pointCost={[75, 130]}
                 numberOfModels={[3, 6]}
                 unitImageUrl="flamers.jpeg"
