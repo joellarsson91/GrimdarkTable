@@ -11,16 +11,16 @@ interface Props {
   rangedWeapons?: { name: string; quantity: number }[];
   meleeWeapons?: { name: string; quantity: number }[];
   miscellaneous?: { name: string; quantity: number }[];
+  enhancements?: { name: string; pointCost: number }[]; // Add enhancements
   addUnitToArmyList: (
     name: string,
     category: string,
     pointCost: number[],
     numberOfModels: number[],
-    // Make 'rangedWeapons' and 'meleeWeapons' optional
     rangedWeapons?: { name: string; quantity: number }[],
     meleeWeapons?: { name: string; quantity: number }[],
-    // Include 'miscellaneous' as an optional parameter
-    miscellaneous?: { name: string; quantity: number }[]
+    miscellaneous?: { name: string; quantity: number }[],
+    enhancements?: { name: string; pointCost: number }[] // Pass enhancements to addUnitToArmyList
   ) => void;
 }
 
@@ -33,6 +33,7 @@ const Unitcard: React.FC<Props> = ({
   rangedWeapons,
   meleeWeapons,
   miscellaneous,
+  enhancements,
   addUnitToArmyList,
 }) => {
   const handleAddToArmyList = () => {
@@ -43,7 +44,8 @@ const Unitcard: React.FC<Props> = ({
       numberOfModels,
       rangedWeapons,
       meleeWeapons,
-      miscellaneous // Include 'miscellaneous' in the function call
+      miscellaneous,
+      enhancements
     );
   };
 
@@ -52,21 +54,25 @@ const Unitcard: React.FC<Props> = ({
   const pointPerUnitComposition = formatPointCost(numberOfModels, pointCost);
 
   return (
-    <div className="card">
-      <img
-        src={"./images/" + unitImageUrl}
-        alt={name}
-        className="card-img-top"
-      />
-      <div className="card-body">
-        <h5 className="card-title">{name}</h5>
-        <h6>Point cost: </h6>
-        <p>{pointPerUnitComposition}</p>
-        <h6>Unit Composition: </h6>
-        <p>{unitComposition}</p> {/* Display unit composition */}
-        <button className="btn btn-primary" onClick={handleAddToArmyList}>
-          Add to Army List
-        </button>
+    <div className="unit-card col-8">
+      <div className="unit-card-content">
+        <div className="rounded-border-gradient">
+          <img
+            src={"./images/" + unitImageUrl}
+            alt={name}
+            className="card-img-top"
+          />
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            <h6>Point cost: </h6>
+            <p>{pointPerUnitComposition}</p>
+            <h6>Unit Composition: </h6>
+            <p>{unitComposition}</p> {/* Display unit composition */}
+          </div>
+          <button className="btn btn-primary" onClick={handleAddToArmyList}>
+            Add to Army List
+          </button>
+        </div>
       </div>
     </div>
   );

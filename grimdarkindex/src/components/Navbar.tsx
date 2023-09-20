@@ -1,14 +1,24 @@
-import css from "../App.css";
-import { useState } from "react";
+import React from "react";
 
 interface Props {
   visibleComponents: { [key: string]: boolean };
   setVisibleComponents: React.Dispatch<
     React.SetStateAction<{ [key: string]: boolean }>
   >;
+  sidebarVisible: boolean;
+  sidebarExpanded: boolean;
+  toggleArmySidebar: () => void;
+  toggleArmySidebarVisibility: () => void;
 }
 
-function Navbar({ visibleComponents, setVisibleComponents }: Props) {
+function Navbar({
+  visibleComponents,
+  setVisibleComponents,
+  sidebarVisible,
+  sidebarExpanded,
+  toggleArmySidebar,
+  toggleArmySidebarVisibility,
+}: Props) {
   const handleCheckboxChange = (componentName: string) => {
     setVisibleComponents((prevState) => ({
       ...prevState,
@@ -134,6 +144,21 @@ function Navbar({ visibleComponents, setVisibleComponents }: Props) {
             </li>
           </ul>
         </div>
+        {sidebarVisible ? (
+          <button
+            className="material-symbols-outlined"
+            onClick={toggleArmySidebar}
+          >
+            {sidebarExpanded ? "check_box_outline_blank" : "dock_to_left"}
+          </button>
+        ) : (
+          <button
+            className="material-symbols-outlined"
+            onClick={toggleArmySidebarVisibility}
+          >
+            dock_to_left
+          </button>
+        )}
       </div>
     </nav>
   );

@@ -121,6 +121,27 @@ export default function AdeptusCustodes({
                 numberOfModels={[1]}
                 unitImageUrl="bladechampion.webp"
                 meleeWeapons={[{ name: "Vaultswords", quantity: 1 }]}
+                enhancements={[
+                  { name: "Unstoppable Destroyer", pointCost: 25 },
+                  { name: "Inspirational Exemplar", pointCost: 10 },
+                  { name: "Veiled Blade", pointCost: 25 },
+                  { name: "Ceaseless Hunter", pointCost: 30 },
+                ]}
+                addUnitToArmyList={addUnitToArmyList}
+              />
+            </div>
+          </div>
+          {/* Unit 6 */}
+          <div className="col-2">
+            <div>
+              <Unitcard
+                name="Trajann Valrois"
+                category={unitCategories.Characters}
+                pointCost={[160]}
+                numberOfModels={[1]}
+                unitImageUrl="trajannvaloris.jpeg"
+                rangedWeapons={[{ name: "Watcher's Axe", quantity: 1 }]}
+                meleeWeapons={[{ name: "Watcher's Axe", quantity: 1 }]}
                 addUnitToArmyList={addUnitToArmyList}
               />
             </div>

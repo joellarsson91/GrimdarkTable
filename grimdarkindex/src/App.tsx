@@ -71,6 +71,27 @@ function App() {
       )
     );
   };
+  const updateEnhancementQuantity = (
+    id: string,
+    enhancementIndex: number,
+    increment: number
+  ) => {
+    setSelectedUnits((prevSelectedUnits) =>
+      prevSelectedUnits.map((unit) =>
+        unit.id === id
+          ? {
+              ...unit,
+              enhancmentQuantities: unit.enhancmentQuantities.map(
+                (quantity, index) =>
+                  index === enhancementIndex
+                    ? Math.max(0, quantity + increment) // Ensure quantity is not negative
+                    : quantity
+              ),
+            }
+          : unit
+      )
+    );
+  };
 
   const removeUnit = (id: string) => {
     setSelectedUnits((prevSelectedUnits) =>
@@ -85,7 +106,8 @@ function App() {
     numberOfModels: number[],
     miscellaneous: { name: string; quantity: number }[] = [],
     rangedWeapons: { name: string; quantity: number }[] = [],
-    meleeWeapons: { name: string; quantity: number }[] = []
+    meleeWeapons: { name: string; quantity: number }[] = [],
+    enhancement: { name: string; pointCost: number }[] = []
   ) => {
     setSelectedUnits((prevSelectedUnits) => [
       ...prevSelectedUnits,
@@ -103,6 +125,7 @@ function App() {
         wargearQuantities: new Array(
           rangedWeapons.length + meleeWeapons.length
         ).fill(0),
+        enhancmentQuantities: new Array(enhancement.length).fill(0),
       },
     ]);
 
@@ -124,14 +147,22 @@ function App() {
       <Navbar
         visibleComponents={visibleComponents}
         setVisibleComponents={setVisibleComponents}
+        sidebarVisible={sidebarVisible}
+        sidebarExpanded={sidebarExpanded}
+        toggleArmySidebar={toggleArmySidebar}
+        toggleArmySidebarVisibility={toggleArmySidebarVisibility}
       />
+
       {sidebarVisible && (
         <ArmySidebar
           selectedUnits={selectedUnits}
           updateUnitQuantity={updateUnitQuantity}
           removeUnit={removeUnit}
           updateWargearQuantity={updateWargearQuantity}
+          updateEnhancementQuantity={updateEnhancementQuantity}
           expanded={sidebarExpanded}
+          toggleArmySidebar={toggleArmySidebar}
+          toggleArmySidebarVisibility={toggleArmySidebar}
         />
       )}
       {Object.keys(visibleComponents).map(
@@ -141,18 +172,6 @@ function App() {
               {getComponent(componentName, setSelectedUnits, addUnitToArmyList)}
             </div>
           )
-      )}
-      {sidebarVisible ? (
-        <button className="sidebar-toggle" onClick={toggleArmySidebar}>
-          {sidebarExpanded ? "<" : ">"}
-        </button>
-      ) : (
-        <button
-          className="sidebar-toggle"
-          onClick={toggleArmySidebarVisibility}
-        >
-          Show Sidebar
-        </button>
       )}
     </div>
   );

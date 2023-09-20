@@ -5,6 +5,11 @@ interface Props {
   selectedUnits: SelectedUnit[];
   updateUnitQuantity: (id: string, increment: number) => void;
   removeUnit: (id: string) => void;
+  updateEnhancementQuantity: (
+    id: string,
+    enhancementIndex: number,
+    increment: number
+  ) => void;
   updateWargearQuantity: (
     id: string,
     wargearIndex: number,
@@ -17,12 +22,14 @@ const ArmyList: React.FC<Props> = ({
   updateUnitQuantity,
   removeUnit,
   updateWargearQuantity,
+  updateEnhancementQuantity,
 }) => {
   const calculateTotalPointCost = (unit: SelectedUnit): number => {
     return unit.pointCost[unit.currentIndex];
   };
 
   const [showWargear, setShowWargear] = useState<string[]>([]);
+  const [showEnhancements, setShowEnhancements] = useState<string[]>([]);
   const [rangedQuantities, setRangedQuantities] = useState<{
     [id: string]: number;
   }>({});
@@ -32,11 +39,15 @@ const ArmyList: React.FC<Props> = ({
   const [miscQuantities, setMiscQuantities] = useState<{
     [id: string]: number;
   }>({});
+  const [enhancementQuantities, setEnhancementQuantities] = useState<{
+    [id: string]: number;
+  }>({});
 
   useEffect(() => {
-    // Initialize showWargear state with an empty array
+    // Initialize showWargear and showEnhancements states with an empty array
     setShowWargear([]);
-  }, []); // This empty array as the second argument means this effect runs once after mounting
+    setShowEnhancements([]);
+  }, []);
 
   // Group units by category
   const groupedUnits: { [category: string]: SelectedUnit[] } = {};
@@ -49,13 +60,13 @@ const ArmyList: React.FC<Props> = ({
 
   return (
     <div style={{ maxHeight: "800px", overflowY: "auto" }}>
-      <h2>Army List</h2>
+      <h2 className="armylist-headers">Army List</h2>
       {Object.keys(groupedUnits).map((category, categoryIndex) => (
         <div key={categoryIndex}>
-          <h3>{category}</h3>
+          <h3 className="armylist-headers">{category}</h3>
           <ul>
             {groupedUnits[category].map((unit, index) => (
-              <li className="army-list-item" key={unit.id}>
+              <div className="army-list-item" key={unit.id}>
                 <div className="army-list-unit">
                   <span>
                     <div className="army-list-quantity">
@@ -84,17 +95,26 @@ const ArmyList: React.FC<Props> = ({
                   <button
                     className="btn btn-primary btn-sm"
                     onClick={() => {
-                      // Toggle wargear visibility for the clicked unit
-                      setShowWargear((prevShowWargear) => {
-                        if (prevShowWargear.includes(unit.id)) {
-                          return prevShowWargear.filter((id) => id !== unit.id);
-                        } else {
-                          return [...prevShowWargear, unit.id];
-                        }
-                      });
+                      setShowWargear((prevShowWargear) =>
+                        prevShowWargear.includes(unit.id)
+                          ? prevShowWargear.filter((id) => id !== unit.id)
+                          : [...prevShowWargear, unit.id]
+                      );
                     }}
                   >
                     Wargear
+                  </button>
+                  <button
+                    className="btn btn-dark btn-sm"
+                    onClick={() => {
+                      setShowEnhancements((prevShowEnhancements) =>
+                        prevShowEnhancements.includes(unit.id)
+                          ? prevShowEnhancements.filter((id) => id !== unit.id)
+                          : [...prevShowEnhancements, unit.id]
+                      );
+                    }}
+                  >
+                    Enhancements
                   </button>
                 </div>
                 {showWargear.includes(unit.id) && (
@@ -226,15 +246,75 @@ const ArmyList: React.FC<Props> = ({
                           : initialQuantity;
 
                       return (
-                        <div>
-                          {index === 0 && <h5>Miscellaneous</h5>}
+                        <label key={index}>
+                          <button
+                            className="btn btn-success btn-sm"
+                            onClick={() => {
+                              updateWargearQuantity(unit.id, wargearIndex, 1);
+                              setMeleeQuantities({
+                                ...meleeQuantities,
+                                [id]: currentQuantity + 1,
+                              });
+                            }}
+                          >
+                            +
+                          </button>
+                          {currentQuantity}
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() => {
+                              if (currentQuantity > 0) {
+                                updateWargearQuantity(
+                                  unit.id,
+                                  wargearIndex,
+                                  -1
+                                );
+                                setMeleeQuantities({
+                                  ...meleeQuantities,
+                                  [id]: currentQuantity - 1,
+                                });
+                              } else {
+                                setMeleeQuantities({
+                                  ...meleeQuantities,
+                                  [id]: 0,
+                                });
+                              }
+                            }}
+                            disabled={currentQuantity <= 0}
+                          >
+                            -
+                          </button>
+                          {weapon.name}
+                        </label>
+                      );
+                    })}
+                  </div>
+                )}
+                {showEnhancements.includes(unit.id) && (
+                  <div>
+                    <h5>Enhancements</h5>
+                    {unit.enhancements && unit.enhancements.length > 0 ? (
+                      unit.enhancements.map((enhancement, index) => {
+                        const enhancementIndex = index;
+                        const id = `${unit.id}-enhancement-${enhancementIndex}`;
+                        const initialQuantity = enhancement.pointCost;
+                        const currentQuantity =
+                          enhancementQuantities[id] !== undefined
+                            ? enhancementQuantities[id]
+                            : initialQuantity;
+
+                        return (
                           <label key={index}>
                             <button
                               className="btn btn-success btn-sm"
                               onClick={() => {
-                                updateWargearQuantity(unit.id, wargearIndex, 1);
-                                setMeleeQuantities({
-                                  ...meleeQuantities,
+                                updateEnhancementQuantity(
+                                  unit.id,
+                                  enhancementIndex,
+                                  1
+                                );
+                                setEnhancementQuantities({
+                                  ...enhancementQuantities,
                                   [id]: currentQuantity + 1,
                                 });
                               }}
@@ -246,18 +326,18 @@ const ArmyList: React.FC<Props> = ({
                               className="btn btn-danger btn-sm"
                               onClick={() => {
                                 if (currentQuantity > 0) {
-                                  updateWargearQuantity(
+                                  updateEnhancementQuantity(
                                     unit.id,
-                                    wargearIndex,
+                                    enhancementIndex,
                                     -1
                                   );
-                                  setMeleeQuantities({
-                                    ...meleeQuantities,
+                                  setEnhancementQuantities({
+                                    ...enhancementQuantities,
                                     [id]: currentQuantity - 1,
                                   });
                                 } else {
-                                  setMeleeQuantities({
-                                    ...meleeQuantities,
+                                  setEnhancementQuantities({
+                                    ...enhancementQuantities,
                                     [id]: 0,
                                   });
                                 }
@@ -266,14 +346,16 @@ const ArmyList: React.FC<Props> = ({
                             >
                               -
                             </button>
-                            {weapon.name}
+                            {enhancement.name} ({enhancement.pointCost} points)
                           </label>
-                        </div>
-                      );
-                    })}
+                        );
+                      })
+                    ) : (
+                      <p>No enhancements available for this unit.</p>
+                    )}
                   </div>
                 )}
-              </li>
+              </div>
             ))}
           </ul>
         </div>
