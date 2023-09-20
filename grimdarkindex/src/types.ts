@@ -14,6 +14,6 @@ export interface SelectedUnit {
   meleeWeapons: { name: string; quantity: number }[];
   miscellaneous: { name: string; quantity: number }[]; // Add the 'miscellaneous' property
   wargearQuantities: number[];
-  enhancements?: { name: string; pointCost: number }[];
-  enhancmentQuantities: number[];
+  enhancements: { name: string; pointCost: number }[];
+  enhancementQuantities: number[];
 }

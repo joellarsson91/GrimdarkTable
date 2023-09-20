@@ -81,7 +81,7 @@ function App() {
         unit.id === id
           ? {
               ...unit,
-              enhancmentQuantities: unit.enhancmentQuantities.map(
+              enhancmentQuantities: unit.enhancementQuantities.map(
                 (quantity, index) =>
                   index === enhancementIndex
                     ? Math.max(0, quantity + increment) // Ensure quantity is not negative
@@ -107,7 +107,7 @@ function App() {
     miscellaneous: { name: string; quantity: number }[] = [],
     rangedWeapons: { name: string; quantity: number }[] = [],
     meleeWeapons: { name: string; quantity: number }[] = [],
-    enhancement: { name: string; pointCost: number }[] = []
+    enhancements: { name: string; pointCost: number }[] = []
   ) => {
     setSelectedUnits((prevSelectedUnits) => [
       ...prevSelectedUnits,
@@ -125,7 +125,8 @@ function App() {
         wargearQuantities: new Array(
           rangedWeapons.length + meleeWeapons.length
         ).fill(0),
-        enhancmentQuantities: new Array(enhancement.length).fill(0),
+        enhancementQuantities: new Array(enhancements.length).fill(0),
+        enhancements, // Corrected property name
       },
     ]);
 

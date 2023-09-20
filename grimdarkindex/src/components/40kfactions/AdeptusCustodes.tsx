@@ -11,7 +11,9 @@ interface Props {
     pointCost: number[],
     numberOfModels: number[],
     rangedWeapons?: { name: string; quantity: number }[],
-    meleeWeapons?: { name: string; quantity: number }[]
+    meleeWeapons?: { name: string; quantity: number }[],
+    miscellaneous?: { name: string; quantity: number }[],
+    enhancements?: { name: string; pointCost: number }[] // Include enhancements parameter
   ) => void;
 }
 
@@ -126,7 +128,7 @@ export default function AdeptusCustodes({
                   { name: "Inspirational Exemplar", pointCost: 10 },
                   { name: "Veiled Blade", pointCost: 25 },
                   { name: "Ceaseless Hunter", pointCost: 30 },
-                ]}
+                ]} // Include enhancements here
                 addUnitToArmyList={addUnitToArmyList}
               />
             </div>
