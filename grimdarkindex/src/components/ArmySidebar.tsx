@@ -19,14 +19,8 @@ interface Props {
   expanded: boolean;
   toggleArmySidebar: () => void;
   toggleArmySidebarVisibility: () => void;
+  enhancementQuantities: { [key: string]: number }; // Add this prop for enhancement quantities
 }
-
-const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
-  return selectedUnits.reduce((totalPoints, unit) => {
-    const unitPoints = unit.pointCost[unit.currentIndex];
-    return totalPoints + unitPoints;
-  }, 0);
-};
 
 const ArmySidebar: React.FC<Props> = ({
   selectedUnits,
@@ -37,8 +31,22 @@ const ArmySidebar: React.FC<Props> = ({
   expanded,
   toggleArmySidebar,
   toggleArmySidebarVisibility,
+  enhancementQuantities,
 }) => {
   const ArmySidebarClass = expanded ? "sidebar expanded" : "sidebar minimized";
+
+  const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
+    return selectedUnits.reduce((totalPoints, unit) => {
+      const unitPoints = unit.pointCost[unit.currentIndex];
+      const enhancementPoints = unit.enhancements.reduce(
+        (enhancementTotal, enhancement, index) =>
+          enhancementTotal +
+          enhancement.pointCost * (unit.enhancementQuantities[index] || 0),
+        0
+      );
+      return totalPoints + unitPoints + enhancementPoints;
+    }, 0);
+  };
 
   return (
     <div className={ArmySidebarClass}>

@@ -335,10 +335,10 @@ const ArmyList: React.FC<Props> = ({
                                   enhancementIndex,
                                   1
                                 );
-                                setEnhancementQuantities({
-                                  ...enhancementQuantities,
-                                  [id]: currentQuantity + 1,
-                                });
+                                setEnhancementQuantities((prevQuantities) => ({
+                                  ...prevQuantities,
+                                  [id]: (prevQuantities[id] || 0) + 1,
+                                }));
                               }}
                             >
                               +
@@ -347,24 +347,21 @@ const ArmyList: React.FC<Props> = ({
                             <button
                               className="btn btn-danger btn-sm"
                               onClick={() => {
-                                if (currentQuantity > 0) {
+                                if (enhancementQuantities[id] > 0) {
                                   updateEnhancementQuantity(
                                     unit.id,
                                     enhancementIndex,
                                     -1
                                   );
-                                  setEnhancementQuantities({
-                                    ...enhancementQuantities,
-                                    [id]: currentQuantity - 1,
-                                  });
-                                } else {
-                                  setEnhancementQuantities({
-                                    ...enhancementQuantities,
-                                    [id]: 0,
-                                  });
+                                  setEnhancementQuantities(
+                                    (prevQuantities) => ({
+                                      ...prevQuantities,
+                                      [id]: prevQuantities[id] - 1,
+                                    })
+                                  );
                                 }
                               }}
-                              disabled={currentQuantity <= 0}
+                              disabled={enhancementQuantities[id] <= 0}
                             >
                               -
                             </button>

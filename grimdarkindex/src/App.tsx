@@ -12,6 +12,9 @@ import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [selectedUnits, setSelectedUnits] = useState<SelectedUnit[]>([]);
+  const [enhancementQuantities, setEnhancementQuantities] = useState<{
+    [key: string]: number;
+  }>({});
   const [visibleComponents, setVisibleComponents] = useState<{
     [key: string]: boolean;
   }>({
@@ -81,10 +84,10 @@ function App() {
         unit.id === id
           ? {
               ...unit,
-              enhancmentQuantities: unit.enhancementQuantities.map(
+              enhancementQuantities: unit.enhancementQuantities.map(
                 (quantity, index) =>
                   index === enhancementIndex
-                    ? Math.max(0, quantity + increment) // Ensure quantity is not negative
+                    ? Math.max(0, quantity + increment)
                     : quantity
               ),
             }
@@ -163,9 +166,11 @@ function App() {
           updateEnhancementQuantity={updateEnhancementQuantity}
           expanded={sidebarExpanded}
           toggleArmySidebar={toggleArmySidebar}
-          toggleArmySidebarVisibility={toggleArmySidebar}
+          toggleArmySidebarVisibility={toggleArmySidebarVisibility} // Corrected this line
+          enhancementQuantities={enhancementQuantities} // Add this line
         />
       )}
+
       {Object.keys(visibleComponents).map(
         (componentName) =>
           visibleComponents[componentName] && (
