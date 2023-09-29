@@ -1,4 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import { Add } from "@mui/icons-material";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import { InputLabel } from "@mui/material";
 
 interface Props {
   visibleComponents: { [key: string]: boolean };
@@ -19,13 +29,16 @@ function Navbar({
   toggleArmySidebar,
   toggleArmySidebarVisibility,
 }: Props) {
+  const [openPopup, setOpenPopup] = useState(false);
   const handleCheckboxChange = (componentName: string) => {
     setVisibleComponents((prevState) => ({
       ...prevState,
       [componentName]: !prevState[componentName],
     }));
   };
-
+  const handleNewArmyClick = () => {
+    setOpenPopup(true);
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -143,6 +156,57 @@ function Navbar({
               </ul>
             </li>
           </ul>
+          <Button
+            variant="contained"
+            color="success"
+            startIcon={<Add />}
+            sx={{ marginLeft: 2 }}
+            onClick={handleNewArmyClick}
+          >
+            New Army
+          </Button>
+          {/* Popup for creating a new army */}
+          <Dialog
+            open={openPopup}
+            onClose={() => setOpenPopup(false)}
+            maxWidth="md"
+            fullWidth
+          >
+            <DialogTitle>Create a New Army</DialogTitle>
+            <DialogContent>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <InputLabel>Game System</InputLabel>
+                <Select
+                // Add the state and handlers for game system selection here
+                >
+                  {/* Add game system options */}
+                </Select>
+              </FormControl>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <InputLabel>Faction</InputLabel>
+                <Select
+                // Add the state and handlers for faction selection here
+                >
+                  {/* Add faction options */}
+                </Select>
+              </FormControl>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <InputLabel>Detachment</InputLabel>
+                <Select
+                // Add the state and handlers for detachment selection here
+                >
+                  {/* Add detachment options */}
+                </Select>
+              </FormControl>
+              <TextField
+                label="Army Name"
+                fullWidth
+                // Add the state and handler for army name here
+                sx={{ marginBottom: 2 }}
+              />
+              {/* Add a button to submit the new army */}
+            </DialogContent>
+          </Dialog>
         </div>
         {sidebarVisible ? (
           <button

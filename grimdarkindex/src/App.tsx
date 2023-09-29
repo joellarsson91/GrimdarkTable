@@ -9,6 +9,7 @@ import ArmySidebar from "./components/ArmySidebar";
 import Unitcard from "./components/units/Unitcard";
 import { SelectedUnit } from "./types";
 import { v4 as uuidv4 } from "uuid";
+import Tyranids from "./components/40kfactions/Tyranids";
 
 function App() {
   const [selectedUnits, setSelectedUnits] = useState<SelectedUnit[]>([]);
@@ -211,6 +212,13 @@ function getComponent(
     case "ChaosDaemons":
       return (
         <ChaosDaemons
+          setSelectedUnits={setSelectedUnits}
+          addUnitToArmyList={addUnitToArmyList}
+        />
+      );
+    case "Tyranids":
+      return (
+        <Tyranids
           setSelectedUnits={setSelectedUnits}
           addUnitToArmyList={addUnitToArmyList}
         />

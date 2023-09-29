@@ -1,6 +1,5 @@
 @import "https://unpkg.com/open-props" layer(design.system);
 @import "https://unpkg.com/open-props/normalize.min.css" layer(demo.support);
-
 .container.text-center{
     margin: 0%;
 }
@@ -89,6 +88,13 @@
   .card-img-top{
     max-height: 160px;
     max-width: auto;
+  }
+  .material-symbols-outlined{
+    align-self: center;
+  }
+
+  .new-army-button{
+    margin-left: 10px;
   }
 
   .card-body{
