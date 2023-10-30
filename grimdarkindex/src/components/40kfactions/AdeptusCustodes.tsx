@@ -17,6 +17,15 @@ interface Props {
   ) => void;
 }
 
+const detachments = {
+  "Shield Host": [
+    { name: "Unstoppable Destroyer", pointCost: 25 },
+    { name: "Inspirational Exemplar", pointCost: 10 },
+    { name: "Veiled Blade", pointCost: 25 },
+    { name: "Ceaseless Hunter", pointCost: 30 },
+  ],
+};
+
 export default function AdeptusCustodes({
   setSelectedUnits,
   addUnitToArmyList,

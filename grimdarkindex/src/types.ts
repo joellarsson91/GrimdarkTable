@@ -17,3 +17,16 @@ export interface SelectedUnit {
   enhancements: { name: string; pointCost: number }[];
   enhancementQuantities: number[];
 }
+
+export interface Detachment {
+  name: string;
+  pointCost: number;
+}
+
+export interface FactionDetachments {
+  [detachmentName: string]: Detachment[];
+}
+
+export interface DetachmentData {
+  [factionName: string]: FactionDetachments;
+}

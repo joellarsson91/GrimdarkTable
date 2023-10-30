@@ -9,6 +9,8 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import { InputLabel } from "@mui/material";
+import detachmentData from "../database/detachments.json";
+import { Detachment, FactionDetachments, DetachmentData } from "../types";
 
 interface Props {
   visibleComponents: { [key: string]: boolean };
@@ -21,24 +23,75 @@ interface Props {
   toggleArmySidebarVisibility: () => void;
 }
 
-function Navbar({
+const Navbar: React.FC<Props> = ({
   visibleComponents,
   setVisibleComponents,
   sidebarVisible,
   sidebarExpanded,
   toggleArmySidebar,
   toggleArmySidebarVisibility,
-}: Props) {
+}: Props) => {
+  const [factionNames, setFactionNames] = useState<string[]>(
+    extractFactionNames()
+  );
   const [openPopup, setOpenPopup] = useState(false);
+
+  // Function to extract faction names from the JSON data
+  function extractFactionNames() {
+    const factionNames = Object.keys(detachmentData);
+    return factionNames;
+  }
+
+  const gameSystems = ["Warhammer 40K", "Age of Sigmar", "Kill Team"];
+  const [selectedGameSystem, setSelectedGameSystem] = useState<
+    string | undefined
+  >(
+    "" // Initialize it as an empty string or undefined
+  );
+  // Function to handle game system change
+  const handleGameSystemChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setSelectedGameSystem(event.target.value as string);
+    // Conditionally show/hide the detachment dropdown based on the selected game system
+    setShowDetachmentDropdown(event.target.value === "Warhammer 40K");
+  };
+  const [selectedFaction, setSelectedFaction] = useState("");
+
+  // Function to handle faction change
+  const handleFactionChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    const selectedFaction = event.target.value as string;
+    setSelectedFaction(selectedFaction);
+  };
+
+  const [showDetachmentDropdown, setShowDetachmentDropdown] = useState(false);
+  // Function to handle detachment change
+  const [selectedDetachment, setSelectedDetachment] = useState("");
+
+  const handleDetachmentChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    const selectedDetachment = event.target.value as string;
+    setSelectedDetachment(selectedDetachment);
+  };
+  // Function to handle the "New Army" button click
+  const handleNewArmyClick = () => {
+    setOpenPopup(true);
+  };
+
   const handleCheckboxChange = (componentName: string) => {
     setVisibleComponents((prevState) => ({
       ...prevState,
       [componentName]: !prevState[componentName],
     }));
   };
-  const handleNewArmyClick = () => {
-    setOpenPopup(true);
-  };
+
+  // Get the detachments associated with the selected faction
+  const detachmentsForSelectedFaction =
+    (detachmentData[selectedFaction] as Detachment) || [];
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -177,27 +230,47 @@ function Navbar({
               <FormControl fullWidth sx={{ marginBottom: 2 }}>
                 <InputLabel>Game System</InputLabel>
                 <Select
-                // Add the state and handlers for game system selection here
+                  value={selectedGameSystem || ""} // Use an empty string as the default value
+                  label="Game System"
+                  onChange={handleGameSystemChange as any}
                 >
-                  {/* Add game system options */}
+                  {gameSystems.map((gameSystem, index) => (
+                    <MenuItem key={index} value={gameSystem}>
+                      {gameSystem}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               <FormControl fullWidth sx={{ marginBottom: 2 }}>
                 <InputLabel>Faction</InputLabel>
                 <Select
-                // Add the state and handlers for faction selection here
+                  value={selectedFaction} // Use the selectedFaction state variable
+                  onChange={(event) => setSelectedFaction(event.target.value)}
                 >
-                  {/* Add faction options */}
+                  {extractFactionNames().map((factionName, index) => (
+                    <MenuItem key={index} value={factionName}>
+                      {factionName}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
-              <FormControl fullWidth sx={{ marginBottom: 2 }}>
-                <InputLabel>Detachment</InputLabel>
-                <Select
-                // Add the state and handlers for detachment selection here
-                >
-                  {/* Add detachment options */}
-                </Select>
-              </FormControl>
+              {showDetachmentDropdown && (
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <InputLabel>Detachment</InputLabel>
+                  <Select
+                    value={selectedDetachment}
+                    onChange={handleDetachmentChange as any}
+                  >
+                    {Object.keys(detachmentsForSelectedFaction).map(
+                      (detachmentName, index) => (
+                        <MenuItem key={index} value={detachmentName}>
+                          {detachmentName}
+                        </MenuItem>
+                      )
+                    )}
+                  </Select>
+                </FormControl>
+              )}
               <TextField
                 label="Army Name"
                 fullWidth
@@ -226,6 +299,6 @@ function Navbar({
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
