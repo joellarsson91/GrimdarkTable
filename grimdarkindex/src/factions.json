@@ -1,0 +1,3309 @@
+[
+  {
+    "faction": "Blood Angels",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "The Lost Brethren",
+        "rules": [],
+        "enhancements": [
+          "Sanguinius’ Grace",
+          "Blood Shard",
+          "To Slay The Warmaster",
+          "Vengeful Onslaught"
+        ],
+        "stratagems": [
+          "Wrathful Rampage",
+          "Armour of Contempt",
+          "Glorious Sacrifice",
+          "Furious Onslaught",
+          "Lost to Rage",
+          "Final Retribution"
+        ]
+      },
+      {
+        "name": "The Angelic Host",
+        "rules": [],
+        "enhancements": [
+          "Artisan of War",
+          "Visage of Death",
+          "Archangel’s Shard",
+          "Gleaming Pinions"
+        ],
+        "stratagems": [
+          "Unbridled Ardour",
+          "Angel’s Sacrifice",
+          "Martial Examplars",
+          "Death From The Skies",
+          "Descent of Angels",
+          "Armour of Contempt"
+        ]
+      },
+      {
+        "name": "Liberator Assault Group",
+        "rules": [],
+        "enhancements": [
+          "Speed of the Primarch",
+          "Gift of Foresight",
+          "Rage-fuelled Warrior",
+          "Icon of the Angel"
+        ],
+        "stratagems": [
+          "Angelic Grace",
+          "Red Rampage",
+          "Aggressive Onslaught",
+          "Relentless Assault",
+          "Savage Echoes",
+          "Armour of Contempt"
+        ]
+      },
+      {
+        "name": "Angelic Inheritors",
+        "rules": [],
+        "enhancements": [
+          "Prescient Flash",
+          "Troubling Visions",
+          "Blazing Icon",
+          "Ordained Sacrifice"
+        ],
+        "stratagems": [
+          "Focused Fury",
+          "Strike Now For Glory",
+          "In The Shadow Of Great Wings",
+          "Unto The Burning Skies",
+          "Armour of Contempt",
+          "Instant of Grace"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Astorath",
+      "Baal Predator",
+      "Blood Angels Captain",
+      "Chief Librarian Mephiston",
+      "Commander Dante",
+      "Death Company Captain",
+      "Death Company Captain with Jump Pack",
+      "Death Company Dreadnought",
+      "Death Company Marines",
+      "Death Company Marines with Bolt Rifles",
+      "Death Company Marines with Jump Packs",
+      "Lemartes",
+      "Sanguinary Guard",
+      "Sanguinary Priest",
+      "The Sanguinor"
+    ]
+  },
+  {
+    "faction": "Dark Angels",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Unforgiven Task Force",
+        "rules": [],
+        "enhancements": [
+          "Weapons of the First Legion",
+          "Stubborn Tenacity",
+          "Pennant of Remembrance",
+          "Shroud of Heroes"
+        ],
+        "stratagems": [
+          "Unbreakable Lines",
+          "Armour of Contempt",
+          "Grim Retribution",
+          "Unforgiven Fury",
+          "Fire Discipline",
+          "Intractable"
+        ]
+      },
+      {
+        "name": "Lion’s Blade Task Force",
+        "rules": [],
+        "enhancements": [
+          "Lord of the Hunt",
+          "Stalwart Champion",
+          "Calibanite Armaments",
+          "Fulgus Magna"
+        ],
+        "stratagems": [
+          "Overpowering Exaction",
+          "Armour of Contempt",
+          "Strength in Unity",
+          "Knights of Iron",
+          "Illuminating Fire",
+          "Inescapable Wrath"
+        ]
+      },
+      {
+        "name": "Inner Circle Task Force",
+        "rules": [],
+        "enhancements": [
+          "Eye of the Unseen",
+          "Champion of the Deathwing",
+          "Singular Will",
+          "Deathwing Assault"
+        ],
+        "stratagems": [
+          "Martial Mastery",
+          "Armour of Contempt",
+          "Duty Unto Death",
+          "Unmatched Fortitude",
+          "Wrath of the Lion",
+          "Relic Teleportarium"
+        ]
+      },
+      {
+        "name": "Company of Hunters",
+        "rules": [],
+        "enhancements": [
+          "Mounted Strategist",
+          "Master-crafted Weapon",
+          "Recon Hunter",
+          "Master of Manoeuvre"
+        ],
+        "stratagems": [
+          "Talon Strike",
+          "Hunter’s Trail",
+          "Armour of Contempt",
+          "High-speed Focus",
+          "Death on the Wind",
+          "Rapid Reappraisal"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Asmodai",
+      "Azrael",
+      "Belial",
+      "Deathwing Knights",
+      "Deathwing Terminator Squad",
+      "Ezekiel",
+      "Inner Circle Companions",
+      "Lazarus",
+      "Land Speeder Vengeance",
+      "Lion El’Jonson",
+      "Nephilim Jetfighter",
+      "Ravenwing Black Knights",
+      "Ravenwing Command Squad",
+      "Ravenwing Darkshroud",
+      "Ravenwing Dark Talon",
+      "Sammael"
+    ]
+  },
+  {
+    "faction": "Adepta Sororitas",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Penitent Host",
+        "rules": [],
+        "enhancements": [
+          "Refrain of Enduring Faith",
+          "Catechism of Divine Penitence",
+          "Verse of Holy Piety",
+          "Psalm of Righteous Judgement"
+        ],
+        "stratagems": [
+          "Final Redemption",
+          "Purity of Suffering",
+          "Devout Fanaticism",
+          "Boundless Zeal",
+          "Lash of Guilt",
+          "Passion of the Penitent"
+        ]
+      },
+      {
+        "name": "Hallowed Martyrs",
+        "rules": [],
+        "enhancements": [
+          "Through Suffering, Strength",
+          "Saintly Example",
+          "Chaplet of Sacrifice",
+          "Mantle of Ophelia"
+        ],
+        "stratagems": [
+          "Spirit of the Martyr",
+          "Sanctified Immolation",
+          "Righteous Vengeance",
+          "Divine Intervention",
+          "Suffering and Sacrifice",
+          "Praise the Fallen"
+        ]
+      },
+      {
+        "name": "Champions of Faith",
+        "rules": [],
+        "enhancements": [
+          "Triptych of Judgement",
+          "Mark of Devotion",
+          "Eyes of the Oracle",
+          "Sanctified Amulet"
+        ],
+        "stratagems": [
+          "Shield of Denial",
+          "To The Heart Of Heresy",
+          "Path of the Righteous",
+          "Bastion of Faith",
+          "Indefatigable Dedication",
+          "Suffer Not The Unfaithful"
+        ]
+      },
+      {
+        "name": "Bringers of Flame",
+        "rules": [],
+        "enhancements": [
+          "Manual of Saint Griselda",
+          "Righteous Rage",
+          "Iron Surplice of Saint Istalela",
+          "Fire and Fury"
+        ],
+        "stratagems": [
+          "Shield of Aversion",
+          "Cleansing Flames",
+          "Blazing Ire",
+          "Righteous Blows",
+          "Carry Forth the Faithful",
+          "Rites of Fire"
+        ]
+      },
+      {
+        "name": "Army of Faith",
+        "rules": [],
+        "enhancements": [
+          "Divine Aspect",
+          "Litanies of Faith",
+          "Triptych of the Macharian Crusade",
+          "Blade of Saint Ellynor"
+        ],
+        "stratagems": [
+          "Angelic Descent",
+          "Faith and Fury",
+          "Divine Guidance",
+          "Light of the Emperor",
+          "Blinding Radiance",
+          "Shield of Faith"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Aestred Thurga and Agathae Dolan",
+      "Arco-flagellants",
+      "Battle Sisters Squad",
+      "Canoness",
+      "Canoness with Jump Pack",
+      "Castigator",
+      "Celestian Sacresants",
+      "Daemonifuge",
+      "Dialogus",
+      "Dogmata",
+      "Dominion Squad",
+      "Exorcist",
+      "Hospitaller",
+      "Imagifier",
+      "Immolator",
+      "Junith Eruita",
+      "Ministorum Priest",
+      "Mortifiers",
+      "Morvenn Vahl",
+      "Palatine",
+      "Paragon Warsuits",
+      "Penitent Engines",
+      "Repentia Squad",
+      "Retributor Squad",
+      "Saint Celestine",
+      "Seraphim Squad",
+      "Sisters Novitiate Squad",
+      "Sororitas Rhino",
+      "Triumph of Saint Katherine",
+      "Zephyrim Squad"
+    ]
+  },
+  {
+    "faction": "Adeptus Custodes",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Talons of the Emperor",
+        "rules": [],
+        "enhancements": [
+          "Champion of the Imperium",
+          "Gift of Terran Artifice",
+          "Radiant Mantle",
+          "Aegis Projector"
+        ],
+        "stratagems": [
+          "Taloned Pincer",
+          "Hunt as One",
+          "Talons Interlocked",
+          "Emperor’s Executioners",
+          "Shield of Honour",
+          "Empyric Severance"
+        ]
+      },
+      {
+        "name": "Solar Spearhead",
+        "rules": [],
+        "enhancements": [
+          "Adamantine Talisman",
+          "Augury Uplink",
+          "Honoured Fallen (Aura)",
+          "Veteran of the Kataphraktoi"
+        ],
+        "stratagems": [
+          "Wrathful Advance",
+          "Unstoppable",
+          "Relentless Persecution",
+          "Punishment Inescapable",
+          "Emperor’s Vengeance",
+          "Flawless Construction"
+        ]
+      },
+      {
+        "name": "Shield Host",
+        "rules": [],
+        "enhancements": [
+          "Panoptispex",
+          "From the Hall of Armouries",
+          "Castellan’s Mark",
+          "Auric Mantle"
+        ],
+        "stratagems": [
+          "Multipotentiality",
+          "Unwavering Sentinels",
+          "Arcane Genetic Alchemy",
+          "Avenge the Fallen",
+          "Vigilance Eternal",
+          "Archeotech Munitions"
+        ]
+      },
+      {
+        "name": "Null Maiden Vigil",
+        "rules": [],
+        "enhancements": [
+          "Oblivion Knight",
+          "Huntress’ Eye",
+          "Raptor Blade",
+          "Enhanced Voidsheen Cloak"
+        ],
+        "stratagems": [
+          "Witch Hunters",
+          "Psy-chaff Volley",
+          "Desperation’s Price",
+          "Psychic Abominations",
+          "Anathema Blademastery",
+          "Purgation Sweep"
+        ]
+      },
+      {
+        "name": "Auric Champions",
+        "rules": [],
+        "enhancements": [
+          "Inspirational Exemplar",
+          "Veiled Blade",
+          "Blade Imperator",
+          "Martial Philosopher"
+        ],
+        "stratagems": [
+          "The Emperor’s Auspice",
+          "Superhuman Reserves",
+          "Shoulder the Mantle",
+          "Slayer of Champions",
+          "Earning of a Name",
+          "Vigil Unending"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Agamatus Custodians",
+      "Aleya",
+      "Allarus Custodians",
+      "Aquilon Custodians",
+      "Anathema Psykana Rhino",
+      "Ares Gunship",
+      "Caladius Grav-tank",
+      "Blade Champion",
+      "Custodian Guard",
+      "Contemptor-Achillus Dreadnought",
+      "Custodian Wardens",
+      "Contemptor-Galatus Dreadnought",
+      "Knight-Centura",
+      "Coronus Grav-carrier",
+      "Custodian Guard with Adrasite and Pyrithite Spears",
+      "Prosecutors",
+      "Orion Assault Dropship",
+      "Shield-Captain",
+      "Pallas Grav-attack",
+      "Shield-Captain in Allarus Terminator Armour",
+      "Sagittarum Custodians",
+      "Shield-Captain on Dawneagle Jetbike",
+      "Trajann Valoris",
+      "Telemon Heavy Dreadnought",
+      "Valerian",
+      "Venatari Custodians",
+      "Venerable Contemptor Dreadnought",
+      "Venerable Land Raider",
+      "Vertus Praetors",
+      "Vigilators",
+      "Witchseekers"
+    ]
+  },
+  {
+    "faction": "Adeptus Mechanicus",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Skitarii Hunter Cohort",
+        "rules": [],
+        "enhancements": [
+          "Veiled Hunter",
+          "Battle-sphere Uplink",
+          "Clandestine Infiltrator",
+          "Cantic Thrallnet"
+        ],
+        "stratagems": [
+          "Programmed Withdrawal",
+          "Shroud Protocols",
+          "Isolate and Destroy",
+          "Bionic Endurance",
+          "Expedited Purge Protocol",
+          "Binharic Offence"
+        ]
+      },
+      {
+        "name": "Rad-Zone Corps",
+        "rules": [],
+        "enhancements": [
+          "Autoclavic Denunciation",
+          "Malphonic Susurrus",
+          "Peerless Eradicator",
+          "Radial Suffusion"
+        ],
+        "stratagems": [
+          "Extinction Order",
+          "Lethal Dosage",
+          "Baleful Halo",
+          "Pre-calibrated Purge Solution",
+          "Bulwark Imperative",
+          "Aggressor Imperative"
+        ]
+      },
+      {
+        "name": "Haloscreed Battle Clade",
+        "rules": [],
+        "enhancements": [
+          "Cognitive Reinforcement",
+          "Inloaded Lethality",
+          "Sanctified Ordnance",
+          "Transoracular Dyad Wafers"
+        ],
+        "stratagems": [
+          "Eradication Protocols",
+          "Targeting Override",
+          "Aggressive Impulse",
+          "Guided Retreat",
+          "Analytical Divination",
+          "Neural Overload"
+        ]
+      },
+      {
+        "name": "Explorator Maniple",
+        "rules": [],
+        "enhancements": [
+          "Logis",
+          "Artisan",
+          "Magos",
+          "Genetor"
+        ],
+        "stratagems": [
+          "Reactive Safeguard",
+          "Auto-oracular Retrieval",
+          "Cached Acquisition",
+          "Priority Reclamation",
+          "Infoslave Skull",
+          "Incense Exhausts"
+        ]
+      },
+      {
+        "name": "Data-psalm Conclave",
+        "rules": [],
+        "enhancements": [
+          "Mantle of the Gnosticarch",
+          "Temporcopia",
+          "Data-blessed Autosermon",
+          "Mechanicus Locum"
+        ],
+        "stratagems": [
+          "Luminescent Blessing",
+          "Incantation of the Iron Soul",
+          "Litany of the Electromancer",
+          "Tribute of Emphatic Veneration",
+          "Chant of the Remorseless Fist",
+          "Verse of Vengeance"
+        ]
+      },
+      {
+        "name": "Cohort Cybernetica",
+        "rules": [],
+        "enhancements": [
+          "Arch-negator",
+          "Necromechanic",
+          "Emotionless Clarity",
+          "Lord of Machines"
+        ],
+        "stratagems": [
+          "Transcendent Cogitation",
+          "Motive Imperative",
+          "Machine Spirit Resurgent",
+          "Benevolence of the Omnissiah",
+          "Auto-divinatory Targeting",
+          "Machine Superiority"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Archaeopter Fusilave",
+      "Archaeopter Stratoraptor",
+      "Archaeopter Transvector",
+      "Belisarius Cawl",
+      "Corpuscarii Electro-Priests",
+      "Cybernetica Datasmith",
+      "Fulgurite Electro-Priests",
+      "Ironstrider Ballistarii",
+      "Kastelan Robots",
+      "Kataphron Breachers",
+      "Kataphron Destroyers",
+      "Onager Dunecrawler",
+      "Pteraxii Skystalkers",
+      "Pteraxii Sterylizors",
+      "Serberys Raiders",
+      "Serberys Sulphurhounds",
+      "Sicarian Infiltrators",
+      "Sicarian Ruststalkers",
+      "Skitarii Marshal",
+      "Skitarii Rangers",
+      "Skitarii Vanguard",
+      "Skorpius Disintegrator",
+      "Skorpius Dunerider",
+      "Sydonian Dragoons with Radium Jezzails",
+      "Sydonian Dragoons with Taser Lances",
+      "Sydonian Skatros",
+      "Technoarcheologist",
+      "Tech-Priest Dominus",
+      "Tech-Priest Enginseer",
+      "Tech-Priest Manipulus"
+    ]
+  },
+  {
+    "faction": "Aeldari",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Windrider Host",
+        "rules": [],
+        "enhancements": [
+          "Firstdrawn Blade",
+          "Mirage Field",
+          "Echoes of Ulthanesh",
+          "Seersight Strike"
+        ],
+        "stratagems": [
+          "Overflight",
+          "Wind of Blades",
+          "Focused Firepower",
+          "Spiralling Evasion",
+          "Daring Riders",
+          "Death From On High"
+        ]
+      },
+      {
+        "name": "Warhost",
+        "rules": [],
+        "enhancements": [
+          "Psychic Destroyer",
+          "Phoenix Gem",
+          "Timeless Strategist",
+          "Gift of Foresight"
+        ],
+        "stratagems": [
+          "Fire and Fade",
+          "Lightning-fast Reactions",
+          "Skyborne Sanctuary",
+          "Feigned Retreat",
+          "Blitzing Firepower",
+          "Webway Tunnel"
+        ]
+      },
+      {
+        "name": "Spirit Conclave",
+        "rules": [],
+        "enhancements": [
+          "Light of Clarity",
+          "Stave of Kurnos",
+          "Rune of Mists",
+          "Higher Duty"
+        ],
+        "stratagems": [
+          "Wraithbone Armour",
+          "Blades From Beyond",
+          "Spirit Token",
+          "Crushing Strides",
+          "Seer’s Eye",
+          "Soul Bridge"
+        ]
+      },
+      {
+        "name": "Seer Council",
+        "rules": [],
+        "enhancements": [
+          "Lucid Eye",
+          "Runes of Warding",
+          "Stone of Eldritch Fury",
+          "Torc of Morai-Heg"
+        ],
+        "stratagems": [
+          "Presentiment of Dread",
+          "Forewarned",
+          "Unshrouded Truth",
+          "Fate Inescapable",
+          "Isha’s Fury",
+          "Psychic Shield"
+        ]
+      },
+      {
+        "name": "Guardian Battlehost",
+        "rules": [],
+        "enhancements": [
+          "Craftworld’s Champion",
+          "Ethereal Pathway",
+          "Protector of the Paths",
+          "Breath of Vaul"
+        ],
+        "stratagems": [
+          "Cost of Victory",
+          "Warding Salvoes",
+          "Shield Nodes",
+          "Time to Strike",
+          "Blades of Asuryan",
+          "Vaul’s Vengeance"
+        ]
+      },
+      {
+        "name": "Ghosts of the Webway",
+        "rules": [],
+        "enhancements": [
+          "Cegorach’s Coil",
+          "Mask of Secrets",
+          "Murder’s Jest",
+          "Mistweave"
+        ],
+        "stratagems": [
+          "Staged Death",
+          "Heroes’ Fall",
+          "Mocking Flight",
+          "Tricksters’ Retort",
+          "Exit the Stage",
+          "Bloody Dance"
+        ]
+      },
+      {
+        "name": "Devoted of Ynnead",
+        "rules": [],
+        "enhancements": [
+          "Gaze of Ynnead",
+          "Storm of Whispers",
+          "Borrowed Vigour",
+          "Morbid Might"
+        ],
+        "stratagems": [
+          "Pall of Dread",
+          "Macabre Resilience",
+          "Emissaries of Ynnead",
+          "Parting the Veil",
+          "Death Answers Death",
+          "Soulsight"
+        ]
+      },
+      {
+        "name": "Aspect Host",
+        "rules": [],
+        "enhancements": [
+          "Mantle of Wisdom",
+          "Shimmerstone",
+          "Strategic Savant",
+          "Aspect of Murder"
+        ],
+        "stratagems": [
+          "To Their Final Breath",
+          "Doom Inescapable",
+          "Preternatural Precision",
+          "Khaine’s Vengeance",
+          "Warrior Focus",
+          "Skyborne Sanctuary"
+        ]
+      },
+      {
+        "name": "Armoured Warhost",
+        "rules": [],
+        "enhancements": [
+          "Guiding Presence",
+          "Harmonisation Matrix",
+          "Spirit Stone of Raelyth",
+          "Guileful Strategist"
+        ],
+        "stratagems": [
+          "Cloudstrike",
+          "Soulsight",
+          "Anti-grav Repulsion",
+          "Layered Wards",
+          "Swift Deployment",
+          "Vectored Engines"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Asurmen",
+      "Autarch",
+      "Autarch Wayleaper",
+      "Avatar of Khaine",
+      "Baharroth",
+      "Corsair Voidreavers",
+      "Corsair Voidscarred",
+      "Crimson Hunter",
+      "D-cannon Platform",
+      "Dark Reapers",
+      "Death Jester",
+      "Dire Avengers",
+      "Eldrad Ulthran",
+      "Falcon",
+      "Farseer",
+      "Farseer Skyrunner",
+      "Fire Dragons",
+      "Fire Prism",
+      "Fuegan",
+      "Guardian Defenders",
+      "Hemlock Wraithfighter",
+      "Howling Banshees",
+      "Jain Zar",
+      "Lhykhis",
+      "Maugan Ra",
+      "Night Spinner",
+      "Rangers",
+      "Shadow Weaver Platform",
+      "Shadowseer",
+      "Shining Spears",
+      "Shroud Runners",
+      "Skyweavers",
+      "Phantom Titan",
+      "Solitaire",
+      "Spiritseer",
+      "Starweaver",
+      "Revenant Titan",
+      "Storm Guardians",
+      "Striking Scorpions",
+      "Swooping Hawks",
+      "The Visarch",
+      "The Yncarne",
+      "Troupe",
+      "Troupe Master",
+      "Vibro Cannon Platform",
+      "Voidweaver",
+      "Vypers",
+      "War Walkers",
+      "Warlock",
+      "Warlock Conclave",
+      "Warlock Skyrunners",
+      "Wave Serpent",
+      "Warp Spiders",
+      "Windriders",
+      "Wraithblades",
+      "Wraithguard",
+      "Wraithknight",
+      "Wraithknight with Ghostglaive",
+      "Wraithlord",
+      "Ynnari Archon",
+      "Ynnari Incubi",
+      "Ynnari Kabalite Warriors",
+      "Ynnari Raider",
+      "Ynnari Reavers",
+      "Ynnari Succubus",
+      "Ynnari Venom",
+      "Ynnari Wyches",
+      "Yvraine"
+    ]
+  },
+  {
+    "faction": "Astra Militarum",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Siege Regiment",
+        "rules": [],
+        "enhancements": [
+          "Flash Grenades",
+          "Legacy Sidearm",
+          "Stalwart’s Honours",
+          "Eager Advance"
+        ],
+        "stratagems": [
+          "Callous Sacrifice",
+          "Trench Fighters",
+          "Flare Burst",
+          "Furious Fusillade",
+          "Minefield",
+          "Over the Top"
+        ]
+      },
+      {
+        "name": "Recon Element",
+        "rules": [],
+        "enhancements": [
+          "Scare Gas Grenades",
+          "Guerrilla Honours",
+          "Survival Gear",
+          "Tripwires"
+        ],
+        "stratagems": [
+          "Draw Them Out",
+          "Courageous Diversion",
+          "Tanglefoot Grenades",
+          "Scouting Outriders",
+          "Scramble Field",
+          "Crack Shots"
+        ]
+      },
+      {
+        "name": "Mechanised Assault",
+        "rules": [],
+        "enhancements": [
+          "Bold Leadership",
+          "Sacred Unguents",
+          "Vanguard Honours",
+          "Smoke Grenades"
+        ],
+        "stratagems": [
+          "Vox-relay",
+          "Rapid Dispersal",
+          "Clear and Secure",
+          "Swift Interception",
+          "Hasty Extraction",
+          "Move Out"
+        ]
+      },
+      {
+        "name": "Hammer of the Emperor",
+        "rules": [],
+        "enhancements": [
+          "Calm Under Fire",
+          "Indomitable Steed",
+          "Regimental Banner",
+          "Veteran Crew"
+        ],
+        "stratagems": [
+          "Tactical Withdrawal",
+          "Final Hour",
+          "Blazing Advance",
+          "Crash Through",
+          "Furious Cannonade",
+          "Ablative Plating"
+        ]
+      },
+      {
+        "name": "Combined Arms",
+        "rules": [],
+        "enhancements": [
+          "Drill Commander",
+          "Grand Strategist",
+          "Death Mask of Ollanius",
+          "Reactive Command"
+        ],
+        "stratagems": [
+          "Inspired Command",
+          "Coordinated Action",
+          "Flexible Command",
+          "Fields of Fire",
+          "Stalwart Protector",
+          "Reinforcements!"
+        ]
+      },
+      {
+        "name": "Bridgehead Strike",
+        "rules": [],
+        "enhancements": [
+          "Bombast-class Vox-array",
+          "Priority-drop Beacon",
+          "Shroud Projector",
+          "Advance Augury"
+        ],
+        "stratagems": [
+          "Fire And Relocate",
+          "Servo-Designators",
+          "On My Position",
+          "Firing Hot",
+          "Bellicosa Drop",
+          "Aerial Extraction"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Aegis Defence Line",
+      "Armoured Sentinels",
+      "Artillery Team",
+      "Avenger Strike Fighter",
+      "Attilan Rough Riders",
+      "Baneblade",
+      "Banehammer",
+      "Banesword",
+      "Basilisk",
+      "Bullgryn Squad",
+      "Cadian Castellan",
+      "Cadian Command Squad",
+      "Cadian Heavy Weapons Squad",
+      "Cadian Shock Troops",
+      "Catachan Command Squad",
+      "Catachan Heavy Weapons Squad",
+      "Catachan Jungle Fighters",
+      "Chimera",
+      "Commissar",
+      "Death Korps of Krieg",
+      "Death Riders",
+      "Cyclops Demolition Vehicle",
+      "Deathstrike",
+      "Doomhammer",
+      "Field Ordnance Battery",
+      "Gaunt’s Ghosts",
+      "Hellhammer",
+      "Hellhound",
+      "Hydra",
+      "Kasrkin",
+      "Krieg Combat Engineers",
+      "Krieg Command Squad",
+      "Krieg Heavy Weapons Squad",
+      "Leman Russ Battle Tank",
+      "Leman Russ Commander",
+      "Leman Russ Demolisher",
+      "Leman Russ Eradicator",
+      "Leman Russ Executioner",
+      "Leman Russ Exterminator",
+      "Leman Russ Punisher",
+      "Leman Russ Vanquisher",
+      "Lord Marshal Dreir",
+      "Lord Solar Leontus",
+      "Manticore",
+      "Militarum Tempestus Command Squad",
+      "Ministorum Priest",
+      "Nork Deddog",
+      "Ogryn Bodyguard",
+      "Ogryn Squad",
+      "Primaris Psyker",
+      "Ratlings",
+      "Rogal Dorn Battle Tank",
+      "Rogal Dorn Commander",
+      "Scout Sentinels",
+      "Shadowsword",
+      "Sly Marbo",
+      "Stormlord",
+      "Stormsword",
+      "Taurox",
+      "Taurox Prime",
+      "Tech-Priest Enginseer",
+      "Tempestus Aquilons",
+      "Tempestus Scions",
+      "Ursula Creed",
+      "Valkyrie",
+      "Wyvern"
+    ]
+  },
+  {
+    "faction": "Chaos Space Marines",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Veterans of the Long War",
+        "rules": [],
+        "enhancements": [
+          "Warmaster’s Gift",
+          "Eager for Vengeance",
+          "Mark of Legend",
+          "Eye of Abaddon"
+        ],
+        "stratagems": [
+          "Endless Ire",
+          "Bringers of Despair",
+          "Let the Galaxy Burn",
+          "Millennia of Experience",
+          "Black Crusade",
+          "Contemptuous Disregard"
+        ]
+      },
+      {
+        "name": "Soulforged Warpack",
+        "rules": [],
+        "enhancements": [
+          "Invigorated Mechatendrils",
+          "Soul Harvester",
+          "Tempting Addendum",
+          "Forge’s Blessing"
+        ],
+        "stratagems": [
+          "Desperate Pledge",
+          "Daemonic Possession",
+          "Glut of Souls",
+          "Feeding Frenzy",
+          "Unstoppable Rampage",
+          "Predatory Pursuit"
+        ]
+      },
+      {
+        "name": "Renegade Raiders",
+        "rules": [],
+        "enhancements": [
+          "Despot’s Claim",
+          "Tyrant’s Lash",
+          "Dread Reaver",
+          "Mark of the Hound"
+        ],
+        "stratagems": [
+          "Reaver’s Haste",
+          "Opportunistic Raiders",
+          "Ruinous Raid",
+          "Scour and Seize",
+          "Unfailingly Obdurate",
+          "Warpcharged Engines"
+        ]
+      },
+      {
+        "name": "Pactbound Zealots",
+        "rules": [],
+        "enhancements": [
+          "Eye of Tzeentch",
+          "Intoxicating Elixir",
+          "Orbs of Unlife",
+          "Talisman of Burning Blood"
+        ],
+        "stratagems": [
+          "Eye of the Gods",
+          "Torpefying Refrain",
+          "Skinshift",
+          "Profane Zeal",
+          "Eternal Hate",
+          "Festering Miasma"
+        ]
+      },
+      {
+        "name": "Fellhammer Siege-host",
+        "rules": [],
+        "enhancements": [
+          "Ironbound Emnity",
+          "Bastion Plate",
+          "Warp Tracer",
+          "Iron Artifice"
+        ],
+        "stratagems": [
+          "Point-blank Destruction",
+          "Pitiless Cannonade",
+          "Steadfast Determination",
+          "Siegecraft",
+          "Persistent Assailants",
+          "Brutal Attrition"
+        ]
+      },
+      {
+        "name": "Dread Talons",
+        "rules": [],
+        "enhancements": [
+          "Willbreaker",
+          "Eater of Dread",
+          "Night’s Shroud",
+          "Warp-Fuelled Thrusters"
+        ],
+        "stratagems": [
+          "Bloody Example",
+          "Pitiless Hunters",
+          "Merciless Pursuit",
+          "Relentless Terror",
+          "Depthless Cruelty",
+          "Screaming Descent"
+        ]
+      },
+      {
+        "name": "Deceptors",
+        "rules": [],
+        "enhancements": [
+          "Shroud of Obfuscation",
+          "Cursed Fang",
+          "Soul Link",
+          "Falsehood"
+        ],
+        "stratagems": [
+          "Detonator",
+          "Relentless Pursuit",
+          "From All Sides",
+          "Coils of Deception",
+          "Scrambled Coordinates",
+          "Pick Them Off"
+        ]
+      },
+      {
+        "name": "Creations of Bile",
+        "rules": [],
+        "enhancements": [
+          "Surgical Precision",
+          "Living Carapace",
+          "Helm of All-Seeing",
+          "Prime Test Subject"
+        ],
+        "stratagems": [
+          "Monstrous Visages",
+          "Masters Are Watching",
+          "Diabolic Regeneration",
+          "Autostimulants",
+          "Specimens For The Spider",
+          "Delayed Mutations"
+        ]
+      },
+      {
+        "name": "Chaos Cult",
+        "rules": [],
+        "enhancements": [
+          "Amulet of Tainted Vigour",
+          "Cultist’s Brand",
+          "Warped Foresight",
+          "Incendiary Goad"
+        ],
+        "stratagems": [
+          "Chosen for Glory",
+          "Crazed Focus",
+          "Selfless Demise",
+          "Reckless Haste",
+          "Infernal Sacrifice",
+          "Mortal Thralls"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Abaddon the Despoiler",
+      "Accursed Cultists",
+      "Chaos Bikers",
+      "Chaos Land Raider",
+      "Chaos Lord",
+      "Chaos Lord in Terminator Armour",
+      "Chaos Lord with Jump Pack",
+      "Chaos Predator Annihilator",
+      "Chaos Predator Destructor",
+      "Chaos Rhino",
+      "Chaos Spawn",
+      "Chaos Terminator Squad",
+      "Chaos Vindicator",
+      "Chosen",
+      "Cultist Firebrand",
+      "Cultist Mob",
+      "Cypher",
+      "Dark Apostle",
+      "Dark Commune",
+      "Defiler",
+      "Fabius Bile",
+      "Fellgor Beastmen",
+      "Forgefiend",
+      "Haarken Worldclaimer",
+      "Havocs",
+      "Helbrute",
+      "Heldrake",
+      "Heretic Astartes Daemon Prince",
+      "Heretic Astartes Daemon Prince with Wings",
+      "Huron Blackheart",
+      "Khorne Lord of Skulls",
+      "Legionaries",
+      "Lord Discordant on Helstalker",
+      "Master of Executions",
+      "Master of Possession",
+      "Maulerfiend",
+      "Nemesis Claw",
+      "Noctilith Crown",
+      "Obliterators",
+      "Possessed",
+      "Raptors",
+      "Sorcerer",
+      "Sorcerer in Terminator Armour",
+      "Traitor Enforcer",
+      "Traitor Guardsmen Squad",
+      "Vashtorr the Arkifane",
+      "Venomcrawler",
+      "Warpsmith",
+      "Warp Talons"
+    ]
+  },
+  {
+    "faction": "Genestealer Cults",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Xenocreed Congregation",
+        "rules": [],
+        "enhancements": [
+          "Incendiary Inspiration",
+          "Denunciator of Tyrants",
+          "Gene-sire’s Reliquant",
+          "Deeds that Speak to the Masses"
+        ],
+        "stratagems": [
+          "Tireless Fervour",
+          "Transcendent Celerity",
+          "The Path of Anguish",
+          "Vengeance for the Martyr!",
+          "Frenzied Devotion",
+          "The Downtrodden Rise"
+        ]
+      },
+      {
+        "name": "Outlander Claw",
+        "rules": [],
+        "enhancements": [
+          "Starfall Shells",
+          "Cartographic Data-leech",
+          "Serpentine Tactics",
+          "Assault Commando"
+        ],
+        "stratagems": [
+          "Close-range Shoot-out",
+          "Deft Manoeuvring",
+          "Rapid Feint",
+          "Encircling the Prey",
+          "Devoted Crew",
+          "Along Shadowed Trails"
+        ]
+      },
+      {
+        "name": "Host of Ascension",
+        "rules": [],
+        "enhancements": [
+          "A Chink In Their Armour",
+          "Our Time is Nigh",
+          "Prowling Agitant",
+          "Assassination Edict"
+        ],
+        "stratagems": [
+          "Tunnel Crawlers",
+          "Primed and Readied",
+          "Coordinated Trap",
+          "A Deadly Snare",
+          "Return to the Shadows",
+          "Lying in Wait"
+        ]
+      },
+      {
+        "name": "Final Day",
+        "rules": [],
+        "enhancements": [
+          "Synaptic Auger",
+          "Enraptured Damnation",
+          "Vanguard Tyrant",
+          "Inhuman Integration"
+        ],
+        "stratagems": [
+          "Hyperferocity",
+          "Psi Surge",
+          "Divine Imperative",
+          "Darting Attacks",
+          "Resistance Tunnels",
+          "Avenge the Star Children"
+        ]
+      },
+      {
+        "name": "Brood Brothers Auxilia",
+        "rules": [],
+        "enhancements": [
+          "Fire-point Commander",
+          "Adaptive Reprisal",
+          "Martial Espionage",
+          "The Hero Returned"
+        ],
+        "stratagems": [
+          "Regimental Reinforcements",
+          "A Dark Network",
+          "Symbiotic Destruction",
+          "In the Shadow of Iron",
+          "Acceptable Losses",
+          "Suppress and Overwhelm"
+        ]
+      },
+      {
+        "name": "Biosanctic Broodsurge",
+        "rules": [],
+        "enhancements": [
+          "Mutagenic Regeneration",
+          "Biomorph Adaptation",
+          "Alien Majesty",
+          "Predatory Instincts"
+        ],
+        "stratagems": [
+          "Saintly Paroxysm",
+          "Evasive Vanguard",
+          "Hyper-metabolic Vigour",
+          "Gene-twisted Muscle",
+          "Stimulated Bio-surge",
+          "Bio-horror Revelation"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Aberrants",
+      "Abominant",
+      "Achilles Ridgerunners",
+      "Acolyte Hybrids with Autopistols",
+      "Acolyte Hybrids with Hand Flamers",
+      "Acolyte Iconward",
+      "Atalan Jackals",
+      "Benefictus",
+      "Biophagus",
+      "Clamavus",
+      "Goliath Rockgrinder",
+      "Goliath Truck",
+      "Hybrid Metamorphs",
+      "Jackal Alphus",
+      "Kelermorph",
+      "Locus",
+      "Magus",
+      "Neophyte Hybrids",
+      "Nexos",
+      "Patriarch",
+      "Primus",
+      "Purestrain Genestealers",
+      "Reductus Saboteur",
+      "Sanctus"
+    ]
+  },
+  {
+    "faction": "Imperial Agents",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Veiled Blade Elimination Force",
+        "rules": [],
+        "enhancements": [
+          "Prime Target",
+          "Hyperstimms",
+          "Will-sapping Salvo",
+          "Orbital Oversight"
+        ],
+        "stratagems": [
+          "Blind Grenades",
+          "Ensnaring Trap"
+        ]
+      },
+      {
+        "name": "Ordo Xenos, Alien Hunters",
+        "rules": [],
+        "enhancements": [
+          "Blackweave Shroud",
+          "Amulet of Auto-chastisement",
+          "Universal Anathema",
+          "Beacon Angelis"
+        ],
+        "stratagems": [
+          "Armour of Contempt",
+          "Adaptive Tactics",
+          "Hellfire Rounds",
+          "Dragonfire Rounds",
+          "Kraken Rounds",
+          "Rapid Tactical Relocation"
+        ]
+      },
+      {
+        "name": "Ordo Malleus, Daemon Hunters",
+        "rules": [],
+        "enhancements": [
+          "Formidable Resolve",
+          "Daemon Slayer",
+          "Grimoire of True Names (Aura)",
+          "Gift of the Prescient"
+        ],
+        "stratagems": [
+          "Ritual of Warding",
+          "Rites of Exorcism",
+          "Steel Heart",
+          "Hexagrammic Wards",
+          "Psybolt Ammunition",
+          "Truesilver Armour"
+        ]
+      },
+      {
+        "name": "Ordo Hereticus, Purgation Force",
+        "rules": [],
+        "enhancements": [
+          "Ignis Judicium",
+          "No Escape (Aura)",
+          "Witch Hunter",
+          "Liber Heresius"
+        ],
+        "stratagems": [
+          "Execution Order",
+          "Stun Grenades",
+          "Dispense Justice",
+          "Inviolate Jurisdiction",
+          "Line of Fire",
+          "Exact Punishment"
+        ]
+      },
+      {
+        "name": "Imperialis Fleet",
+        "rules": [],
+        "enhancements": [
+          "Digital Weapons",
+          "Clandestine Operation",
+          "Fleetmaster",
+          "Combat Landers"
+        ],
+        "stratagems": [
+          "Violent Acquisition",
+          "Masters of the Void",
+          "Close-quarters Barrage",
+          "Emperor’s Will",
+          "Selfless Bodyguard",
+          "Displacer Field"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Callidus Assassin",
+      "Corvus Blackstar",
+      "Culexus Assassin",
+      "Deathwatch Kill Team",
+      "Eversor Assassin",
+      "Exaction Squad",
+      "Grey Knights Terminator Squad",
+      "Imperial Navy Breachers",
+      "Imperial Rhino",
+      "Inquisitor",
+      "Inquisitor Coteaz",
+      "Inquisitor Draxus",
+      "Inquisitor Greyfax",
+      "Inquisitorial Agents",
+      "Inquisitorial Chimera",
+      "Ministorum Priest",
+      "Navigator",
+      "Rogue Trader Entourage",
+      "Sisters of Battle Immolator",
+      "Sisters of Battle Squad",
+      "Subductor Squad",
+      "Watch Captain Artemis",
+      "Watch Master",
+      "Vigilant Squad",
+      "Vindicare Assassin",
+      "Voidsmen-at-Arms"
+    ]
+  },
+  {
+    "faction": "Necrons",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Starshatter Arsenal",
+        "rules": [],
+        "enhancements": [
+          "Miniaturised Nebuloscope",
+          "Dread Majesty (Aura)",
+          "Demanding Leader",
+          "Chrono-impedance Fields"
+        ],
+        "stratagems": [
+          "Chronoshift",
+          "Dimensional Tunnel",
+          "Endless Servitude",
+          "Merciless Reclamation",
+          "Unyielding Forms",
+          "Reactive Reposition"
+        ]
+      },
+      {
+        "name": "Obeisance Phalanx",
+        "rules": [],
+        "enhancements": [
+          "Honourable Combatant",
+          "Warrior Noble",
+          "Eternal Conqueror",
+          "Unflinching Will"
+        ],
+        "stratagems": [
+          "Your Time Is Nigh",
+          "Suffer No Rival",
+          "Nanoassembly Protocols",
+          "Sentinels of Eternity",
+          "Territorial Obsession",
+          "Enslaved Artifice"
+        ]
+      },
+      {
+        "name": "Hypercrypt Legion",
+        "rules": [],
+        "enhancements": [
+          "Dimensional Overseer",
+          "Arisen Tyrant",
+          "Osteoclave Fulcrum",
+          "Hyperspatial Transfer Node"
+        ],
+        "stratagems": [
+          "Quantum Deflection",
+          "Dimensional Corridor",
+          "Entropic Damping",
+          "Hyperphasic Recall",
+          "Reanimation Crypts",
+          "Cosmic Precision"
+        ]
+      },
+      {
+        "name": "Canoptek Court",
+        "rules": [],
+        "enhancements": [
+          "Hyperphasic Fulcrum",
+          "Autodivinator",
+          "Dimensional Sanctum",
+          "Metalodermal Tesla Weave"
+        ],
+        "stratagems": [
+          "Solar Pulse",
+          "Curse of the Cryptek",
+          "Suboptimal Facade",
+          "Cynosure of Eradication",
+          "Reactive Subroutines",
+          "Countertemporal Shift"
+        ]
+      },
+      {
+        "name": "Awakened Dynasty",
+        "rules": [],
+        "enhancements": [
+          "Nether-realm Casket",
+          "Enaegic Dermal Bond",
+          "Phasal Subjugator (Aura)",
+          "Veil of Darkness"
+        ],
+        "stratagems": [
+          "Protocol of the Hungry Void",
+          "Protocol of the Undying Legions",
+          "Protocol of the Conquering Tyrant",
+          "Protocol of the Sudden Storm",
+          "Protocol of the Vengeful Stars",
+          "Protocol of the Eternal Revenant"
+        ]
+      },
+      {
+        "name": "Annihilation Legion",
+        "rules": [],
+        "enhancements": [
+          "Soulless Reaper",
+          "Eldritch Nightmare",
+          "Eternal Madness",
+          "Ingrained Superiority"
+        ],
+        "stratagems": [
+          "Masks of Death",
+          "Pitiless Hunters",
+          "Murderous Reanimation",
+          "Blood-fuelled Cruelty",
+          "Insanity’s Ire",
+          "The Spoor of Frailty"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Annihilation Barge",
+      "Canoptek Doomstalker",
+      "Canoptek Reanimator",
+      "Canoptek Scarab Swarms",
+      "Canoptek Spyders",
+      "Canoptek Wraiths",
+      "Catacomb Command Barge",
+      "Chronomancer",
+      "Convergence of Dominion",
+      "Cryptothralls",
+      "C’tan Shard of the Deceiver",
+      "C’tan Shard of the Nightbringer",
+      "C’tan Shard of the Void Dragon",
+      "Deathmarks",
+      "Doom Scythe",
+      "Doomsday Ark",
+      "Flayed Ones",
+      "Ghost Ark",
+      "Hexmark Destroyer",
+      "Illuminor Szeras",
+      "Immortals",
+      "Imotekh the Stormlord",
+      "Lokhust Destroyers",
+      "Lokhust Heavy Destroyers",
+      "Lokhust Lord",
+      "Lychguard",
+      "Monolith",
+      "Necron Warriors",
+      "Night Scythe",
+      "Obelisk",
+      "Ophydian Destroyers",
+      "Orikan the Diviner",
+      "Overlord",
+      "Overlord with Translocation Shroud",
+      "Plasmancer",
+      "Psychomancer",
+      "Royal Warden",
+      "Skorpekh Destroyers",
+      "Skorpekh Lord",
+      "Technomancer",
+      "Tesseract Vault",
+      "The Silent King",
+      "Tomb Blades",
+      "Seraptek Heavy Construct",
+      "Transcendent C’tan",
+      "Trazyn the Infinite",
+      "Triarch Praetorians",
+      "Triarch Stalker"
+    ]
+  },
+  {
+    "faction": "Orks",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "War Horde",
+        "rules": [],
+        "enhancements": [
+          "Supa-Cybork Body",
+          "Kunnin’ but Brutal",
+          "Follow Me Ladz",
+          "Headwoppa’s Killchoppa"
+        ],
+        "stratagems": [
+          "’Ere We Go",
+          "Careen!",
+          "’Ard as Nails",
+          "Unbridled Carnage",
+          "Orks is Never Beaten",
+          "Mob Rule"
+        ]
+      },
+      {
+        "name": "Taktikal Brigade",
+        "rules": [],
+        "enhancements": [
+          "Mek Kaptin",
+          "Mork’s Kunnin’",
+          "Gob Boomer",
+          "Skwad Leader"
+        ],
+        "stratagems": [
+          "Dat’s Ours",
+          "Fight Proppa",
+          "Krunchin’ Descent",
+          "On To Da Next",
+          "Ded Sneaky",
+          "Taktikal Retreat"
+        ]
+      },
+      {
+        "name": "Kult of Speed",
+        "rules": [],
+        "enhancements": [
+          "Squig-hide Tyres",
+          "Fasta Than Yooz",
+          "Wazblasta",
+          "Speed Makes Right"
+        ],
+        "stratagems": [
+          "Squig Flingin’",
+          "Full Throttle",
+          "Blitza Fire",
+          "Speediest Freeks",
+          "Dakkastorm",
+          "More Gitz Over ’Ere!"
+        ]
+      },
+      {
+        "name": "Green Tide",
+        "rules": [],
+        "enhancements": [
+          "Bloodthirsty Belligerence",
+          "Raucous Warcaller",
+          "Ferocious Show Off",
+          "Brutal But Kunnin’"
+        ],
+        "stratagems": [
+          "Tide of Muscle",
+          "Come On Ladz!",
+          "Bulldozer Brutality",
+          "Competitive Streak",
+          "Go Get ’Em!",
+          "Braggin’ Rights"
+        ]
+      },
+      {
+        "name": "Dread Mob",
+        "rules": [],
+        "enhancements": [
+          "Press It Fasta!",
+          "Supa-glowy Fing",
+          "Smoky Gubbinz",
+          "Gitfinder Gogglez"
+        ],
+        "stratagems": [
+          "Klankin’ Klaws",
+          "Dakka! Dakka! Dakka!",
+          "Conniving Runts",
+          "Superfuelled Boiler",
+          "Bigger Shells For Bigger Gitz",
+          "Extra Gubbinz"
+        ]
+      },
+      {
+        "name": "Da Big Hunt",
+        "rules": [],
+        "enhancements": [
+          "Proper Killy",
+          "Surly As A Squiggoth",
+          "Glory Hog",
+          "Skrag Every Stash!"
+        ],
+        "stratagems": [
+          "Dat One’s Even Bigga!",
+          "Unstoppable Momentum",
+          "Drag It Down",
+          "Where D’ya Fink You’re Going?",
+          "Instinctive Hunters",
+          "Stalkin’ Taktiks"
+        ]
+      },
+      {
+        "name": "Bully Boyz",
+        "rules": [],
+        "enhancements": [
+          "Tellyporta",
+          "’Eadstompa",
+          "Da Biggest Boss",
+          "Big Gob"
+        ],
+        "stratagems": [
+          "Cut’ Em Down",
+          "Crushing Impact",
+          "Too Arrogant To Die",
+          "Armed To Da Teef",
+          "Always Lookin’ Fer A Fight",
+          "Hulking Brutes"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Battlewagon",
+      "Beastboss",
+      "Beastboss on Squigosaur",
+      "Beast Snagga Boyz",
+      "Big’ed Bossbunka",
+      "Big Mek",
+      "Big Mek in Mega Armour",
+      "Big Mek with Shokk Attack Gun",
+      "Blitza-bommer",
+      "Boomdakka Snazzwagon",
+      "Boss Snikrot",
+      "Boyz",
+      "Breaka Boyz",
+      "Burna-bommer",
+      "Burna Boyz",
+      "Dakkajet",
+      "Deff Dread",
+      "Deffkilla Wartrike",
+      "Deffkoptas",
+      "Flash Gitz",
+      "Ghazghkull Thraka",
+      "Gargantuan Squiggoth",
+      "Gorkanaut",
+      "Gretchin",
+      "Hunta Rig",
+      "Killa Kans",
+      "Kill Rig",
+      "Kommandos",
+      "Kustom Boosta-blasta",
+      "Lootas",
+      "Meganobz",
+      "Megatrakk Scrapjet",
+      "Mek",
+      "Mek Gunz",
+      "Morkanaut",
+      "Mozrog Skragbad",
+      "Nobz",
+      "Painboss",
+      "Painboy",
+      "Rukkatrukk Squigbuggy",
+      "Shokkjump Dragsta",
+      "Squighog Boyz",
+      "Stompa",
+      "Stormboyz",
+      "Tankbustas",
+      "Trukk",
+      "Warbikers",
+      "Warboss",
+      "Warboss in Mega Armour",
+      "Wazbom Blastajet",
+      "Weirdboy",
+      "Wurrboy",
+      "Zodgrod Wortsnagga"
+    ]
+  },
+  {
+    "faction": "Space Marines",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Vanguard Spearhead",
+        "rules": [],
+        "enhancements": [
+          "Ghostweave Cloak",
+          "Shadow War Veteran",
+          "Execute and Redeploy",
+          "The Blade Driven Deep"
+        ],
+        "stratagems": [
+          "Strike From The Shadows",
+          "A Deadly Prize",
+          "Surgical Strikes",
+          "Armour of Contempt",
+          "Guerrilla Tactics",
+          "Calculated Feint"
+        ]
+      },
+      {
+        "name": "Stormlance Task Force",
+        "rules": [],
+        "enhancements": [
+          "Fury of the Storm",
+          "Hunter’s Instincts",
+          "Portents of Wisdom",
+          "Feinting Withdrawal"
+        ],
+        "stratagems": [
+          "Armour of Contempt",
+          "Ride Hard, Ride Fast",
+          "Blitzing Fusillade",
+          "Wind-swift Evasion",
+          "Full Throttle",
+          "Shock Assault"
+        ]
+      },
+      {
+        "name": "Librarius Conclave",
+        "rules": [],
+        "enhancements": [
+          "Prescience",
+          "Celerity",
+          "Obfuscation",
+          "Fusillade"
+        ],
+        "stratagems": [
+          "Prescient Precision",
+          "Sensory Assault",
+          "Fiery Shield",
+          "Iron Arm",
+          "Assail",
+          "Armour of Contempt"
+        ]
+      },
+      {
+        "name": "Ironstorm Spearhead",
+        "rules": [],
+        "enhancements": [
+          "Adept of the Omnissiah",
+          "Master of Machine War",
+          "Target Augury Web",
+          "The Flesh Is Weak"
+        ],
+        "stratagems": [
+          "Ancient Fury",
+          "Vengeful Animus",
+          "Unbowed Conviction",
+          "Mercy Is Weakness",
+          "Armour of Contempt",
+          "Power of the Machine Spirit"
+        ]
+      },
+      {
+        "name": "Gladius Task Force",
+        "rules": [],
+        "enhancements": [
+          "Artificer Armour",
+          "The Honour Vehement",
+          "Adept of the Codex",
+          "Fire Discipline"
+        ],
+        "stratagems": [
+          "Armour of Contempt",
+          "Storm of Fire",
+          "Squad Tactics",
+          "Adaptive Strategy",
+          "Only in Death Does Duty End",
+          "Honour the Chapter"
+        ]
+      },
+      {
+        "name": "Firestorm Assault Force",
+        "rules": [],
+        "enhancements": [
+          "War-tempered Artifice",
+          "Champion of Humanity",
+          "Adamantine Mantle",
+          "Forged in Battle"
+        ],
+        "stratagems": [
+          "Immolation Protocols",
+          "Armour of Contempt",
+          "Crucible of Battle",
+          "Rapid Embarkation",
+          "Burning Vengeance",
+          "Onslaught of Fire"
+        ]
+      },
+      {
+        "name": "Anvil Siege Force",
+        "rules": [],
+        "enhancements": [
+          "Stoic Defender",
+          "Fleet Commander",
+          "Architect of War",
+          "Indomitable Fury"
+        ],
+        "stratagems": [
+          "Armour of Contempt",
+          "Not One Backwards Step",
+          "Hail of Vengeance",
+          "Battle Drill Recall",
+          "Rigid Discipline",
+          "No Threat Too Great"
+        ]
+      },
+      {
+        "name": "1st Company Task Force",
+        "rules": [],
+        "enhancements": [
+          "The Imperium’s Sword",
+          "Iron Resolve",
+          "Fear Made Manifest (Aura)",
+          "Rites of War"
+        ],
+        "stratagems": [
+          "Heroes of the Chapter",
+          "Orbital Teleportarium",
+          "Duty and Honour",
+          "Legendary Fortitude",
+          "Armour of Contempt",
+          "Terrifying Proficiency"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Adrax Agatone",
+      "Aggressor Squad",
+      "Ancient",
+      "Ancient in Terminator Armour",
+      "Apothecary",
+      "Apothecary Biologis",
+      "Assault Intercessor Squad",
+      "Assault Intercessors with Jump Packs",
+      "Ballistus Dreadnought",
+      "Bladeguard Ancient",
+      "Bladeguard Veteran Squad",
+      "Brutalis Dreadnought",
+      "Captain",
+      "Captain in Gravis Armour",
+      "Captain in Phobos Armour",
+      "Captain in Terminator Armour",
+      "Captain Sicarius",
+      "Captain with Jump Pack",
+      "Centurion Assault Squad",
+      "Centurion Devastator Squad",
+      "Chaplain",
+      "Chaplain in Terminator Armour",
+      "Chaplain on Bike",
+      "Chaplain with Jump Pack",
+      "Chief Librarian Tigurius",
+      "Company Heroes",
+      "Darnath Lysander",
+      "Desolation Squad",
+      "Devastator Squad",
+      "Dreadnought",
+      "Drop Pod",
+      "Eliminator Squad",
+      "Eradicator Squad",
+      "Firestrike Servo-turrets",
+      "Gladiator Lancer",
+      "Gladiator Reaper",
+      "Gladiator Valiant",
+      "Hammerfall Bunker",
+      "Heavy Intercessor Squad",
+      "Hellblaster Squad",
+      "Impulsor",
+      "Inceptor Squad",
+      "Incursor Squad",
+      "Infernus Squad",
+      "Infiltrator Squad",
+      "Intercessor Squad",
+      "Invader ATV",
+      "Invictor Tactical Warsuit",
+      "Iron Father Feirros",
+      "Judiciar",
+      "Kayvaan Shrike",
+      "Kor’sarro Khan",
+      "Land Raider",
+      "Land Raider Crusader",
+      "Land Raider Redeemer",
+      "Librarian",
+      "Librarian in Phobos Armour",
+      "Librarian in Terminator Armour",
+      "Lieutenant",
+      "Lieutenant in Phobos Armour",
+      "Lieutenant in Reiver Armour",
+      "Lieutenant Titus",
+      "Lieutenant with Combi-weapon",
+      "Marneus Calgar",
+      "Outrider Squad",
+      "Pedro Kantor",
+      "Predator Annihilator",
+      "Predator Destructor",
+      "Razorback",
+      "Redemptor Dreadnought",
+      "Reiver Squad",
+      "Repulsor",
+      "Repulsor Executioner",
+      "Rhino",
+      "Roboute Guilliman",
+      "Scout Squad",
+      "Sternguard Veteran Squad",
+      "Stormhawk Interceptor",
+      "Stormraven Gunship",
+      "Storm Speeder Hailstrike",
+      "Storm Speeder Thunderstrike",
+      "Storm Speeder Hammerstrike",
+      "Stormtalon Gunship",
+      "Suppressor Squad",
+      "Tactical Squad",
+      "Techmarine",
+      "Terminator Assault Squad",
+      "Terminator Squad",
+      "Tor Garadon",
+      "Uriel Ventris",
+      "Vanguard Veteran Squad with Jump Packs",
+      "Vindicator",
+      "Vulkan He’stan",
+      "Whirlwind"
+    ]
+  },
+  {
+    "faction": "Tyranids",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Warrior Bioform Onslaught",
+        "rules": [],
+        "enhancements": [
+          "Synaptic Tyrant",
+          "Ocular Adaptation",
+          "Sensory Assimilation",
+          "Elevated Might"
+        ],
+        "stratagems": [
+          "Synaptic Amplification",
+          "Spontaneous Hypercorrosion",
+          "Restorative Impulse",
+          "Synaptic Micronodes",
+          "Parasitic Payload",
+          "Synaptic Shield"
+        ]
+      },
+      {
+        "name": "Vanguard Onslaught",
+        "rules": [],
+        "enhancements": [
+          "Neuronode",
+          "Chameleonic",
+          "Hunting Grounds",
+          "Stalker"
+        ],
+        "stratagems": [
+          "Seeded Broods",
+          "Hypersensory Scillia",
+          "Assassin Beasts",
+          "Invisible Hunter",
+          "Surprise Assault",
+          "Unseen Lurkers"
+        ]
+      },
+      {
+        "name": "Unending Swarm",
+        "rules": [],
+        "enhancements": [
+          "Naturalised Camouflage",
+          "Piercing Talons",
+          "Relentless Hunger",
+          "Adrenalised Onslaught"
+        ],
+        "stratagems": [
+          "Synaptic Goading",
+          "Preservation Imperative",
+          "Teeming Masses",
+          "Swarming Masses",
+          "Bounding Advance",
+          "Unending Waves"
+        ]
+      },
+      {
+        "name": "Synaptic Nexus",
+        "rules": [],
+        "enhancements": [
+          "The Dirgeheart of Kharis (Aura)",
+          "Psychostatic Disruption",
+          "Synaptic Control",
+          "Power of the Hive Mind"
+        ],
+        "stratagems": [
+          "Reinforced Hive Node",
+          "The Smothering Shadow",
+          "Synaptic Channelling",
+          "Irresistible Will",
+          "Imperative Dominance",
+          "Override Instincts"
+        ]
+      },
+      {
+        "name": "Invasion Fleet",
+        "rules": [],
+        "enhancements": [
+          "Adaptive Biology",
+          "Perfectly Adapted",
+          "Alien Cunning",
+          "Synaptic Lynchpin"
+        ],
+        "stratagems": [
+          "Adrenal Surge",
+          "Predatory Imperative",
+          "Overrun",
+          "Endless Swarm",
+          "Death Frenzy",
+          "Rapid Regeneration"
+        ]
+      },
+      {
+        "name": "Crusher Stampede",
+        "rules": [],
+        "enhancements": [
+          "Enraged Reserves",
+          "Null Nodules",
+          "Monstrous Nemesis",
+          "Ominous Presence"
+        ],
+        "stratagems": [
+          "Untrammelled Ferocity",
+          "Massive Impact",
+          "Corrosive Viscera",
+          "Rampaging Monstrosities",
+          "Savage Roar",
+          "Swarm-guided Salvoes"
+        ]
+      },
+      {
+        "name": "Assimilation Swarm",
+        "rules": [],
+        "enhancements": [
+          "Biophagic Flow (Aura)",
+          "Regenerating Monstrosity",
+          "Parasitic Biomorphology",
+          "Instinctive Defence"
+        ],
+        "stratagems": [
+          "Broodguard Impulse",
+          "Secure Biomass",
+          "Tyrannoformed",
+          "Rapacious Hunger",
+          "Reclaim Biomass",
+          "Ablative Carapace"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Barbgaunts",
+      "Biovores",
+      "Broodlord",
+      "Carnifexes",
+      "Deathleaper",
+      "Exocrine",
+      "Gargoyles",
+      "Genestealers",
+      "Harpy",
+      "Haruspex",
+      "Hive Crone",
+      "Harridan",
+      "Hive Guard",
+      "Hive Tyrant",
+      "Hierophant",
+      "Hormagaunts",
+      "Lictor",
+      "Maleceptor",
+      "Mawloc",
+      "Mucolid Spores",
+      "Neurogaunts",
+      "Neurolictor",
+      "Neurotyrant",
+      "Norn Assimilator",
+      "Norn Emissary",
+      "Old One Eye",
+      "Parasite of Mortrex",
+      "Psychophage",
+      "Pyrovores",
+      "Raveners",
+      "Ripper Swarms",
+      "Screamer-Killer",
+      "Spore Mines",
+      "Sporocyst",
+      "Termagants",
+      "Tervigon",
+      "The Swarmlord",
+      "Toxicrene",
+      "Trygon",
+      "Tyranid Warriors with Melee Bio-weapons",
+      "Tyranid Warriors with Ranged Bio-weapons",
+      "Tyrannocyte",
+      "Tyrannofex",
+      "Tyrant Guard",
+      "Venomthropes",
+      "Von Ryan’s Leapers",
+      "Winged Hive Tyrant",
+      "Winged Tyranid Prime",
+      "Zoanthropes"
+    ]
+  },
+  {
+    "faction": "T’au Empire",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Retaliation Cadre",
+        "rules": [],
+        "enhancements": [
+          "Prototype Weapon System",
+          "Starflare Ignition System",
+          "Internal Grenade Racks",
+          "Puretide Engram Neurochip"
+        ],
+        "stratagems": [
+          "The Torchstar Gambit",
+          "Grav-inhibitor Field",
+          "Fail-safe Detonator",
+          "Stimm Injectors",
+          "The Shortened Blade",
+          "The Arro’kon Protocol"
+        ]
+      },
+      {
+        "name": "Mont’ka",
+        "rules": [],
+        "enhancements": [
+          "Strategic Conqueror",
+          "Exemplar of the Mont’ka",
+          "Coordinated Exploitation",
+          "Strike Swiftly"
+        ],
+        "stratagems": [
+          "Pinpoint Counter-offensive",
+          "Focused Fire",
+          "Counterfire Defence Systems",
+          "Pulse Onslaught",
+          "Combat Debarkation",
+          "Aggressive Mobility"
+        ]
+      },
+      {
+        "name": "Kroot Hunting Pack",
+        "rules": [],
+        "enhancements": [
+          "Root-carved Weapons",
+          "Nomadic Hunter",
+          "Borthrod Gland",
+          "Kroothawk Flock"
+        ],
+        "stratagems": [
+          "Guerrilla Warriors",
+          "EMP Grenades",
+          "The Grisly Feast",
+          "Join the Hunt",
+          "Hidden Hunters",
+          "A Trap Well Laid"
+        ]
+      },
+      {
+        "name": "Kauyon",
+        "rules": [],
+        "enhancements": [
+          "Exemplar of the Kauyon",
+          "Solid-image Projection Unit",
+          "Precision of the Patient Hunter",
+          "Through Unity, Devastation"
+        ],
+        "stratagems": [
+          "Coordinate to Engage",
+          "A Tempting Trap",
+          "Photon Grenades",
+          "Point-blank Ambush",
+          "Combat Embarkation",
+          "Wall of Mirrors"
+        ]
+      },
+      {
+        "name": "Auxiliary Cadre",
+        "rules": [],
+        "enhancements": [
+          "Student of Kauyon",
+          "Admired Leader",
+          "Fanatical Convert",
+          "Transponder Lock Module"
+        ],
+        "stratagems": [
+          "Interlocking Manouevres",
+          "Pheromone Waypoints",
+          "Alien Expertise",
+          "Guided Fire",
+          "Multisensory Scanning",
+          "Experimental Modifications"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Breacher Team",
+      "Broadside Battlesuits",
+      "Cadre Fireblade",
+      "AX-1-0 Tiger Shark",
+      "Commander Farsight",
+      "Commander in Coldstar Battlesuit",
+      "Commander in Enforcer Battlesuit",
+      "Commander Shadowsun",
+      "Crisis Fireknife Battlesuits",
+      "Crisis Starscythe Battlesuits",
+      "Crisis Sunforge Battlesuits",
+      "Darkstrider",
+      "Devilfish",
+      "Ethereal",
+      "Firesight Team",
+      "Ghostkeel Battlesuit",
+      "Hammerhead Gunship",
+      "Kroot Carnivores",
+      "Kroot Farstalkers",
+      "Kroot Flesh Shaper",
+      "Kroot Hounds",
+      "Kroot Lone-spear",
+      "Krootox Rampagers",
+      "Krootox Riders",
+      "Kroot Trail Shaper",
+      "Kroot War Shaper",
+      "Pathfinder Team",
+      "Manta",
+      "Piranhas",
+      "Razorshark Strike Fighter",
+      "Riptide Battlesuit",
+      "Sky Ray Gunship",
+      "Stealth Battlesuits",
+      "Stormsurge",
+      "Strike Team",
+      "Sun Shark Bomber",
+      "Tidewall Droneport",
+      "Tidewall Gunrig",
+      "Tidewall Shieldline",
+      "Vespid Stingwings",
+      "Ta’unar Supremacy Armour",
+      "Tiger Shark"
+    ]
+  },
+  {
+    "faction": "Black Templars",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Wrathful Procession",
+        "rules": [],
+        "enhancements": [
+          "Pyrebrand",
+          "Sacred Rage",
+          "Taramond’s Censer",
+          "Benediction of Fury"
+        ],
+        "stratagems": [
+          "Fuelled by Wrath",
+          "Brute Fervour",
+          "Relentless Momentum",
+          "Voice of Devotion",
+          "Castigate the Demagogues",
+          "Armour of Contempt"
+        ]
+      },
+      {
+        "name": "Righteous Crusaders",
+        "rules": [],
+        "enhancements": [
+          "Sigismund’s Seal",
+          "Perdition’s Edge",
+          "Witchseeker Bolts",
+          "Tännhauser’s Bones"
+        ],
+        "stratagems": [
+          "Fervent Acclamation",
+          "Armour of Contempt",
+          "Devout Push",
+          "No Escape",
+          "Crusader’s Wrath",
+          "Vicious Riposte"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Black Templars Gladiator Lancer",
+      "Black Templars Gladiator Reaper",
+      "Black Templars Gladiator Valiant",
+      "Black Templars Impulsor",
+      "Black Templars Repulsor",
+      "Black Templars Repulsor Executioner",
+      "Castellan",
+      "Chaplain Grimaldus",
+      "Crusader Squad",
+      "High Marshal Helbrecht",
+      "Marshal",
+      "Primaris Crusader Squad",
+      "Primaris Sword Brethren",
+      "The Emperor’s Champion"
+    ]
+  },
+  {
+    "faction": "Chaos Daemons",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Scintillating Legion",
+        "rules": [],
+        "enhancements": [
+          "Inescapable Eye",
+          "Infernal Puppeteer",
+          "Neverblade",
+          "Improbable Shield (Aura)"
+        ],
+        "stratagems": [
+          "Impossible Eclipse",
+          "Pyrogenesis",
+          "Flickering Reality",
+          "Fateborne Nightmares",
+          "Ficklefire",
+          "Delirium Unmade"
+        ]
+      },
+      {
+        "name": "Plague Legion",
+        "rules": [],
+        "enhancements": [
+          "Cankerblight (Aura)",
+          "Droning Shroud (Aura)",
+          "Font of Spores (Aura)",
+          "Maggot Maws"
+        ],
+        "stratagems": [
+          "Seeping Virulence",
+          "Fever Visions",
+          "Foetid Resurgence",
+          "Rot and Renewal",
+          "Murkshadows",
+          "Plague of Woes"
+        ]
+      },
+      {
+        "name": "Legion of Excess",
+        "rules": [],
+        "enhancements": [
+          "False Majesty (Aura)",
+          "Dreaming Crown (Aura)",
+          "Avatar of Perfection",
+          "Soul Glutton"
+        ],
+        "stratagems": [
+          "Thieves of Pain",
+          "Archagonists",
+          "Sensory Excruciation",
+          "Phantasmal Longing",
+          "Cavalcade of Blades",
+          "Overwhelming Excess"
+        ]
+      },
+      {
+        "name": "Daemonic Incursion",
+        "rules": [],
+        "enhancements": [
+          "The Everstave",
+          "Soulstealer",
+          "The Endless Gift",
+          "A’rgath, The King of Blades"
+        ],
+        "stratagems": [
+          "Warp Surge",
+          "Denizens of the Warp",
+          "Draught of Terror",
+          "Daemonic Invulnerability",
+          "Corrupt Realspace",
+          "The Realm of Chaos"
+        ]
+      },
+      {
+        "name": "Blood Legion",
+        "rules": [],
+        "enhancements": [
+          "Slaughterthirst (Aura)",
+          "Fury’s Cage",
+          "Brazenmaw",
+          "Gateway Unto Damnation"
+        ],
+        "stratagems": [
+          "Wrath Undeniable",
+          "Gore-hungry Onslaught",
+          "Skulls Beget Blood",
+          "Blood Begets Skulls",
+          "Fool’s Flight",
+          "Sheathed In Brass"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Beasts of Nurgle",
+      "Be’lakor",
+      "Bloodcrushers",
+      "Bloodletters",
+      "Bloodmaster",
+      "Bloodthirster",
+      "Blue Horrors",
+      "Burning Chariot",
+      "Changecaster",
+      "Contorted Epitome",
+      "Daemonettes",
+      "Daemon Prince of Chaos",
+      "Daemon Prince of Chaos with Wings",
+      "Epidemius",
+      "Exalted Flamer",
+      "Exalted Seeker Chariot",
+      "Fateskimmer",
+      "Feculent Gnarlmaw",
+      "Fiends",
+      "Flamers",
+      "Flesh Hounds",
+      "Fluxmaster",
+      "Great Unclean One",
+      "Hellflayer",
+      "Horticulous Slimux",
+      "Infernal Enrapturess",
+      "Kairos Fateweaver",
+      "Karanak",
+      "Keeper of Secrets",
+      "Lord of Change",
+      "Nurglings",
+      "Pink Horrors",
+      "Plaguebearers",
+      "Plague Drones",
+      "Poxbringer",
+      "Rendmaster on Blood Throne",
+      "Rotigus",
+      "Screamers",
+      "Seeker Chariot",
+      "Seekers",
+      "Shalaxi Helbane",
+      "Skarbrand",
+      "Skull Altar",
+      "Skull Cannon",
+      "Skullmaster",
+      "Skulltaker",
+      "Sloppity Bilepiper",
+      "Soul Grinder",
+      "Spoilpox Scrivener",
+      "Syll’Esske",
+      "The Blue Scribes",
+      "The Changeling",
+      "The Masque of Slaanesh",
+      "Tormentbringer on Exalted Seeker Chariot",
+      "Tranceweaver"
+    ]
+  },
+  {
+    "faction": "Chaos Knights",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Traitoris Lance",
+        "rules": [],
+        "enhancements": [
+          "Lord of Dread",
+          "The Traitor’s Mark",
+          "Panoply of the Cursed Knights",
+          "Aura of Terror"
+        ],
+        "stratagems": [
+          "Pterrorshades",
+          "Disdain for the Weak",
+          "A Long Leash",
+          "Dread Hounds",
+          "Diabolic Bulwark",
+          "Knights of Shade"
+        ]
+      },
+      {
+        "name": "Iconoclast Fiefdom",
+        "rules": [],
+        "enhancements": [
+          "Profane Altar",
+          "Pave The Way",
+          "Diabolical Resilience",
+          "Tyrant’s Banner"
+        ],
+        "stratagems": [
+          "Wretched Masses",
+          "Soul Hunger",
+          "Unrestrained Rage",
+          "Worthless Chattel",
+          "Preserve The Idols",
+          "Avenge The Masters!"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Chaos Acastus Knight Asterius",
+      "Chaos Acastus Knight Porphyrion",
+      "Chaos Cerastus Knight Acheron",
+      "Chaos Cerastus Knight Atrapos",
+      "Chaos Cerastus Knight Castigator",
+      "Chaos Cerastus Knight Lancer",
+      "Chaos Questoris Knight Magaera",
+      "Chaos Questoris Knight Styrix",
+      "Knight Abominant",
+      "Knight Desecrator",
+      "Knight Despoiler",
+      "Knight Rampager",
+      "Knight Tyrant",
+      "War Dog Brigand",
+      "War Dog Executioner",
+      "War Dog Huntsman",
+      "War Dog Karnivore",
+      "War Dog Moirax",
+      "War Dog Stalker"
+    ]
+  },
+  {
+    "faction": "Death Guard",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Plague Company",
+        "rules": [],
+        "enhancements": [
+          "Deadly Pathogen",
+          "Shamblerot",
+          "The Droning (Aura)",
+          "Living Plague"
+        ],
+        "stratagems": [
+          "Boilblight",
+          "Ferric Blight",
+          "Cloud of Flies",
+          "Gifts of Decay",
+          "Sanguous Flux",
+          "Disgustingly Resilient"
+        ]
+      },
+      {
+        "name": "Flyblown Host",
+        "rules": [],
+        "enhancements": [
+          "Droning Chorus",
+          "Insectile Murmuration",
+          "Rejuvenating Swarm",
+          "Plagueveil"
+        ],
+        "stratagems": [
+          "Nauseating Paroxysms",
+          "Vermin Cloud",
+          "Eye of the Swarm",
+          "Droning Horror",
+          "Enervating Onslaught",
+          "Myphitic Invigoration"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Biologus Putrifier",
+      "Blightlord Terminators",
+      "Death Guard Chaos Lord",
+      "Death Guard Chaos Lord in Terminator Armour",
+      "Death Guard Chaos Spawn",
+      "Death Guard Cultists",
+      "Death Guard Daemon Prince",
+      "Death Guard Daemon Prince with Wings",
+      "Death Guard Defiler",
+      "Death Guard Helbrute",
+      "Death Guard Icon Bearer",
+      "Death Guard Land Raider",
+      "Death Guard Predator Annihilator",
+      "Death Guard Predator Destructor",
+      "Death Guard Rhino",
+      "Death Guard Sorcerer in Terminator Armour",
+      "Deathshroud Terminators",
+      "Foetid Bloat-Drone",
+      "Foul Blightspawn",
+      "Lord of Contagion",
+      "Lord of Virulence",
+      "Malignant Plaguecaster",
+      "Miasmic Malignifier",
+      "Mortarion",
+      "Myphitic Blight-Haulers",
+      "Noxious Blightbringer",
+      "Plagueburst Crawler",
+      "Plague Marines",
+      "Plague Surgeon",
+      "Poxwalkers",
+      "Tallyman",
+      "Typhus"
+    ]
+  },
+  {
+    "faction": "Deathwatch",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Black Spear Task Force",
+        "rules": [],
+        "enhancements": [
+          "Thief of Secrets",
+          "Osseus Key",
+          "Beacon Angelis",
+          "The Tome of Ectoclades"
+        ],
+        "stratagems": [
+          "Adaptive Tactics",
+          "Site-to-Site Teleportation",
+          "Kraken Rounds",
+          "Armour of Contempt",
+          "Hellfire Rounds",
+          "Dragonfire Rounds"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Corvus Blackstar",
+      "Deathwatch Terminator Squad",
+      "Deathwatch Veterans",
+      "Fortis Kill Team",
+      "Indomitor Kill Team",
+      "Spectrus Kill Team",
+      "Talonstrike Kill Team",
+      "Watch Captain Artemis",
+      "Watch Master"
+    ]
+  },
+  {
+    "faction": "Drukhari",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Skysplinter Assault",
+        "rules": [],
+        "enhancements": [
+          "Nightmare Shroud",
+          "Phantasmal Smoke",
+          "Sadistic Fulcrum",
+          "Spiteful Raider"
+        ],
+        "stratagems": [
+          "Wraithlike Retreat",
+          "Pounce on the Prey",
+          "Night Shield",
+          "Skyborne Annihilation",
+          "Swooping Mockery",
+          "Vicious Blades"
+        ]
+      },
+      {
+        "name": "Reaper’s Wager",
+        "rules": [],
+        "enhancements": [
+          "Archraider",
+          "Webway Walker",
+          "Reaper’s Cowl",
+          "Conductor of Torment"
+        ],
+        "stratagems": [
+          "Shorten The Odds",
+          "Fateful Role",
+          "Murderer’s Circus",
+          "Scintillating Tempo",
+          "Dance Macabre",
+          "Malicious Frenzy"
+        ]
+      },
+      {
+        "name": "Realspace Raiders",
+        "rules": [],
+        "enhancements": [
+          "Crucible of Malediction",
+          "Blood Dancer",
+          "The Art of Pain",
+          "Labyrinthine Cunning"
+        ],
+        "stratagems": [
+          "Prey on the Weak",
+          "Alliance of Agony",
+          "Acrobatic Display",
+          "Quicksilver Reactions",
+          "Strike and Fade",
+          "Insensible to Pain"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Archon",
+      "Beastmaster",
+      "Court of the Archon",
+      "Cronos",
+      "Drazhar",
+      "Grotesques",
+      "Haemonculus",
+      "Hellions",
+      "Incubi",
+      "Kabalite Warriors",
+      "Lelith Hesperax",
+      "Mandrakes",
+      "Raider",
+      "Ravager",
+      "Razorwing Jetfighter",
+      "Reavers",
+      "Scourges",
+      "Succubus",
+      "Talos",
+      "Urien Rakarth",
+      "Venom",
+      "Voidraven Bomber",
+      "Wracks",
+      "Wyches"
+    ]
+  },
+  {
+    "faction": "Emperor’s Children",
+    "rules": [],
+    "detachments": [],
+    "datasheets": [
+      "Lucius the Eternal",
+      "Noise Marines"
+    ]
+  },
+  {
+    "faction": "Grey Knights",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Warpbane Task Force",
+        "rules": [],
+        "enhancements": [
+          "Mandulian Reliquary",
+          "Radiant Champion",
+          "Phial of the Abyss",
+          "Paragon of Sanctity"
+        ],
+        "stratagems": [
+          "Sanctified Kill Zone",
+          "Flames of Sanctity",
+          "Hallowed Beacon",
+          "Fires of Covenant",
+          "Aegis Eternal",
+          "Repelling Sphere"
+        ]
+      },
+      {
+        "name": "Teleport Strike Force",
+        "rules": [],
+        "enhancements": [
+          "Inescapable Wrath",
+          "First to the Fray",
+          "Domina Liber Daemonica",
+          "Sigil of Exigence"
+        ],
+        "stratagems": [
+          "Death From The Warp",
+          "Mists of Deimos",
+          "Prognisticated Arrival",
+          "Radiant Strike",
+          "Haloed in Soulfire",
+          "Truesilver Armour"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Brother-Captain",
+      "Brother-Captain Stern",
+      "Brotherhood Champion",
+      "Brotherhood Chaplain",
+      "Brotherhood Librarian",
+      "Brotherhood Techmarine",
+      "Brotherhood Terminator Squad",
+      "Castellan Crowe",
+      "Grand Master",
+      "Grand Master in Nemesis Dreadknight",
+      "Grand Master Voldus",
+      "Grey Knights Land Raider",
+      "Grey Knights Land Raider Crusader",
+      "Grey Knights Land Raider Redeemer",
+      "Grey Knights Razorback",
+      "Grey Knights Rhino",
+      "Grey Knights Stormhawk Interceptor",
+      "Grey Knights Stormraven Gunship",
+      "Grey Knights Stormtalon Gunship",
+      "Grey Knights Thunderhawk Gunship",
+      "Grey Knights Venerable Dreadnought",
+      "Interceptor Squad",
+      "Kaldor Draigo",
+      "Land Raider Banisher",
+      "Nemesis Dreadknight",
+      "Paladin Squad",
+      "Purgation Squad",
+      "Purifier Squad",
+      "Servitors",
+      "Strike Squad"
+    ]
+  },
+  {
+    "faction": "Imperial Knights",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Questor Forgepact",
+        "rules": [],
+        "enhancements": [
+          "Omnissian Champion",
+          "Knight of the Opus Machina",
+          "Magos Questoris",
+          "Vocifer Magnificat (Aura)"
+        ],
+        "stratagems": [
+          "Bonded Imperative",
+          "Machine Focus",
+          "Aggression Begets Aggression",
+          "Thronegheist Fury",
+          "Vengeance of the Machine Cult",
+          "Omnissiah’s Grace"
+        ]
+      },
+      {
+        "name": "Noble Lance",
+        "rules": [],
+        "enhancements": [
+          "Unyielding Paragon",
+          "Banner of Macharius Triumphant",
+          "Mythic Hero",
+          "Revered Knight (Aura)"
+        ],
+        "stratagems": [
+          "Mysterious Guardian",
+          "Valiant Last Stand",
+          "Squires’ Duty",
+          "Thunderstomp",
+          "Shoulder the Burden",
+          "Trophy Claim"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Acastus Knight Asterius",
+      "Acastus Knight Porphyrion",
+      "Armiger Helverin",
+      "Armiger Moirax",
+      "Armiger Warglaive",
+      "Canis Rex",
+      "Cerastus Knight Acheron",
+      "Cerastus Knight Atrapos",
+      "Cerastus Knight Castigator",
+      "Cerastus Knight Lancer",
+      "Knight Castellan",
+      "Knight Crusader",
+      "Knight Errant",
+      "Knight Gallant",
+      "Knight Paladin",
+      "Knight Preceptor",
+      "Knight Valiant",
+      "Knight Warden",
+      "Questoris Knight Magaera",
+      "Questoris Knight Styrix",
+      "Sir Hekhtur"
+    ]
+  },
+  {
+    "faction": "Leagues of Votann",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Oathband",
+        "rules": [],
+        "enhancements": [
+          "A Long List",
+          "Grim Demeanour",
+          "Appraising Glare",
+          "Wayfarer’s Grace"
+        ],
+        "stratagems": [
+          "Ancestral Sentence",
+          "Newfound Nemesis",
+          "Void Armour",
+          "Warrior Pride",
+          "Ordered Retreat",
+          "Reactive Reprisal"
+        ]
+      },
+      {
+        "name": "Hearthband",
+        "rules": [],
+        "enhancements": [
+          "Bastion Shield",
+          "Quake Multigenerator",
+          "Ironskein",
+          "High Kâhl"
+        ],
+        "stratagems": [
+          "Brëkkeknots",
+          "Fury of the Hearth",
+          "Sure of Purpose",
+          "Superior Craftsmanship",
+          "Unyielding Aggression",
+          "Materialisation Matrices"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Brôkhyr Iron-master",
+      "Brôkhyr Thunderkyn",
+      "Cthonian Beserks",
+      "Einhyr Champion",
+      "Einhyr Hearthguard",
+      "Grimnyr",
+      "Hearthkyn Warriors",
+      "Hekaton Land Fortress",
+      "Hernkyn Pioneers",
+      "Hernkyn Yaegirs",
+      "Kâhl",
+      "Sagitaur",
+      "Ûthar the Destined"
+    ]
+  },
+  {
+    "faction": "Space Wolves",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Champions of Russ",
+        "rules": [],
+        "enhancements": [
+          "Black Death",
+          "The Pelt of the Balewolf",
+          "Frost Weapon",
+          "Wolf Tail Talisman"
+        ],
+        "stratagems": [
+          "Armour of Contempt",
+          "Go for the Throat",
+          "Warrior Pride",
+          "Relentless Assault",
+          "Runic Wards",
+          "Death Howl"
+        ]
+      },
+      {
+        "name": "Champions of Fenris",
+        "rules": [],
+        "enhancements": [
+          "Wolves’ Wisdom",
+          "Fangrune Pendant",
+          "Longstrider",
+          "Foes’ Fate"
+        ],
+        "stratagems": [
+          "Armour of Contempt",
+          "Stalking Wolves",
+          "Onrushing Storm",
+          "Runes of Claiming",
+          "Chilling Howl",
+          "Preytaker’s Eye"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Arjac Rockfist",
+      "Bjorn the Fell-Handed",
+      "Blood Claws",
+      "Canis Wolfborn",
+      "Cyberwolf",
+      "Fenrisian Wolves",
+      "Grey Hunters",
+      "Harald Deathwolf",
+      "Hounds of Morkai",
+      "Iron Priest",
+      "Krom Dragongaze",
+      "Logan Grimnar",
+      "Logan Grimnar on Stormrider",
+      "Long Fangs",
+      "Lukas the Trickster",
+      "Murderfang",
+      "Njal Stormcaller",
+      "Ragnar Blackmane",
+      "Skyclaws",
+      "Space Wolves Venerable Dreadnought",
+      "Stormfang Gunship",
+      "Stormwolf",
+      "Thunderwolf Cavalry",
+      "Ulrik the Slayer",
+      "Wolf Guard",
+      "Wolf Guard Battle Leader in Terminator Armour",
+      "Wolf Guard Battle Leader on Thunderwolf",
+      "Wolf Guard Pack Leader",
+      "Wolf Guard Pack Leader in Terminator Armour",
+      "Wolf Guard Pack Leader with Jump Pack",
+      "Wolf Guard Terminators",
+      "Wolf Lord on Thunderwolf",
+      "Wolf Scouts",
+      "Wulfen",
+      "Wulfen Dreadnought"
+    ]
+  },
+  {
+    "faction": "Thousand Sons",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Hexwarp Thrallband",
+        "rules": [],
+        "enhancements": [
+          "Arcane Might",
+          "Empyric Onslaught",
+          "Noctilith Mantle",
+          "Empowered Manifestation"
+        ],
+        "stratagems": [
+          "Warding Hex",
+          "Wrath of the Doomed",
+          "Strands of Time",
+          "Through The Veil",
+          "Scouring Warpflame",
+          "Kaleidoscopic Tempest"
+        ]
+      },
+      {
+        "name": "Cult of Magic",
+        "rules": [],
+        "enhancements": [
+          "Athenaean Scrolls",
+          "Lord of Forbidden Lore",
+          "Arcane Vortex",
+          "Umbralefic Crystal"
+        ],
+        "stratagems": [
+          "Warp Sight",
+          "Sorcerous Might",
+          "Destined by Fate",
+          "Devastating Sorcery",
+          "Ensorcelled Infusion",
+          "Psychic Dominion"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Ahriman",
+      "Ahriman on Disc of Tzeentch",
+      "Exalted Sorcerer",
+      "Exalted Sorcerer on Disc of Tzeentch",
+      "Infernal Master",
+      "Magnus the Red",
+      "Mutalith Vortex Beast",
+      "Rubric Marines",
+      "Scarab Occult Terminators",
+      "Thousand Sons Chaos Spawn",
+      "Thousand Sons Cultists",
+      "Thousand Sons Daemon Prince",
+      "Thousand Sons Daemon Prince with Wings",
+      "Thousand Sons Defiler",
+      "Thousand Sons Forgefiend",
+      "Thousand Sons Helbrute",
+      "Thousand Sons Heldrake",
+      "Thousand Sons Land Raider",
+      "Thousand Sons Maulerfiend",
+      "Thousand Sons Predator Annihilator",
+      "Thousand Sons Predator Destructor",
+      "Thousand Sons Rhino",
+      "Thousand Sons Sorcerer",
+      "Thousand Sons Sorcerer in Terminator Armour",
+      "Thousand Sons Vindicator",
+      "Tzaangor Enlightened",
+      "Tzaangors",
+      "Tzaangor Shaman"
+    ]
+  },
+  {
+    "faction": "World Eaters",
+    "rules": [],
+    "detachments": [
+      {
+        "name": "Vessels of Wrath",
+        "rules": [],
+        "enhancements": [
+          "Archslaughterer",
+          "Vox-Diabolus",
+          "Gateways to Glory",
+          "Avenger’s Crown"
+        ],
+        "stratagems": [
+          "Aspire to Infamy",
+          "Overshadowed by None",
+          "Punish the Craven",
+          "Meet Force With Force",
+          "Brazen Contempt",
+          "Gory Dedication"
+        ]
+      },
+      {
+        "name": "Berzerker Warband",
+        "rules": [],
+        "enhancements": [
+          "Berzerker Glaive",
+          "Favoured of Khorne",
+          "Helm of Brazen Ire",
+          "Battle-lust"
+        ],
+        "stratagems": [
+          "Blood Offering",
+          "For the Skull Throne!",
+          "Khorne Cares Not...",
+          "Apoplectic Frenzy",
+          "Gory Massacre",
+          "For the Blood God!"
+        ]
+      }
+    ],
+    "datasheets": [
+      "Angron",
+      "Eightbound",
+      "Exalted Eightbound",
+      "Jakhals",
+      "Khârn the Betrayer",
+      "Khorne Berzerkers",
+      "Khorne Lord of Skulls",
+      "Lord Invocatus",
+      "World Eaters Chaos Spawn",
+      "World Eaters Daemon Prince",
+      "World Eaters Daemon Prince with Wings",
+      "World Eaters Defiler",
+      "World Eaters Forgefiend",
+      "World Eaters Helbrute",
+      "World Eaters Heldrake",
+      "World Eaters Land Raider",
+      "World Eaters Lord on Juggernaut",
+      "World Eaters Master of Executions",
+      "World Eaters Maulerfiend",
+      "World Eaters Predator Annihilator",
+      "World Eaters Predator Destructor",
+      "World Eaters Rhino",
+      "World Eaters Terminator Squad"
+    ]
+  }
+]
