@@ -43,13 +43,6 @@ async function fetchWithRetry(url, retries = 3) {
   throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
 }
 
-async function fetchFactionData(factionUrls) {
-  const results = await Promise.allSettled(
-    factionUrls.map(url => limit(() => fetchWithRetry(url)))
-  );
-  return results.filter(res => res.status === 'fulfilled').map(res => res.value);
-}
-
 async function fetchPage(url) {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
@@ -58,67 +51,108 @@ async function fetchPage(url) {
   } catch (error) {
     console.error(`Error fetching ${url}:`, error);
     await browser.close();
-    return null;  // Return null or handle it differently
+    return null;
   }
+  
 
   const content = await page.content();  // Get fully rendered HTML
   await browser.close();
   return cheerio.load(content);
 }
 
-
 /**
  * Extracts detachment-specific details (rules, enhancements, stratagems)
  */
 async function extractDetachmentData(detachmentLink, detachmentName) {
-    console.log(`Fetching detachment page: ${baseUrl + detachmentLink}`);
-    const $ = await fetchPage(baseUrl + detachmentLink);
-    if (!$) return null;
+  console.log(`Fetching detachment page: ${baseUrl + detachmentLink}`);
+  const $ = await fetchPage(baseUrl + detachmentLink);
+  if (!$) return null;
 
-    // Extract all rules (includes enhancements and stratagems)
-    const allRules = [];
-    $('.collapsible_header').each((index, element) => {
-        const ruleName = $(element).find('.enhancement_name, .stratagem_name').text().trim();
-        if (ruleName) {
-            console.log('Extracted Rule:', ruleName);
-            allRules.push(ruleName);
-        }
-    });
+  // Extract all rules (includes enhancements and stratagems)
+  const allRules = [];
 
-    // Assuming first 4 are enhancements and next 6 are stratagems
-    const enhancements = allRules.slice(0, 4);
-    const stratagems = allRules.slice(4, 10);
+  // Find the <h2> element with text 'Rules' and extract all .rule elements after it
+  const rulesSection = $('h2').filter((index, element) => $(element).text().trim() === 'Rules');
 
-    console.log(`Extracted Enhancements:`, enhancements);
-    console.log(`Extracted Stratagems:`, stratagems);
+  // Extract all the .rule elements that come after the <h2>Rules</h2> element
+  rulesSection.nextAll('.rule').each((index, element) => {
+    const ruleText = $(element).text().trim();
+    if (ruleText) {
+      console.log('Extracted Detachment Rule:', ruleText);
+      allRules.push({ ruleName: '', ruleText });  // Empty ruleName for now, just extract ruleText
+    }
+  });
 
-    return {
-        name: detachmentName,
-        rules: [], // If there are actual separate detachment rules, extract them separately
-        enhancements,
-        stratagems,
-    };
+  // Now let's extract enhancements based on the new structure you provided
+  const enhancements = [];
+  $('.enhancements .enhancement').each((index, element) => {
+    const nameElement = $(element).find('.enhancement_name');
+    const ruleElement = $(element).find('.enhancement_rule');
+    
+    // Check if the elements exist before accessing their content
+    const name = nameElement.length ? nameElement.text().trim() : '';
+    const ruleText = ruleElement.length ? ruleElement.html().trim() : '';
+    
+    // Extract the cost from the ruleText
+    const costMatch = ruleText.match(/Cost: (\d+)/);
+    const points = costMatch ? parseInt(costMatch[1]) : 0;  // Default to 0 if no cost is found
+
+    if (name && ruleText) {
+      enhancements.push({
+        name,
+        points,
+        rules: ruleText,
+      });
+      // Focused logging for enhancements
+      console.log(`Found Enhancement: Name - ${name}`);
+      console.log(`Found Enhancement: Cost - ${points}`);
+      console.log(`Found Enhancement: Rule - ${ruleText}`);
+    } else {
+      if (!name) console.log('No enhancement name found.');
+      if (!ruleText) console.log('No enhancement rule found.');
+      if (!points) console.log('No enhancement cost found.');
+    }
+  });
+
+  // Handle stratagems with the same logic if necessary (not modified here)
+  const stratagems = [];
+
+  console.log(`Extracted Detachment Rules:`, allRules);
+  console.log(`Extracted Enhancements:`, enhancements);
+  console.log(`Extracted Stratagems:`, stratagems);
+
+  return {
+    name: detachmentName,
+    detachmentRules: allRules.map(rule => ({ rule: rule.ruleText })),
+    enhancements,
+    stratagems,
+  };
 }
-
-
 
 /**
  * Extracts faction data, including rules, detachments, and datasheets.
  */
 async function extractFactionData($, factionName) {
-  const rules = [];
+  const armyRules = [];
   const detachments = [];
   const datasheets = [];
 
-  // Extract rules names (without links)
-  $('a[href^="/rules/"]').each((index, element) => {
-    const ruleName = $(element).text().trim();
-    if (ruleName) {
-      rules.push(ruleName); // Store just the name
+  // Extract army rules names and their corresponding texts
+  console.log('Start extracting army rules...');
+  $('.army-rule').each((index, element) => {
+    const ruleName = $(element).find('.rule_name').text().trim();
+    const ruleText = $(element).find('.rule_text').text().trim();  // Adjust selector based on actual HTML
+    if (ruleName && ruleText) {
+      armyRules.push({
+        name: ruleName,
+        rules: ruleText,
+      });
     }
   });
 
-  // Extract detachment names and process each detachment page
+  console.log('Army Rules:', armyRules);
+
+  // Extract detachment links and process each in parallel
   const detachmentLinks = [];
   $('a[href^="/detachment/"]').each((index, element) => {
     const detachmentName = $(element).text().trim();
@@ -128,12 +162,17 @@ async function extractFactionData($, factionName) {
     }
   });
 
-  for (const { name, link } of detachmentLinks) {
-    const detachmentData = await extractDetachmentData(link, name);
-    if (detachmentData) {
-      detachments.push(detachmentData);
-    }
-  }
+  // Use Promise.all to fetch and process all detachment data concurrently
+  const detachmentPromises = detachmentLinks.map(({ name, link }) =>
+    extractDetachmentData(link, name).then(detachmentData => {
+      if (detachmentData) {
+        detachments.push(detachmentData);
+      }
+    })
+  );
+
+  // Wait for all detachment data to be fetched
+  await Promise.all(detachmentPromises);
 
   // Extract datasheet names (without links)
   $('a[href^="/datasheet/"]').each((index, element) => {
@@ -145,14 +184,15 @@ async function extractFactionData($, factionName) {
 
   return {
     faction: factionName,
-    rules,
+    armyRules,
     detachments,
     datasheets,
   };
 }
 
+
 /**
- * Crawls the website to collect faction details.
+ * Crawls the website to collect faction details
  */
 async function crawlWebsite() {
   const factions = [];
