@@ -3,13 +3,14 @@ import fs from 'fs';
 import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import pLimit from 'p-limit';
+import { log } from 'console';
 
 const baseUrl = 'https://39k.pro';
 
 const limit = pLimit(5); // Adjust concurrency limit to prevent overload
 const cache = new Map(); // Cache responses to avoid redundant requests
 
-function delay(ms) {
+/* function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -41,31 +42,49 @@ async function fetchWithRetry(url, retries = 3) {
     }
   }
   throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
+} */
+
+  async function fetchPage(url, expectEnhancements = false) {
+    const browser = await puppeteer.launch({ headless: false, slowMo: 100 }); // Use headless: false to debug visually
+    const page = await browser.newPage();
+    try {
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+
+        if (expectEnhancements) {
+            // Vänta bara på enhancements om detta flaggas i anropet
+            await page.waitForSelector('.enhancements', { timeout: 15000 });
+
+            // Klicka på alla collapsible headers för att expandera innehåll
+            const headingHandles = await page.$$('.collapsible_header');
+            for (const el of headingHandles) {
+                console.log("Clicking on heading");
+                await el.click();
+                await page.waitForTimeout(500); // Ge tid att expandera
+            }
+
+            // Vänta på att enhancement-detaljer laddas
+            await page.waitForSelector('.enhancement_rule', { timeout: 5000 });
+        }
+
+        // Extrahera innehållet
+        const content = await page.content();
+        await browser.close();
+        return cheerio.load(content);
+    } catch (error) {
+        console.error(`Error fetching ${url}:`, error);
+        await browser.close();
+        return null;
+    }
 }
 
-async function fetchPage(url) {
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
-  try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 200000 });
-  } catch (error) {
-    console.error(`Error fetching ${url}:`, error);
-    await browser.close();
-    return null;
-  }
-  
-
-  const content = await page.content();  // Get fully rendered HTML
-  await browser.close();
-  return cheerio.load(content);
-}
 
 /**
  * Extracts detachment-specific details (rules, enhancements, stratagems)
  */
 async function extractDetachmentData(detachmentLink, detachmentName) {
   console.log(`Fetching detachment page: ${baseUrl + detachmentLink}`);
-  const $ = await fetchPage(baseUrl + detachmentLink);
+  const $ = await fetchPage(baseUrl + detachmentLink, true); // Aktivera expectEnhancements
+
   if (!$) return null;
 
   // Extract all rules (includes enhancements and stratagems)
@@ -78,48 +97,36 @@ async function extractDetachmentData(detachmentLink, detachmentName) {
   rulesSection.nextAll('.rule').each((index, element) => {
     const ruleText = $(element).text().trim();
     if (ruleText) {
-      console.log('Extracted Detachment Rule:', ruleText);
+    //  console.log('Extracted Detachment Rule:', ruleText);
       allRules.push({ ruleName: '', ruleText });  // Empty ruleName for now, just extract ruleText
     }
   });
 
-  // Now let's extract enhancements based on the new structure you provided
-  const enhancements = [];
-  $('.enhancements .enhancement').each((index, element) => {
-    const nameElement = $(element).find('.enhancement_name');
-    const ruleElement = $(element).find('.enhancement_rule');
-    
-    // Check if the elements exist before accessing their content
-    const name = nameElement.length ? nameElement.text().trim() : '';
-    const ruleText = ruleElement.length ? ruleElement.html().trim() : '';
-    
-    // Extract the cost from the ruleText
-    const costMatch = ruleText.match(/Cost: (\d+)/);
-    const points = costMatch ? parseInt(costMatch[1]) : 0;  // Default to 0 if no cost is found
+// Extract enhancements dynamically like rules
 
-    if (name && ruleText) {
-      enhancements.push({
-        name,
-        points,
-        rules: ruleText,
-      });
-      // Focused logging for enhancements
-      console.log(`Found Enhancement: Name - ${name}`);
-      console.log(`Found Enhancement: Cost - ${points}`);
-      console.log(`Found Enhancement: Rule - ${ruleText}`);
-    } else {
-      if (!name) console.log('No enhancement name found.');
-      if (!ruleText) console.log('No enhancement rule found.');
-      if (!points) console.log('No enhancement cost found.');
-    }
-  });
+
+
+const enhancements = [];
+const enhancementsSection = $('h2').filter((index, element) => $(element).text().trim() === 'Enhancements');
+
+enhancementsSection.nextAll('.enhancement').each((index, element) => {
+  const name = $(element).find('.enhancement_name').text().trim();
+  const ruleText = $(element).find('.enhancement_rule').html().trim();
+  const costMatch = ruleText.match(/Cost: (\d+)/);
+  const points = costMatch ? parseInt(costMatch[1]) : 0;
+  
+  if (name && ruleText) {
+    enhancements.push({ name, points, rules: ruleText });
+
+  }
+});
 
   // Handle stratagems with the same logic if necessary (not modified here)
   const stratagems = [];
 
-  console.log(`Extracted Detachment Rules:`, allRules);
-  console.log(`Extracted Enhancements:`, enhancements);
-  console.log(`Extracted Stratagems:`, stratagems);
+ // console.log(`Extracted Detachment Rules:`, allRules);
+ // console.log(`Extracted Enhancements:`, enhancements);
+ // console.log(`Extracted Stratagems:`, stratagems);
 
   return {
     name: detachmentName,
@@ -138,7 +145,7 @@ async function extractFactionData($, factionName) {
   const datasheets = [];
 
   // Extract army rules names and their corresponding texts
-  console.log('Start extracting army rules...');
+ // console.log('Start extracting army rules...');
   $('.army-rule').each((index, element) => {
     const ruleName = $(element).find('.rule_name').text().trim();
     const ruleText = $(element).find('.rule_text').text().trim();  // Adjust selector based on actual HTML
@@ -150,7 +157,7 @@ async function extractFactionData($, factionName) {
     }
   });
 
-  console.log('Army Rules:', armyRules);
+ // console.log('Army Rules:', armyRules);
 
   // Extract detachment links and process each in parallel
   const detachmentLinks = [];
@@ -197,7 +204,7 @@ async function extractFactionData($, factionName) {
 async function crawlWebsite() {
   const factions = [];
 
-  console.log(`Fetching main page: ${baseUrl}`);
+ // console.log(`Fetching main page: ${baseUrl}`);
   const $ = await fetchPage(baseUrl);
   if (!$) return;
 
@@ -207,29 +214,30 @@ async function crawlWebsite() {
     const link = $(element).attr('href');
     const factionName = $(element).text().trim();
     if (link && factionName) {
-      console.log(`Found faction: ${factionName} -> ${baseUrl + link}`);
+      //console.log(`Found faction: ${factionName} -> ${baseUrl + link}`);
       factionLinks.push({ link, name: factionName });
     }
   });
 
-  console.log(`Found ${factionLinks.length} factions`);
+  //console.log(`Found ${factionLinks.length} factions`);
 
   // Fetch each faction's page
   for (const { link, name } of factionLinks) {
-    console.log(`Fetching faction page: ${baseUrl + link}`);
+   // console.log(`Fetching faction page: ${baseUrl + link}`);
     const factionPage = await fetchPage(baseUrl + link);
+    
     if (factionPage) {
       const factionData = await extractFactionData(factionPage, name);
-      console.log(`Extracted data for faction: ${factionData.faction}`);
+    //  console.log(`Extracted data for faction: ${factionData.faction}`);
       factions.push(factionData);
     } else {
-      console.log(`Failed to fetch faction page: ${baseUrl + link}`);
+   //   console.log(`Failed to fetch faction page: ${baseUrl + link}`);
     }
   }
 
   // Save extracted data
   fs.writeFileSync('factions.json', JSON.stringify(factions, null, 2));
-  console.log('Data saved to factions.json');
+ // console.log('Data saved to factions.json');
 }
 
 // Run the crawler
