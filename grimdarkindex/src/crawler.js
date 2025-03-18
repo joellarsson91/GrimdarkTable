@@ -3,242 +3,151 @@ import fs from 'fs';
 import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import pLimit from 'p-limit';
-import { log } from 'console';
 
 const baseUrl = 'https://39k.pro';
+const limit = pLimit(5);
 
-const limit = pLimit(5); // Adjust concurrency limit to prevent overload
-const cache = new Map(); // Cache responses to avoid redundant requests
-
-/* function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function fetchWithTimeout(url, timeout = 5000) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-
+async function fetchPage(url, expectEnhancements = false, expectStratagems = false) {
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
   try {
-    const response = await fetch(url, { signal: controller.signal });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return await response.text(); // Use text() instead of json() for HTML content
-  } finally {
-    clearTimeout(id);
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    let enhancements = [];
+    let stratagems = [];
+
+    if (expectEnhancements) {
+      await page.waitForSelector('.enhancements', { timeout: 15000 });
+      const headingHandles = await page.$$('.collapsible_header');
+      for (const el of headingHandles) {
+        await el.click();
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+      await page.waitForSelector('.enhancement_rule', { timeout: 5000 });
+
+      enhancements = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('.enhancement')).map(el => {
+          const name = el.querySelector('.enhancement_name')?.innerText.trim() || "";
+          const ruleText = el.querySelector('.enhancement_rule')?.innerHTML.trim() || "";
+          const costMatch = ruleText.match(/Cost: (\d+)/);
+          const points = costMatch ? parseInt(costMatch[1]) : 0;
+          return { name, points, rules: ruleText };
+        });
+      });
+    }
+
+    if (expectStratagems) {
+      await page.waitForSelector('.stratagems', { timeout: 10000 });
+      stratagems = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('.stratagem')).map(el => {
+          const name = el.querySelector('.stratagem_name')?.innerText.trim() || "";
+          const costMatch = el.querySelector('.stratagem_cost')?.innerText.match(/CP: (\d+)/);
+          const commandPointCost = costMatch ? parseInt(costMatch[1]) : 0;
+          const rules = el.querySelector('.stratagem_rules')?.innerText.trim() || "";
+          return { name, commandPointCost, rules };
+        });
+      });
+    }
+
+    const content = await page.content();
+    await browser.close();
+    const $ = cheerio.load(content);
+    return { $, content, enhancements, stratagems };
+  } catch (error) {
+    console.error(`Error fetching ${url}:`, error);
+    await browser.close();
+    return null;
   }
 }
 
-async function fetchWithRetry(url, retries = 3) {
-  if (cache.has(url)) return cache.get(url);
-
-  for (let i = 0; i < retries; i++) {
-    try {
-      console.log(`Fetching: ${url}`);
-      const data = await fetchWithTimeout(url);
-      cache.set(url, data);
-      return data;
-    } catch (error) {
-      console.warn(`Retrying ${url} (${i + 1}/${retries}) due to error: ${error.message}`);
-      await delay(1000 * (i + 1)); // Exponential backoff
-    }
-  }
-  throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
-} */
-
-  async function fetchPage(url, expectEnhancements = false) {
-    const browser = await puppeteer.launch({ headless: false, slowMo: 100 }); // Use headless: false to debug visually
-    const page = await browser.newPage();
-    try {
-        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-        if (expectEnhancements) {
-            // Vänta bara på enhancements om detta flaggas i anropet
-            await page.waitForSelector('.enhancements', { timeout: 15000 });
-
-            // Klicka på alla collapsible headers för att expandera innehåll
-            const headingHandles = await page.$$('.collapsible_header');
-            for (const el of headingHandles) {
-                console.log("Clicking on heading");
-                await el.click();
-                await page.waitForTimeout(500); // Ge tid att expandera
-            }
-
-            // Vänta på att enhancement-detaljer laddas
-            await page.waitForSelector('.enhancement_rule', { timeout: 5000 });
-        }
-
-        // Extrahera innehållet
-        const content = await page.content();
-        await browser.close();
-        return cheerio.load(content);
-    } catch (error) {
-        console.error(`Error fetching ${url}:`, error);
-        await browser.close();
-        return null;
-    }
-}
-
-
-/**
- * Extracts detachment-specific details (rules, enhancements, stratagems)
- */
 async function extractDetachmentData(detachmentLink, detachmentName) {
   console.log(`Fetching detachment page: ${baseUrl + detachmentLink}`);
-  const $ = await fetchPage(baseUrl + detachmentLink, true); // Aktivera expectEnhancements
+  const pageData = await fetchPage(baseUrl + detachmentLink, true, true);
+  if (!pageData) return null;
 
-  if (!$) return null;
-
-  // Extract all rules (includes enhancements and stratagems)
+  const { enhancements, stratagems, $ } = pageData;
   const allRules = [];
-
-  // Find the <h2> element with text 'Rules' and extract all .rule elements after it
-  const rulesSection = $('h2').filter((index, element) => $(element).text().trim() === 'Rules');
-
-  // Extract all the .rule elements that come after the <h2>Rules</h2> element
-  rulesSection.nextAll('.rule').each((index, element) => {
-    const ruleText = $(element).text().trim();
-    if (ruleText) {
-    //  console.log('Extracted Detachment Rule:', ruleText);
-      allRules.push({ ruleName: '', ruleText });  // Empty ruleName for now, just extract ruleText
-    }
-  });
-
-// Extract enhancements dynamically like rules
-
-
-
-const enhancements = [];
-const enhancementsSection = $('h2').filter((index, element) => $(element).text().trim() === 'Enhancements');
-
-enhancementsSection.nextAll('.enhancement').each((index, element) => {
-  const name = $(element).find('.enhancement_name').text().trim();
-  const ruleText = $(element).find('.enhancement_rule').html().trim();
-  const costMatch = ruleText.match(/Cost: (\d+)/);
-  const points = costMatch ? parseInt(costMatch[1]) : 0;
-  
-  if (name && ruleText) {
-    enhancements.push({ name, points, rules: ruleText });
-
-  }
-});
-
-  // Handle stratagems with the same logic if necessary (not modified here)
-  const stratagems = [];
-
- // console.log(`Extracted Detachment Rules:`, allRules);
- // console.log(`Extracted Enhancements:`, enhancements);
- // console.log(`Extracted Stratagems:`, stratagems);
+  $('h2').filter((_, el) => $(el).text().trim() === 'Rules')
+    .nextAll('.rule')
+    .each((_, el) => {
+      const ruleText = $(el).text().trim();
+      if (ruleText) {
+        allRules.push({ ruleName: '', ruleText });
+      }
+    });
 
   return {
     name: detachmentName,
     detachmentRules: allRules.map(rule => ({ rule: rule.ruleText })),
     enhancements,
-    stratagems,
+    stratagems
   };
 }
 
-/**
- * Extracts faction data, including rules, detachments, and datasheets.
- */
-async function extractFactionData($, factionName) {
+async function extractFactionData(pageData, factionName) {
+  const { $, content } = pageData;
   const armyRules = [];
   const detachments = [];
   const datasheets = [];
 
-  // Extract army rules names and their corresponding texts
- // console.log('Start extracting army rules...');
-  $('.army-rule').each((index, element) => {
-    const ruleName = $(element).find('.rule_name').text().trim();
-    const ruleText = $(element).find('.rule_text').text().trim();  // Adjust selector based on actual HTML
-    if (ruleName && ruleText) {
-      armyRules.push({
-        name: ruleName,
-        rules: ruleText,
-      });
-    }
-  });
+  $('h2').filter((_, el) => $(el).text().trim() === 'Rules')
+    .nextAll('div')
+    .each((_, el) => {
+      const ruleName = $(el).find('.army_rule_header').text().trim();
+      const ruleText = $(el).find('div[style="white-space: pre-line"]').text().trim();
+      if (ruleName && ruleText) {
+        armyRules.push({ name: ruleName, rules: ruleText });
+      }
+    });
 
- // console.log('Army Rules:', armyRules);
-
-  // Extract detachment links and process each in parallel
   const detachmentLinks = [];
-  $('a[href^="/detachment/"]').each((index, element) => {
-    const detachmentName = $(element).text().trim();
-    const detachmentLink = $(element).attr('href');
+  $('a[href^="/detachment/"]').each((_, el) => {
+    const detachmentName = $(el).text().trim();
+    const detachmentLink = $(el).attr('href');
     if (detachmentName && detachmentLink) {
       detachmentLinks.push({ name: detachmentName, link: detachmentLink });
     }
   });
 
-  // Use Promise.all to fetch and process all detachment data concurrently
   const detachmentPromises = detachmentLinks.map(({ name, link }) =>
-    extractDetachmentData(link, name).then(detachmentData => {
-      if (detachmentData) {
-        detachments.push(detachmentData);
-      }
-    })
+    extractDetachmentData(link, name).then(data => { if (data) detachments.push(data); })
   );
-
-  // Wait for all detachment data to be fetched
   await Promise.all(detachmentPromises);
 
-  // Extract datasheet names (without links)
-  $('a[href^="/datasheet/"]').each((index, element) => {
-    const datasheetName = $(element).text().trim();
-    if (datasheetName) {
-      datasheets.push(datasheetName); // Store just the name
-    }
+  $('a[href^="/datasheet/"]').each((_, el) => {
+    const datasheetName = $(el).text().trim();
+    if (datasheetName) datasheets.push(datasheetName);
   });
 
-  return {
-    faction: factionName,
-    armyRules,
-    detachments,
-    datasheets,
-  };
+  return { faction: factionName, armyRules, detachments, datasheets };
 }
 
 
-/**
- * Crawls the website to collect faction details
- */
 async function crawlWebsite() {
   const factions = [];
+  console.log(`Fetching main page: ${baseUrl}`);
+  const pageData = await fetchPage(baseUrl);
+  if (!pageData) return;
+  const { $ } = pageData;
 
- // console.log(`Fetching main page: ${baseUrl}`);
-  const $ = await fetchPage(baseUrl);
-  if (!$) return;
-
-  // Extract faction links
   const factionLinks = [];
-  $('a[href^="/faction/"]').each((index, element) => {
-    const link = $(element).attr('href');
-    const factionName = $(element).text().trim();
+  $('a[href^="/faction/"]').each((_, el) => {
+    const link = $(el).attr('href');
+    const factionName = $(el).text().trim();
     if (link && factionName) {
-      //console.log(`Found faction: ${factionName} -> ${baseUrl + link}`);
       factionLinks.push({ link, name: factionName });
     }
   });
 
-  //console.log(`Found ${factionLinks.length} factions`);
-
-  // Fetch each faction's page
   for (const { link, name } of factionLinks) {
-   // console.log(`Fetching faction page: ${baseUrl + link}`);
-    const factionPage = await fetchPage(baseUrl + link);
-    
-    if (factionPage) {
-      const factionData = await extractFactionData(factionPage, name);
-    //  console.log(`Extracted data for faction: ${factionData.faction}`);
-      factions.push(factionData);
-    } else {
-   //   console.log(`Failed to fetch faction page: ${baseUrl + link}`);
-    }
+    console.log(`Fetching faction page: ${baseUrl + link}`);
+    const factionPageData = await fetchPage(baseUrl + link);
+    if (!factionPageData) continue;
+    const factionData = await extractFactionData(factionPageData, name);
+    factions.push(factionData);
   }
 
-  // Save extracted data
   fs.writeFileSync('factions.json', JSON.stringify(factions, null, 2));
- // console.log('Data saved to factions.json');
+  console.log('Data saved to factions.json');
 }
 
-// Run the crawler
 crawlWebsite().catch(console.error);
