@@ -7,13 +7,15 @@ import pLimit from 'p-limit';
 const baseUrl = 'https://39k.pro';
 const limit = pLimit(5);
 
-async function fetchPage(url, expectEnhancements = false, expectStratagems = false) {
+async function fetchPage(url, expectEnhancements = false, expectStratagems = false, expectArmyRules = false) {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   try {
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+
     let enhancements = [];
     let stratagems = [];
+    let armyRules = [];
 
     if (expectEnhancements) {
       await page.waitForSelector('.enhancements', { timeout: 15000 });
@@ -48,16 +50,40 @@ async function fetchPage(url, expectEnhancements = false, expectStratagems = fal
       });
     }
 
+    if (expectArmyRules) {
+      await page.waitForSelector('.collapsible_header', { timeout: 10000 });
+      const ruleHandles = await page.$$('.army_rule_header');
+      for (const el of ruleHandles) {
+        await el.click();
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+      await page.waitForSelector('.collapsible_header div', { timeout: 5000 });
+
+      armyRules = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('.collapsible_header')).map(el => {
+          const name = el.querySelector('.army_rule_header')?.innerText.trim() || "";
+          
+          // Hitta regeln som ligger i nästa syskon-div efter .collapsible_header
+          const rulesContainer = el.nextElementSibling; 
+          const rules = rulesContainer ? rulesContainer.innerText.trim() : "";
+      
+          return { name, rules };
+        });
+      });
+      
+    }
+
     const content = await page.content();
     await browser.close();
     const $ = cheerio.load(content);
-    return { $, content, enhancements, stratagems };
+    return { $, content, enhancements, stratagems, armyRules };
   } catch (error) {
     console.error(`Error fetching ${url}:`, error);
     await browser.close();
     return null;
   }
 }
+
 
 async function extractDetachmentData(detachmentLink, detachmentName) {
   console.log(`Fetching detachment page: ${baseUrl + detachmentLink}`);
@@ -66,6 +92,7 @@ async function extractDetachmentData(detachmentLink, detachmentName) {
 
   const { enhancements, stratagems, $ } = pageData;
   const allRules = [];
+
   $('h2').filter((_, el) => $(el).text().trim() === 'Rules')
     .nextAll('.rule')
     .each((_, el) => {
@@ -83,22 +110,14 @@ async function extractDetachmentData(detachmentLink, detachmentName) {
   };
 }
 
-async function extractFactionData(pageData, factionName) {
-  const { $, content } = pageData;
-  const armyRules = [];
+async function extractFactionData(factionPageData, factionName) {
+  const { $, armyRules } = factionPageData;
   const detachments = [];
   const datasheets = [];
 
-  $('h2').filter((_, el) => $(el).text().trim() === 'Rules')
-    .nextAll('div')
-    .each((_, el) => {
-      const ruleName = $(el).find('.army_rule_header').text().trim();
-      const ruleText = $(el).find('div[style="white-space: pre-line"]').text().trim();
-      if (ruleName && ruleText) {
-        armyRules.push({ name: ruleName, rules: ruleText });
-      }
-    });
+  console.log(`Extracted Army Rules for ${factionName}:`, armyRules);
 
+  // Extract detachment links
   const detachmentLinks = [];
   $('a[href^="/detachment/"]').each((_, el) => {
     const detachmentName = $(el).text().trim();
@@ -108,11 +127,13 @@ async function extractFactionData(pageData, factionName) {
     }
   });
 
+  // Fetch detachment data
   const detachmentPromises = detachmentLinks.map(({ name, link }) =>
     extractDetachmentData(link, name).then(data => { if (data) detachments.push(data); })
   );
   await Promise.all(detachmentPromises);
 
+  // Extract datasheets
   $('a[href^="/datasheet/"]').each((_, el) => {
     const datasheetName = $(el).text().trim();
     if (datasheetName) datasheets.push(datasheetName);
@@ -120,6 +141,8 @@ async function extractFactionData(pageData, factionName) {
 
   return { faction: factionName, armyRules, detachments, datasheets };
 }
+
+
 
 
 async function crawlWebsite() {
@@ -140,7 +163,7 @@ async function crawlWebsite() {
 
   for (const { link, name } of factionLinks) {
     console.log(`Fetching faction page: ${baseUrl + link}`);
-    const factionPageData = await fetchPage(baseUrl + link);
+    const factionPageData = await fetchPage(baseUrl + link, false, false, true); // Enable army rules extraction
     if (!factionPageData) continue;
     const factionData = await extractFactionData(factionPageData, name);
     factions.push(factionData);
