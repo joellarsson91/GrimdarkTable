@@ -130,89 +130,58 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
   try {
     await page.goto(baseUrl + datasheetLink, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForSelector('.datacard', { timeout: 15000 });
-    
+
     const collapsibleHeaders = await page.$$('.collapsible_header');
     for (const header of collapsibleHeaders) {
       await header.click();
       await new Promise(resolve => setTimeout(resolve, 500));
     }
-    
+
     const content = await page.content();
     const $ = cheerio.load(content);
-    
+
     const name = $('.datacard .name').text().trim();
-    
-    const characteristics = {};
-    const headers = [];
-    $('.datacard .characteristics_header > div').each((i, el) => {
-      headers.push($(el).text().trim());
-    });
-    const values = [];
-    $('.datacard .characteristics > div').each((i, el) => {
-      values.push($(el).text().trim());
-    });
-    headers.forEach((header, index) => {
-      characteristics[header] = values[index] || '';
-    });
-    
-    const invulSave = $('.datacard .invulnerable_save.header').text().trim();
-    
-    const weapons = [];
-    $('.datacard .weapons_melee .weapon').each((i, el) => {
-      const weaponName = $(el).find('.weapon_name').text().trim();
-      const weaponCharacteristics = {};
-      $(el).find('.weapon_characteristics > div').each((j, elem) => {
-        const key = $(elem).attr('class') || `stat${j}`;
-        const value = $(elem).text().trim();
-        weaponCharacteristics[key] = value;
-      });
-      const weaponAbilities = [];
-      $(el).find('.weapon_abilities .weapon_ability').each((j, elem) => {
-        weaponAbilities.push($(elem).text().trim());
-      });
-      weapons.push({ name: weaponName, characteristics: weaponCharacteristics, abilities: weaponAbilities });
-    });
-    
-    const abilities = [];
-    $('.datacard .abilities .ability').each((i, el) => {
-      const abilityName = $(el).find('.ability_name').text().trim();
-      const abilityRule = $(el).find('.ability_rule').text().trim();
-      if (abilityName || abilityRule) {
-        abilities.push({ name: abilityName, rule: abilityRule });
+
+    const keywords = [];
+    $('.datacard .keywords').each((_, el) => {
+      const keywordText = $(el).text().trim();
+      if (keywordText) {
+        keywords.push(keywordText);
       }
     });
-    
-    const unitComposition = $('.datacard .unit_composition .composition').text().trim();
-    
+
+    const factionKeywords = $('.datacard .faction_keywords').text().trim();
+
+    const wargearOptions = [];
+    $('.datacard .wargear_rule').each((_, el) => {
+      const wargearText = $(el).text().trim();
+      if (wargearText) {
+        wargearOptions.push(wargearText);
+      }
+    });
+
     const ledBy = [];
-    $('.datacard .collapsible_header').each((i, el) => {
+    $('.datacard .collapsible_header').each((_, el) => {
       const headerText = $(el).text().trim();
       if (headerText === 'Led By') {
-        $(el).parent().next().find('a').each((j, a) => {
-          ledBy.push($(a).text().trim());
+        // Find the next sibling <ul> and extract the text of all <a> tags
+        $(el).parent().next().find('ul li a').each((_, a) => {
+          const leaderName = $(a).text().trim();
+          if (leaderName) {
+            ledBy.push(leaderName);
+          }
         });
       }
     });
-    
-    const keywords = [];
-    $('.datacard .collapsible_header').each((i, el) => {
-      const headerText = $(el).text().trim();
-      if (headerText === 'Keywords') {
-        $(el).parent().next().find('.keywords').each((j, elem) => {
-          keywords.push($(elem).text().trim());
-        });
-      }
-    });
-    
+
     return {
       name: datasheetName || name,
-      characteristics,
-      invulnerableSave: invulSave,
-      weapons,
-      abilities,
-      unitComposition,
+      keywords: {
+        factionKeywords,
+        keywords,
+      },
+      wargearOptions,
       ledBy,
-      keywords
     };
   } catch (error) {
     console.error(`Error fetching datasheet ${baseUrl + datasheetLink}:`, error);
@@ -275,7 +244,7 @@ async function crawlWebsite(limitFactions = false) {
     }
   });
 
-  const maxFactions = limitFactions ? 3 : factionLinks.length;
+  const maxFactions = limitFactions ? 1 : factionLinks.length;
   for (const { link, name } of factionLinks.slice(0, maxFactions)) {
     console.log(`Fetching faction page: ${baseUrl + link}`);
     const factionPageData = await fetchPage(baseUrl + link, false, false, true);
