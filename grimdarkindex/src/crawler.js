@@ -38,7 +38,7 @@ async function fetchPage(url, expectEnhancements = false, expectStratagems = fal
           return Array.from(document.querySelectorAll('.enhancement')).map(el => {
             const name = el.querySelector('.enhancement_name')?.innerText.trim() || "";
             const ruleText = el.querySelector('.enhancement_rule')?.innerHTML.trim() || "";
-            const costMatch = ruleText.match(/Cost: (\\d+)/);
+            const costMatch = ruleText.match(/Cost: (\d+)/);
             const points = costMatch ? parseInt(costMatch[1]) : 0;
             return { name, points, rules: ruleText };
           });
@@ -54,7 +54,7 @@ async function fetchPage(url, expectEnhancements = false, expectStratagems = fal
         stratagems = await page.evaluate(() => {
           return Array.from(document.querySelectorAll('.stratagem')).map(el => {
             const name = el.querySelector('.stratagem_name')?.innerText.trim() || "";
-            const costMatch = el.querySelector('.stratagem_cost')?.innerText.match(/CP: (\\d+)/);
+            const costMatch = el.querySelector('.stratagem_cost')?.innerText.match(/CP: (\d+)/);
             const commandPointCost = costMatch ? parseInt(costMatch[1]) : 0;
             const rules = el.querySelector('.stratagem_rules')?.innerText.trim() || "";
             return { name, commandPointCost, rules };
@@ -228,7 +228,6 @@ async function extractFactionData(factionPageData, factionName) {
   const datasheets = [];
   console.log(`Extracted Army Rules for ${factionName}:`, armyRules);
 
-  // Extrahera detachment-länkar
   const detachmentLinks = [];
   $('a[href^="/detachment/"]').each((_, el) => {
     const detachmentName = $(el).text().trim();
@@ -243,7 +242,6 @@ async function extractFactionData(factionPageData, factionName) {
   );
   await Promise.all(detachmentPromises);
 
-  // Extrahera datasheet-länkar och hämta datasheet-data
   const datasheetLinks = [];
   $('a[href^="/datasheet/"]').each((_, el) => {
     const datasheetName = $(el).text().trim();
@@ -261,7 +259,7 @@ async function extractFactionData(factionPageData, factionName) {
   return { faction: factionName, armyRules, detachments, datasheets };
 }
 
-async function crawlWebsite() {
+async function crawlWebsite(limitFactions = false) {
   const factions = [];
   console.log(`Fetching main page: ${baseUrl}`);
   const pageData = await fetchPage(baseUrl);
@@ -277,7 +275,8 @@ async function crawlWebsite() {
     }
   });
 
-  for (const { link, name } of factionLinks) {
+  const maxFactions = limitFactions ? 3 : factionLinks.length;
+  for (const { link, name } of factionLinks.slice(0, maxFactions)) {
     console.log(`Fetching faction page: ${baseUrl + link}`);
     const factionPageData = await fetchPage(baseUrl + link, false, false, true);
     if (!factionPageData) continue;
@@ -285,12 +284,15 @@ async function crawlWebsite() {
     factions.push(factionData);
   }
 
-  fs.writeFileSync('factions.json', JSON.stringify(factions, null, 2));
-  console.log('Data saved to factions.json');
+  const outputFileName = limitFactions ? 'factionsTest.json' : 'factions.json';
+  fs.writeFileSync(outputFileName, JSON.stringify(factions, null, 2));
+  console.log(`Data saved to ${outputFileName}`);
 
   if (browser) {
     await browser.close();
   }
 }
 
-crawlWebsite().catch(console.error);
+const args = process.argv.slice(2);
+const limitFactions = args.includes('--limit');
+crawlWebsite(limitFactions).catch(console.error);
