@@ -16,10 +16,10 @@ interface Props {
     enhancementIndex: number,
     increment: number
   ) => void;
+  enhancementQuantities: number[][]; // Ensure this matches the type passed from App.tsx
   expanded: boolean;
   toggleArmySidebar: () => void;
   toggleArmySidebarVisibility: () => void;
-  enhancementQuantities: { [key: string]: number }; // Add this prop for enhancement quantities
 }
 
 const ArmySidebar: React.FC<Props> = ({
@@ -28,10 +28,10 @@ const ArmySidebar: React.FC<Props> = ({
   removeUnit,
   updateWargearQuantity,
   updateEnhancementQuantity,
+  enhancementQuantities,
   expanded,
   toggleArmySidebar,
   toggleArmySidebarVisibility,
-  enhancementQuantities,
 }) => {
   const ArmySidebarClass = expanded ? "sidebar expanded" : "sidebar minimized";
 
@@ -65,6 +65,36 @@ const ArmySidebar: React.FC<Props> = ({
         updateWargearQuantity={updateWargearQuantity}
         updateEnhancementQuantity={updateEnhancementQuantity}
       />
+      <div>
+        {/* Render selected units and their enhancement quantities */}
+        {selectedUnits.map((unit, index) => (
+          <div key={unit.id}>
+            <h3>{unit.name}</h3>
+            <p>Enhancements:</p>
+            {enhancementQuantities[index].map((quantity, enhancementIndex) => (
+              <div key={enhancementIndex}>
+                <span>
+                  Enhancement {enhancementIndex + 1}: {quantity}
+                </span>
+                <button
+                  onClick={() =>
+                    updateEnhancementQuantity(unit.id, enhancementIndex, 1)
+                  }
+                >
+                  +
+                </button>
+                <button
+                  onClick={() =>
+                    updateEnhancementQuantity(unit.id, enhancementIndex, -1)
+                  }
+                >
+                  -
+                </button>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
       <div className="total-points">
         <p>Total: {calculateTotalPoints(selectedUnits)} points</p>
       </div>

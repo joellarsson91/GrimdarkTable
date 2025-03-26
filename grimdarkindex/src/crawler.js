@@ -131,10 +131,11 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     await page.goto(baseUrl + datasheetLink, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForSelector('.datacard', { timeout: 15000 });
 
+    // Uncollapse all collapsible headers
     const collapsibleHeaders = await page.$$('.collapsible_header');
     for (const header of collapsibleHeaders) {
       await header.click();
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for content to load
     }
 
     const content = await page.content();
@@ -142,16 +143,85 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
 
     const name = $('.datacard .name').text().trim();
 
-    const keywords = [];
-    $('.datacard .keywords').each((_, el) => {
-      const keywordText = $(el).text().trim();
-      if (keywordText) {
-        keywords.push(keywordText);
+    // Extract characteristics
+    const characteristics = {};
+    $('.datacard .characteristics_header div').each((index, el) => {
+      const key = $(el).text().trim();
+      const value = $('.datacard .characteristics div').eq(index).text().trim();
+      if (key && value) {
+        characteristics[key] = value;
       }
     });
 
-    const factionKeywords = $('.datacard .faction_keywords').text().trim();
+    // Extract invulnerable save
+    const invulnerableSave = $('.datacard .invulnerable_save').text().trim() || '';
 
+    // Extract weapons
+    const weapons = [];
+    $('.datacard .weapons_ranged, .datacard .weapons_melee').each((_, section) => {
+      $(section).find('.weapon').each((_, weapon) => {
+        const weaponNames = $(weapon).find('.weapon_name').map((_, el) => $(el).text().trim()).get();
+        const weaponCharacteristics = $(weapon).find('.weapon_characteristics');
+        const weaponAbilities = $(weapon).find('.weapon_abilities');
+
+        weaponNames.forEach((weaponName, index) => {
+          const characteristics = {};
+          weaponCharacteristics.eq(index).find('div').each((i, char) => {
+            const key = $('.weapon_headers div').eq(i).text().trim();
+            const value = $(char).text().trim();
+            if (key && value) {
+              characteristics[key.toLowerCase()] = value;
+            }
+          });
+
+          const abilities = [];
+          weaponAbilities.eq(index).find('.weapon_ability').each((_, ability) => {
+            abilities.push($(ability).text().trim());
+          });
+
+          weapons.push({
+            name: weaponName,
+            characteristics,
+            abilities,
+          });
+        });
+      });
+    });
+
+    // Extract faction abilities
+    const factionAbilities = [];
+    $('.datacard .abilities').find('.faction_ability').each((_, el) => {
+      const abilityName = $(el).text().trim();
+      if (abilityName) {
+        factionAbilities.push(abilityName);
+      }
+    });
+
+    // Extract datasheet abilities
+    const datasheetAbilities = [];
+    $('.datacard .abilities .ability').each((_, ability) => {
+      const abilityName = $(ability).find('.ability_name').text().trim();
+      const abilityRule = $(ability).find('.ability_rule').text().trim();
+      datasheetAbilities.push({
+        name: abilityName,
+        rule: abilityRule,
+      });
+    });
+
+    // Extract unit composition and point costs
+    const unitComposition = $('.datacard .unit_composition .composition').text().trim();
+    const pointCosts = [];
+    $('.datacard .unit_composition .composition table tbody tr').each((_, row) => {
+      const modelName = $(row).find('td').eq(0).text().trim();
+      const count = $(row).find('td').eq(1).text().trim();
+      const points = parseInt($(row).find('td').eq(2).text().trim(), 10);
+
+      if (modelName && count && !isNaN(points)) {
+        pointCosts.push({ modelName, count, points });
+      }
+    });
+
+    // Extract wargear options
     const wargearOptions = [];
     $('.datacard .wargear_rule').each((_, el) => {
       const wargearText = $(el).text().trim();
@@ -160,12 +230,13 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       }
     });
 
+    // Extract "Led By"
     const ledBy = [];
-    $('.datacard .collapsible_header').each((_, el) => {
+    $('.datacard .collapsible_header').each((index, el) => {
       const headerText = $(el).text().trim();
       if (headerText === 'Led By') {
-        // Find the next sibling <ul> and extract the text of all <a> tags
-        $(el).parent().next().find('ul li a').each((_, a) => {
+        const leaders = $(el).next('div').find('ul li a');
+        leaders.each((_, a) => {
           const leaderName = $(a).text().trim();
           if (leaderName) {
             ledBy.push(leaderName);
@@ -174,14 +245,40 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       }
     });
 
+    // Extract keywords
+    const factionKeywords = $('.datacard .faction_keywords').text().trim();
+    const keywords = [];
+    $('.datacard .keywords .keyword').each((_, el) => {
+      const keyword = $(el).text().trim();
+      if (keyword) {
+        keywords.push(keyword);
+      }
+    });
+
+    if (keywords.length === 0) {
+      const keywordsText = $('.datacard .keywords').text().trim();
+      if (keywordsText) {
+        keywords.push(...keywordsText.split(',').map(k => k.trim()));
+      }
+    }
+
     return {
       name: datasheetName || name,
+      characteristics,
+      invulnerableSave,
+      weapons,
+      abilities: {
+        factionAbilities,
+        datasheetAbilities,
+      },
+      unitComposition,
+      pointCosts, // Include extracted point costs
+      wargearOptions,
+      ledBy,
       keywords: {
         factionKeywords,
         keywords,
       },
-      wargearOptions,
-      ledBy,
     };
   } catch (error) {
     console.error(`Error fetching datasheet ${baseUrl + datasheetLink}:`, error);
@@ -249,6 +346,7 @@ async function crawlWebsite(limitFactions = false) {
     console.log(`Fetching faction page: ${baseUrl + link}`);
     const factionPageData = await fetchPage(baseUrl + link, false, false, true);
     if (!factionPageData) continue;
+
     const factionData = await extractFactionData(factionPageData, name);
     factions.push(factionData);
   }
