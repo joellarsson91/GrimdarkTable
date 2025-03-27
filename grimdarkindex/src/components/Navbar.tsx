@@ -5,11 +5,26 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select"; // Import SelectChangeEvent
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import { InputLabel } from "@mui/material";
 import factionsData from "../factions.json"; // Import factions.json dynamically
+
+// Define the structure of a detachment
+type Detachment = {
+  name: string;
+};
+
+// Define the structure of a faction
+type Faction = {
+  faction: string;
+  rules: string[];
+  detachments: Detachment[];
+  datasheets: any[]; // Adjust this type if you have a specific structure for datasheets
+};
+
+const factions: Faction[] = factionsData as Faction[];
 
 interface Props {
   visibleComponents: string[]; // Array of visible faction names
@@ -36,11 +51,11 @@ const Navbar: React.FC<Props> = ({
   const [armyName, setArmyName] = useState<string>("");
 
   // Extract faction names dynamically from factions.json
-  const factionNames = factionsData.map((faction) => faction.faction);
+  const factionNames = factions.map((faction: Faction) => faction.faction);
 
   // Get detachments for the selected faction
   const detachmentsForSelectedFaction =
-    factionsData.find((faction) => faction.faction === selectedFaction)
+    factions.find((faction: Faction) => faction.faction === selectedFaction)
       ?.detachments || [];
 
   const handleFactionChange = (event: SelectChangeEvent<string>) => {
@@ -105,7 +120,7 @@ const Navbar: React.FC<Props> = ({
                 Factions
               </a>
               <ul className="dropdown-menu">
-                {factionNames.map((factionName) => (
+                {factionNames.map((factionName: string) => (
                   <li key={factionName}>
                     <div className="form-check">
                       <input
@@ -152,7 +167,7 @@ const Navbar: React.FC<Props> = ({
                   value={selectedFaction || ""}
                   onChange={handleFactionChange}
                 >
-                  {factionNames.map((factionName) => (
+                  {factionNames.map((factionName: string) => (
                     <MenuItem key={factionName} value={factionName}>
                       {factionName}
                     </MenuItem>
@@ -166,11 +181,13 @@ const Navbar: React.FC<Props> = ({
                     value={selectedDetachment || ""}
                     onChange={handleDetachmentChange}
                   >
-                    {detachmentsForSelectedFaction.map((detachment, index) => (
-                      <MenuItem key={index} value={detachment.name}>
-                        {detachment.name}
-                      </MenuItem>
-                    ))}
+                    {detachmentsForSelectedFaction.map(
+                      (detachment: Detachment, index: number) => (
+                        <MenuItem key={index} value={detachment.name}>
+                          {detachment.name}
+                        </MenuItem>
+                      )
+                    )}
                   </Select>
                 </FormControl>
               )}

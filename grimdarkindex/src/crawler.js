@@ -208,16 +208,38 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       });
     });
 
-    // Extract unit composition and point costs
-    const unitComposition = $('.datacard .unit_composition .composition').text().trim();
+    // Updated logic for extracting unit composition and point costs
+    const unitComposition = [];
     const pointCosts = [];
-    $('.datacard .unit_composition .composition table tbody tr').each((_, row) => {
-      const modelName = $(row).find('td').eq(0).text().trim();
-      const count = $(row).find('td').eq(1).text().trim();
+
+    // Extract unit composition
+    $('.datacard .unit_composition .composition').each((_, el) => {
+      const compositionText = $(el).text().trim();
+      if (compositionText) {
+        const lines = compositionText.split('\n').map(line => line.trim());
+        lines.forEach(line => {
+          const match = line.match(/■\s*(\d+[-\d]*)\s*(.+)/); // Match count and model name
+          if (match) {
+            const count = match[1];
+            const modelName = match[2];
+            unitComposition.push({ modelName, count });
+          }
+        });
+      }
+    });
+
+    // Extract point costs
+    $('.datacard .unit_composition table tbody tr').each((_, row) => {
+      const modelNames = $(row).find('td').eq(0).find('div').map((_, el) => $(el).text().trim()).get();
+      const counts = $(row).find('td').eq(1).find('div').map((_, el) => $(el).text().trim()).get();
       const points = parseInt($(row).find('td').eq(2).text().trim(), 10);
 
-      if (modelName && count && !isNaN(points)) {
-        pointCosts.push({ modelName, count, points });
+      if (modelNames.length && counts.length && !isNaN(points)) {
+        const combinedModels = modelNames.map((modelName, index) => ({
+          modelName,
+          count: counts[index] || '',
+        }));
+        pointCosts.push({ models: combinedModels, points });
       }
     });
 
@@ -341,7 +363,7 @@ async function crawlWebsite(limitFactions = false) {
     }
   });
 
-  const maxFactions = limitFactions ? 1 : factionLinks.length;
+  const maxFactions = limitFactions ? 3 : factionLinks.length;
   for (const { link, name } of factionLinks.slice(0, maxFactions)) {
     console.log(`Fetching faction page: ${baseUrl + link}`);
     const factionPageData = await fetchPage(baseUrl + link, false, false, true);

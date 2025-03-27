@@ -2,25 +2,29 @@
 .unit-card-container {
   display: flex;
   flex-wrap: wrap; /* Allow wrapping to the next row */
-  gap: 10px; /* Add space between cards */
-  justify-content: center; /* Center the cards horizontally */
-  padding: 10px; /* Add padding around the container */
+  gap: 5px; /* Space between cards */
+  justify-content: flex-start; /* Align the cards to the left */
+  padding: 10px; /* Padding around the container */
+  background-color: #f0f0f0; /* Optional: Add a background color for better visibility */
+  width: 100%; /* Fill the screen width */
+  margin: 0; /* Remove auto-centering */
 }
 
 /* Individual unit card */
 .unit-card {
+  max-width: 350px; /* Reduce the width of the unit card to half */
+  padding: 5px; /* Reduce padding inside the card */
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center the content within the card */
   margin: 5px;
-  width: 200px; /* Fixed width for each card */
-  height: 150px; /* Fixed height for each card */
+  height: auto; /* Allow the height to adjust dynamically */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center; /* Center the elements within the card */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -29,38 +33,110 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.unit-image img {
+  width: 100%; /* Adjust the image to fit the smaller card */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Center the image */
+  max-width: 50px; /* Limit the maximum width */
+  max-height: 50px; /* Limit the maximum height */
+  object-fit: contain;
+}
+
 .unit-name {
-  font-size: 16px;
+  font-size: 1rem; /* Reduce the font size of the unit name */
   font-weight: bold;
-  text-align: center;
+  text-align: center; /* Center the text */
   margin-bottom: 5px;
 }
 
 .unit-composition {
-  font-size: 14px;
+  font-size: 6px; /* Reduce the font size */
   color: #555;
-  text-align: center;
+  text-align: center; /* Center the text */
   margin-bottom: 5px;
 }
 
 .unit-cost {
-  font-size: 14px;
+  font-size: 0.8rem; /* Reduce the font size for "Cost" and points */
   color: #333;
-  text-align: center;
-  margin-bottom: 10px;
+  text-align: center; /* Center the text */
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.unit-cost ul {
+  padding-left: 0; /* Remove padding for the list */
+  font-size: inherit; /* Inherit the font size from .unit-cost */
+  text-align: center; /* Center the list */
+}
+
+.unit-cost li {
+  font-size: inherit; /* Inherit the font size from .unit-cost */
+  margin-bottom: 3px; /* Reduce spacing between list items */
 }
 
 .add-unit-button {
+  font-size: 1rem; /* Reduce the font size of the button */
+  display: block;
+  width: 40%;
+  padding: 3px; /* Reduce padding for the button */
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
   cursor: pointer;
-  font-size: 14px;
+  text-align: center;
   transition: background-color 0.2s ease;
 }
 
 .add-unit-button:hover {
   background-color: #0056b3;
+}
+
+/* Media Queries for Responsive Design */
+
+/* For small screens (mobile) */
+@media (max-width: 600px) {
+  .unit-card {
+    width: 50px; /* Smaller cards for mobile */
+  }
+
+  .unit-card-container {
+    gap: 3px; /* Reduce the gap between cards */
+    padding: 3px; /* Reduce padding around the container */
+  }
+
+  .unit-cost {
+    font-size: 0.2rem; /* Smaller font size for cost */
+  }
+
+  .add-unit-button {
+    font-size: 0.4rem; /* Smaller button font size */
+    padding: 2px;
+  }
+}
+
+/* For medium screens (tablets) */
+@media (max-width: 1024px) {
+  .unit-card {
+    width: 55px; /* Slightly smaller cards for tablets */
+  }
+
+  .unit-card-container {
+    gap: 5px; /* Adjust gap between cards */
+    padding: 5px; /* Adjust padding around the container */
+  }
+}
+
+/* For large screens (desktops) */
+@media (min-width: 1025px) {
+  .unit-card {
+    width: 70px; /* Larger cards for desktops */
+  }
+
+  .unit-card-container {
+    gap: 8px; /* Increase gap between cards */
+    padding: 8px; /* Increase padding around the container */
+  }
 }

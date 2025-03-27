@@ -7,51 +7,32 @@ import { SelectedUnit } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import factionsData from "./factions.json"; // Import factions.json dynamically
 
-type Props = {
-  unit: {
-    name: string;
-    characteristics: {
-      M: string;
-      T: string;
-      SV: string;
-      W: string;
-      LD: string;
-      OC: string;
-    };
-    invulnerableSave: string;
-    weapons: {
-      name: string;
-      characteristics: {
-        range: string;
-        type: string;
-        shots: string;
-        strength: string;
-        ap: string;
-        d: string;
-      };
-      abilities: string[];
-    }[];
-    abilities: string[];
-    factionKeywords: string[];
-    keywords: string[];
-  };
-  addUnitToArmyList: (
-    name: string,
-    category: string,
-    pointCost: number[],
-    numberOfModels: number[],
-    miscellaneous?: { name: string; quantity: number }[],
-    rangedWeapons?: { name: string; quantity: number }[],
-    meleeWeapons?: { name: string; quantity: number }[],
-    enhancements?: { name: string; pointCost: number }[]
-  ) => void;
+// Define the structure of a unit
+type Unit = {
+  name: string;
+  unitComposition: string;
+  pointCosts: {
+    modelName: string;
+    count: string;
+    points: number;
+  }[]; // Array of model counts and their respective points
 };
+
+// Define the structure of a faction
+type Faction = {
+  faction: string;
+  rules: string[];
+  detachments: string[];
+  datasheets: Unit[];
+};
+
+const factions: Faction[] = factionsData as Faction[];
 
 function App() {
   const [selectedUnits, setSelectedUnits] = useState<SelectedUnit[]>([]);
   const [sidebarVisible, setArmySidebarVisible] = useState(false);
   const [sidebarExpanded, setArmySidebarExpanded] = useState(true);
-  const [visibleFactions, setVisibleFactions] = useState<string[]>([]); // Updated to an array of strings
+  const [visibleFactions, setVisibleFactions] = useState<string[]>([]);
 
   const toggleArmySidebar = () => {
     setArmySidebarExpanded(!sidebarExpanded);
@@ -108,8 +89,8 @@ function App() {
   return (
     <div>
       <Navbar
-        visibleComponents={visibleFactions} // Pass the array of visible factions
-        setVisibleComponents={setVisibleFactions} // Pass the setter for visible factions
+        visibleComponents={visibleFactions}
+        setVisibleComponents={setVisibleFactions}
         sidebarVisible={sidebarVisible}
         sidebarExpanded={sidebarExpanded}
         toggleArmySidebar={toggleArmySidebar}
@@ -178,7 +159,7 @@ function App() {
           }}
           enhancementQuantities={selectedUnits.map(
             (unit) => unit.enhancementQuantities
-          )} // Pass enhancementQuantities
+          )}
           expanded={sidebarExpanded}
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
@@ -187,32 +168,22 @@ function App() {
 
       {visibleFactions.map((factionName) => (
         <div key={factionName}>
-          {factionsData
+          {factions
             .filter((faction) => faction.faction === factionName)
             .map((faction) => (
               <div key={faction.faction}>
                 <h2>{faction.faction}</h2>
                 <div className="unit-card-container">
-                  {faction.datasheets.map((unit) => {
-                    // Extract point cost from unitComposition
-                    const pointCostMatch =
-                      unit.unitComposition.match(/(\d+)\s*pts/);
-                    const pointCost = pointCostMatch
-                      ? parseInt(pointCostMatch[1], 10)
-                      : null;
-
-                    return (
-                      <Unitcard
-                        key={unit.name}
-                        unit={{
-                          name: unit.name,
-                          unitComposition: unit.unitComposition,
-                          pointCost: pointCost ? [pointCost] : [], // Wrap in an array to match expected structure
-                        }}
-                        addUnitToArmyList={addUnitToArmyList}
-                      />
-                    );
-                  })}
+                  {faction.datasheets.map((unit) => (
+                    <Unitcard
+                      key={unit.name}
+                      unit={{
+                        name: unit.name,
+                        pointCosts: unit.pointCosts || [], // Ensure pointCosts is valid
+                      }}
+                      addUnitToArmyList={addUnitToArmyList}
+                    />
+                  ))}
                 </div>
               </div>
             ))}
