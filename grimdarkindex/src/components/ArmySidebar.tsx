@@ -65,36 +65,7 @@ const ArmySidebar: React.FC<Props> = ({
         updateWargearQuantity={updateWargearQuantity}
         updateEnhancementQuantity={updateEnhancementQuantity}
       />
-      <div>
-        {/* Render selected units and their enhancement quantities */}
-        {selectedUnits.map((unit, index) => (
-          <div key={unit.id}>
-            <h3>{unit.name}</h3>
-            <p>Enhancements:</p>
-            {enhancementQuantities[index].map((quantity, enhancementIndex) => (
-              <div key={enhancementIndex}>
-                <span>
-                  Enhancement {enhancementIndex + 1}: {quantity}
-                </span>
-                <button
-                  onClick={() =>
-                    updateEnhancementQuantity(unit.id, enhancementIndex, 1)
-                  }
-                >
-                  +
-                </button>
-                <button
-                  onClick={() =>
-                    updateEnhancementQuantity(unit.id, enhancementIndex, -1)
-                  }
-                >
-                  -
-                </button>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+
       <div className="total-points">
         <p>Total: {calculateTotalPoints(selectedUnits)} points</p>
       </div>
