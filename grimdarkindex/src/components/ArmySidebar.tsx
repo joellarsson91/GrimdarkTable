@@ -62,7 +62,9 @@ const ArmySidebar: React.FC<Props> = ({
         selectedUnits={selectedUnits}
         updateUnitQuantity={updateUnitQuantity}
         removeUnit={removeUnit}
-        updateWargearQuantity={updateWargearQuantity}
+        updateWargearQuantity={(id, wargearIndex, increment) =>
+          updateWargearQuantity(id, Number(wargearIndex), increment)
+        }
         updateEnhancementQuantity={updateEnhancementQuantity}
       />
 

@@ -12,6 +12,7 @@ interface Props {
   ) => void;
   updateWargearQuantity: (
     id: string,
+    wargearType: string,
     wargearIndex: number,
     increment: number
   ) => void;
@@ -30,15 +31,6 @@ const ArmyList: React.FC<Props> = ({
 
   const [showWargear, setShowWargear] = useState<string[]>([]);
   const [showEnhancements, setShowEnhancements] = useState<string[]>([]);
-  const [rangedQuantities, setRangedQuantities] = useState<{
-    [id: string]: number;
-  }>({});
-  const [meleeQuantities, setMeleeQuantities] = useState<{
-    [id: string]: number;
-  }>({});
-  const [miscQuantities, setMiscQuantities] = useState<{
-    [id: string]: number;
-  }>({});
   const [enhancementQuantities, setEnhancementQuantities] = useState<{
     [id: string]: number;
   }>({});
@@ -59,7 +51,6 @@ const ArmyList: React.FC<Props> = ({
   });
 
   const toggleWargear = (unitId: string) => {
-    console.log("Toggling wargear for unit:", unitId);
     setShowWargear((prevShowWargear) =>
       prevShowWargear.includes(unitId)
         ? prevShowWargear.filter((id) => id !== unitId)
@@ -126,190 +117,80 @@ const ArmyList: React.FC<Props> = ({
                 </div>
                 {showWargear.includes(unit.id) && (
                   <div>
-                    {unit.miscellaneous.length > 0 && (
-                      <div>
-                        <h5 className="wargear-headers">Ranged Weapons</h5>
-                        {unit.miscellaneous.map((miscItem, index) => {
-                          const wargearIndex =
-                            index +
-                            unit.meleeWeapons.length +
-                            unit.rangedWeapons.length;
-                          const id = `${unit.id}-misc-${wargearIndex}`;
-                          const initialQuantity = miscItem.quantity;
-                          const currentQuantity =
-                            miscQuantities[id] !== undefined
-                              ? miscQuantities[id]
-                              : initialQuantity;
-
-                          return (
-                            <label key={index}>
-                              <button
-                                className="btn btn-success btn-sm"
-                                onClick={() => {
-                                  updateWargearQuantity(
-                                    unit.id,
-                                    wargearIndex,
-                                    1
-                                  );
-                                  setMiscQuantities({
-                                    ...miscQuantities,
-                                    [id]: currentQuantity + 1,
-                                  });
-                                }}
-                              >
-                                +
-                              </button>
-                              {currentQuantity}
-                              <button
-                                className="btn btn-danger btn-sm"
-                                onClick={() => {
-                                  if (currentQuantity > 0) {
-                                    updateWargearQuantity(
-                                      unit.id,
-                                      wargearIndex,
-                                      -1
-                                    );
-                                    setMiscQuantities({
-                                      ...miscQuantities,
-                                      [id]: currentQuantity - 1,
-                                    });
-                                  } else {
-                                    setMiscQuantities({
-                                      ...miscQuantities,
-                                      [id]: 0,
-                                    });
-                                  }
-                                }}
-                                disabled={currentQuantity <= 0}
-                              >
-                                -
-                              </button>
-                              {miscItem.name}
-                            </label>
-                          );
-                        })}
-                      </div>
-                    )}
                     {unit.rangedWeapons.length > 0 && (
                       <div>
-                        <h5 className="wargear-headers">Melee Weapons</h5>
-                        {unit.rangedWeapons.map((weapon, index: number) => {
-                          const wargearIndex = index;
-                          const id = `${unit.id}-ranged-${wargearIndex}`;
-                          const initialQuantity = weapon.quantity;
-                          const currentQuantity =
-                            rangedQuantities[id] !== undefined
-                              ? rangedQuantities[id]
-                              : initialQuantity;
-
-                          return (
-                            <label key={index}>
-                              <button
-                                className="btn btn-success btn-sm"
-                                onClick={() => {
-                                  updateWargearQuantity(
-                                    unit.id,
-                                    wargearIndex,
-                                    1
-                                  );
-                                  setRangedQuantities({
-                                    ...rangedQuantities,
-                                    [id]: currentQuantity + 1,
-                                  });
-                                }}
-                              >
-                                +
-                              </button>
-                              {currentQuantity}
-                              <button
-                                className="btn btn-danger btn-sm"
-                                onClick={() => {
-                                  if (currentQuantity > 0) {
-                                    updateWargearQuantity(
-                                      unit.id,
-                                      wargearIndex,
-                                      -1
-                                    );
-                                    setRangedQuantities({
-                                      ...rangedQuantities,
-                                      [id]: currentQuantity - 1,
-                                    });
-                                  } else {
-                                    setRangedQuantities({
-                                      ...rangedQuantities,
-                                      [id]: 0,
-                                    });
-                                  }
-                                }}
-                                disabled={currentQuantity <= 0}
-                              >
-                                -
-                              </button>
-                              {weapon.name}
-                            </label>
-                          );
-                        })}
+                        <h5 className="wargear-headers">Ranged Weapons</h5>
+                        {unit.rangedWeapons.map((weapon, index) => (
+                          <div key={index} className="wargear-item">
+                            <span>
+                              {weapon.name}: {weapon.quantity}
+                            </span>
+                            <button
+                              className="btn btn-success btn-sm"
+                              onClick={() =>
+                                updateWargearQuantity(
+                                  unit.id,
+                                  "ranged",
+                                  index,
+                                  1
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() =>
+                                updateWargearQuantity(
+                                  unit.id,
+                                  "ranged",
+                                  index,
+                                  -1
+                                )
+                              }
+                            >
+                              -
+                            </button>
+                          </div>
+                        ))}
                       </div>
                     )}
                     {unit.meleeWeapons.length > 0 && (
                       <div>
-                        <h5 className="wargear-headers">Miscellaneous</h5>
-                        {unit.meleeWeapons.map((weapon, index: number) => {
-                          const wargearIndex = index + unit.meleeWeapons.length;
-                          const id = `${unit.id}-melee-${wargearIndex}`;
-                          const initialQuantity = weapon.quantity;
-                          const currentQuantity =
-                            meleeQuantities[id] !== undefined
-                              ? meleeQuantities[id]
-                              : initialQuantity;
-
-                          return (
-                            <label key={index}>
-                              <button
-                                className="btn btn-success btn-sm"
-                                onClick={() => {
-                                  updateWargearQuantity(
-                                    unit.id,
-                                    wargearIndex,
-                                    1
-                                  );
-                                  setMeleeQuantities({
-                                    ...meleeQuantities,
-                                    [id]: currentQuantity + 1,
-                                  });
-                                }}
-                              >
-                                +
-                              </button>
-                              {currentQuantity}
-                              <button
-                                className="btn btn-danger btn-sm"
-                                onClick={() => {
-                                  if (currentQuantity > 0) {
-                                    updateWargearQuantity(
-                                      unit.id,
-                                      wargearIndex,
-                                      -1
-                                    );
-                                    setMeleeQuantities({
-                                      ...meleeQuantities,
-                                      [id]: currentQuantity - 1,
-                                    });
-                                  } else {
-                                    setMeleeQuantities({
-                                      ...meleeQuantities,
-                                      [id]: 0,
-                                    });
-                                  }
-                                }}
-                                disabled={currentQuantity <= 0}
-                              >
-                                -
-                              </button>
-                              {weapon.name}
-                            </label>
-                          );
-                        })}
+                        <h5 className="wargear-headers">Melee Weapons</h5>
+                        {unit.meleeWeapons.map((weapon, index) => (
+                          <div key={index} className="wargear-item">
+                            <span>
+                              {weapon.name}: {weapon.quantity}
+                            </span>
+                            <button
+                              className="btn btn-success btn-sm"
+                              onClick={() =>
+                                updateWargearQuantity(
+                                  unit.id,
+                                  "melee",
+                                  index,
+                                  1
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() =>
+                                updateWargearQuantity(
+                                  unit.id,
+                                  "melee",
+                                  index,
+                                  -1
+                                )
+                              }
+                            >
+                              -
+                            </button>
+                          </div>
+                        ))}
                       </div>
                     )}
                   </div>

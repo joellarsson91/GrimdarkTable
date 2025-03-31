@@ -12,10 +12,13 @@ type Unit = {
   name: string;
   unitComposition: string;
   pointCosts: {
-    modelName: string;
-    count: string;
+    models: {
+      modelName: string;
+      count: string;
+    }[];
     points: number;
   }[]; // Array of model counts and their respective points
+  wargearOptions?: string[]; // Add wargearOptions as an optional property
 };
 
 // Define the structure of a faction
@@ -47,12 +50,35 @@ function App() {
     category: string,
     pointCost: number[],
     numberOfModels: number[],
+    weapons: { name: string; characteristics: { range: string } }[] = [],
     miscellaneous: { name: string; quantity: number }[] = [],
-    rangedWeapons: { name: string; quantity: number }[] = [],
-    meleeWeapons: { name: string; quantity: number }[] = [],
     enhancements: { name: string; pointCost: number }[] = [],
-    wargearOptions: string[] = [] // Add wargearOptions as an optional parameter
+    wargearOptions: string[] = []
   ) => {
+    // Transform weapons to include characteristics if missing
+    const transformedWeapons = weapons.map((weapon) => ({
+      ...weapon,
+      characteristics: weapon.characteristics || { range: "unknown" },
+    }));
+
+    // Separate weapons into ranged and melee based on the "range" property
+    const meleeWeapons = transformedWeapons.filter(
+      (weapon) => weapon.characteristics.range.toLowerCase() === "melee"
+    );
+    const rangedWeapons = transformedWeapons.filter(
+      (weapon) => weapon.characteristics.range.toLowerCase() !== "melee"
+    );
+
+    // Initialize all weapons with a quantity of 0
+    const defaultRangedWeapons = rangedWeapons.map((weapon) => ({
+      name: weapon.name,
+      quantity: 0,
+    }));
+    const defaultMeleeWeapons = meleeWeapons.map((weapon) => ({
+      name: weapon.name,
+      quantity: 0,
+    }));
+
     setSelectedUnits((prevSelectedUnits) => [
       ...prevSelectedUnits,
       {
@@ -60,11 +86,11 @@ function App() {
         name,
         category,
         pointCost,
-        quantity: numberOfModels[0],
+        quantity: numberOfModels[0], // Add the minimum number of models
         numberOfModels: [...numberOfModels],
         currentIndex: 0,
-        rangedWeapons,
-        meleeWeapons,
+        rangedWeapons: defaultRangedWeapons,
+        meleeWeapons: defaultMeleeWeapons,
         miscellaneous,
         wargearQuantities: new Array(
           rangedWeapons.length + meleeWeapons.length
@@ -76,9 +102,7 @@ function App() {
     ]);
 
     // Set sidebarVisible to true when adding the first unit
-    if (selectedUnits.length === 0) {
-      setArmySidebarVisible(true);
-    }
+    setArmySidebarVisible(true);
   };
 
   const calculateTotalPoints = () => {
@@ -86,6 +110,31 @@ function App() {
       const unitPoints = unit.pointCost[unit.currentIndex];
       return totalPoints + unitPoints;
     }, 0);
+  };
+
+  const updateWargearQuantity = (
+    id: string,
+    weaponType: "ranged" | "melee",
+    weaponIndex: number,
+    increment: number
+  ) => {
+    setSelectedUnits((prevSelectedUnits) =>
+      prevSelectedUnits.map((unit) =>
+        unit.id === id
+          ? {
+              ...unit,
+              [weaponType]: unit[weaponType].map((weapon, index) =>
+                index === weaponIndex
+                  ? {
+                      ...weapon,
+                      quantity: Math.max(0, weapon.quantity + increment),
+                    }
+                  : weapon
+              ),
+            }
+          : unit
+      )
+    );
   };
 
   return (
@@ -181,7 +230,13 @@ function App() {
                       key={unit.name}
                       unit={{
                         name: unit.name,
-                        pointCosts: unit.pointCosts || [], // Ensure pointCosts is valid
+                        pointCosts: unit.pointCosts.map((cost) => ({
+                          models: cost.models.map((model) => ({
+                            modelName: model.modelName || "Unknown Model", // Fallback for undefined modelName
+                            count: model.count || "0", // Fallback for undefined count
+                          })),
+                          points: cost.points,
+                        })), // Transform pointCosts to match the expected structure
                         wargearOptions: unit.wargearOptions || [], // Pass wargearOptions if available
                       }}
                       addUnitToArmyList={addUnitToArmyList}

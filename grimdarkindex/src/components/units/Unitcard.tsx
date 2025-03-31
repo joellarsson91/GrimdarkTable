@@ -12,15 +12,15 @@ interface Props {
       points: number; // Points for the corresponding count
     }[]; // Array of model counts and their respective points
     wargearOptions?: string[]; // Add wargearOptions as an optional property
+    weapons?: { name: string; quantity: number }[]; // Add weapons as an optional property
   };
   addUnitToArmyList: (
     name: string,
     category: string,
     pointCost: number[],
     numberOfModels: number[],
+    weapons?: { name: string; quantity: number }[],
     miscellaneous?: { name: string; quantity: number }[],
-    rangedWeapons?: { name: string; quantity: number }[],
-    meleeWeapons?: { name: string; quantity: number }[],
     enhancements?: { name: string; pointCost: number }[],
     wargearOptions?: string[] // Add wargearOptions as an optional parameter
   ) => void;
@@ -33,7 +33,10 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
     const findImagePath = async () => {
       const path = `/images/${unit.name}.webp`; // All images are now .webp
       try {
-        const response = await fetch(path, { method: "HEAD", cache: "no-store" });
+        const response = await fetch(path, {
+          method: "HEAD",
+          cache: "no-store",
+        });
         if (response.ok) {
           setImagePath(path); // Set the image path if the file exists
         } else {
@@ -55,7 +58,12 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
           <img
             src={imagePath}
             alt={unit.name}
-            style={{ width: "100%", height: "auto", maxWidth: "200px", maxHeight: "200px" }}
+            style={{
+              width: "100%",
+              height: "auto",
+              maxWidth: "200px",
+              maxHeight: "200px",
+            }}
           />
         ) : (
           <p>Image missing</p> // Display "Image missing" if no image is found
@@ -70,31 +78,38 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
               <li key={index}>
                 {cost.models
                   .map((model) => `${model.count} ${model.modelName}`)
-                  .join(" & ")}: {cost.points} pts
+                  .join(" & ")}
+                : {cost.points} pts
               </li>
             ))}
         </ul>
       </p>
       <button
-  className="add-unit-button"
-  onClick={() =>
-    addUnitToArmyList(
-      unit.name,
-      "Troops", // Example category
-      unit.pointCosts.map((cost) => cost.points), // Extract points
-      unit.pointCosts.map((cost) =>
-        cost.models.reduce((total, model) => total + parseInt(model.count), 0)
-      ), // Extract total model count
-      [], // Default miscellaneous
-      [], // Default ranged weapons
-      [], // Default melee weapons
-      [], // Default enhancements
-      unit.wargearOptions || [] // Pass wargear options if available
-    )
-  }
->
-  Add to Army
-</button>
+        className="add-unit-button"
+        onClick={() =>
+          addUnitToArmyList(
+            unit.name,
+            "Troops", // Example category
+            unit.pointCosts.map((cost) => cost.points), // Extract points
+            unit.pointCosts.map((cost) =>
+              cost.models.reduce(
+                (total, model) => total + parseInt(model.count),
+                0
+              )
+            ), // Extract total model count
+            unit.weapons?.map((weapon) => ({
+              name: weapon.name,
+              quantity: weapon.quantity, // Preserve the quantity property
+              characteristics: { range: "unknown" }, // Add default characteristics
+            })) || [], // Transform weapons to include both quantity and characteristics
+            [], // Default miscellaneous
+            [], // Default enhancements
+            unit.wargearOptions || [] // Pass wargear options if available
+          )
+        }
+      >
+        Add to Army
+      </button>
     </div>
   );
 };

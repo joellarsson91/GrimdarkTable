@@ -162,8 +162,9 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     // Extract invulnerable save
     const invulnerableSave = $('.datacard .invulnerable_save').text().trim() || '';
 
-    // Extract weapons
-    const weapons = [];
+    // Extract weapons and separate into ranged and melee
+    const rangedWeapons = [];
+    const meleeWeapons = [];
     $('.datacard .weapons_ranged, .datacard .weapons_melee').each((_, section) => {
       $(section).find('.weapon').each((_, weapon) => {
         const weaponNames = $(weapon).find('.weapon_name').map((_, el) => $(el).text().trim()).get();
@@ -185,11 +186,18 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
             abilities.push($(ability).text().trim());
           });
 
-          weapons.push({
+          const weaponData = {
             name: weaponName,
             characteristics,
             abilities,
-          });
+          };
+
+          // Classify as ranged or melee based on the "range" characteristic
+          if (characteristics.range && characteristics.range.toLowerCase() === 'melee') {
+            meleeWeapons.push(weaponData);
+          } else {
+            rangedWeapons.push(weaponData);
+          }
         });
       });
     });
@@ -284,7 +292,10 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       name: datasheetName || name,
       characteristics, // Updated characteristics extraction
       invulnerableSave,
-      weapons,
+      weapons: {
+        rangedWeapons,
+        meleeWeapons,
+      },
       abilities: {
         factionAbilities,
         datasheetAbilities,
