@@ -146,12 +146,18 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     // Extract characteristics
     const characteristics = {};
     $('.datacard .characteristics_header div').each((index, el) => {
-      const key = $(el).text().trim();
-      const value = $('.datacard .characteristics div').eq(index).text().trim();
+      const key = $(el).text().trim(); // Get the characteristic name (e.g., M, T, SV)
+      const value = $('.datacard .characteristics div').eq(index).text().trim(); // Get the corresponding value
       if (key && value) {
         characteristics[key] = value;
       }
     });
+
+    // Extract toughness separately
+    const toughness = $('.datacard .characteristics .toughness div').text().trim();
+    if (toughness) {
+      characteristics['T'] = toughness; // Override the toughness value in characteristics
+    }
 
     // Extract invulnerable save
     const invulnerableSave = $('.datacard .invulnerable_save').text().trim() || '';
@@ -208,27 +214,17 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       });
     });
 
-    // Updated logic for extracting unit composition and point costs
-    const unitComposition = [];
-    const pointCosts = [];
-
-    // Extract unit composition
+    // Extract unit composition as a single string
+    let unitComposition = '';
     $('.datacard .unit_composition .composition').each((_, el) => {
       const compositionText = $(el).text().trim();
       if (compositionText) {
-        const lines = compositionText.split('\n').map(line => line.trim());
-        lines.forEach(line => {
-          const match = line.match(/■\s*(\d+[-\d]*)\s*(.+)/); // Match count and model name
-          if (match) {
-            const count = match[1];
-            const modelName = match[2];
-            unitComposition.push({ modelName, count });
-          }
-        });
+        unitComposition += compositionText + '\n';
       }
     });
 
     // Extract point costs
+    const pointCosts = [];
     $('.datacard .unit_composition table tbody tr').each((_, row) => {
       const modelNames = $(row).find('td').eq(0).find('div').map((_, el) => $(el).text().trim()).get();
       const counts = $(row).find('td').eq(1).find('div').map((_, el) => $(el).text().trim()).get();
@@ -286,15 +282,15 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
 
     return {
       name: datasheetName || name,
-      characteristics,
+      characteristics, // Updated characteristics extraction
       invulnerableSave,
       weapons,
       abilities: {
         factionAbilities,
         datasheetAbilities,
       },
-      unitComposition,
-      pointCosts, // Include extracted point costs
+      unitComposition: unitComposition.trim(), // Save as a single string
+      pointCosts,
       wargearOptions,
       ledBy,
       keywords: {

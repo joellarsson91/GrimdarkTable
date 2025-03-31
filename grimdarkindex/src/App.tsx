@@ -50,7 +50,8 @@ function App() {
     miscellaneous: { name: string; quantity: number }[] = [],
     rangedWeapons: { name: string; quantity: number }[] = [],
     meleeWeapons: { name: string; quantity: number }[] = [],
-    enhancements: { name: string; pointCost: number }[] = []
+    enhancements: { name: string; pointCost: number }[] = [],
+    wargearOptions: string[] = [] // Add wargearOptions as an optional parameter
   ) => {
     setSelectedUnits((prevSelectedUnits) => [
       ...prevSelectedUnits,
@@ -70,6 +71,7 @@ function App() {
         ).fill(0),
         enhancementQuantities: new Array(enhancements.length).fill(0),
         enhancements,
+        wargearOptions, // Include wargearOptions in the unit structure
       },
     ]);
 
@@ -180,6 +182,7 @@ function App() {
                       unit={{
                         name: unit.name,
                         pointCosts: unit.pointCosts || [], // Ensure pointCosts is valid
+                        wargearOptions: unit.wargearOptions || [], // Pass wargearOptions if available
                       }}
                       addUnitToArmyList={addUnitToArmyList}
                     />

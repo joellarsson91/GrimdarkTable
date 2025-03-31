@@ -5,10 +5,13 @@ interface Props {
   unit: {
     name: string;
     pointCosts: {
-      modelName: string;
-      count: string;
-      points: number;
+      models: {
+        modelName: string;
+        count: string; // Number of models (e.g., "4" or "5")
+      }[];
+      points: number; // Points for the corresponding count
     }[]; // Array of model counts and their respective points
+    wargearOptions?: string[]; // Add wargearOptions as an optional property
   };
   addUnitToArmyList: (
     name: string,
@@ -18,7 +21,8 @@ interface Props {
     miscellaneous?: { name: string; quantity: number }[],
     rangedWeapons?: { name: string; quantity: number }[],
     meleeWeapons?: { name: string; quantity: number }[],
-    enhancements?: { name: string; pointCost: number }[]
+    enhancements?: { name: string; pointCost: number }[],
+    wargearOptions?: string[] // Add wargearOptions as an optional parameter
   ) => void;
 }
 
@@ -58,28 +62,39 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
         )}
       </div>
       <p className="unit-cost">
-        Cost:
+        <strong>Cost:</strong>
         <ul>
-          {unit.pointCosts.map((cost, index) => (
-            <li key={index}>
-              {cost.count} models: {cost.points} pts
-            </li>
-          ))}
+          {unit.pointCosts
+            .sort((a, b) => a.points - b.points) // Sort by points (lowest to highest)
+            .map((cost, index) => (
+              <li key={index}>
+                {cost.models
+                  .map((model) => `${model.count} ${model.modelName}`)
+                  .join(" & ")}: {cost.points} pts
+              </li>
+            ))}
         </ul>
       </p>
       <button
-        className="add-unit-button"
-        onClick={() =>
-          addUnitToArmyList(
-            unit.name,
-            "Troops", // Example category
-            unit.pointCosts.map((cost) => cost.points), // Extract points
-            unit.pointCosts.map((cost) => parseInt(cost.count.split("-")[0])) // Extract minimum model count
-          )
-        }
-      >
-        Add to Army
-      </button>
+  className="add-unit-button"
+  onClick={() =>
+    addUnitToArmyList(
+      unit.name,
+      "Troops", // Example category
+      unit.pointCosts.map((cost) => cost.points), // Extract points
+      unit.pointCosts.map((cost) =>
+        cost.models.reduce((total, model) => total + parseInt(model.count), 0)
+      ), // Extract total model count
+      [], // Default miscellaneous
+      [], // Default ranged weapons
+      [], // Default melee weapons
+      [], // Default enhancements
+      unit.wargearOptions || [] // Pass wargear options if available
+    )
+  }
+>
+  Add to Army
+</button>
     </div>
   );
 };

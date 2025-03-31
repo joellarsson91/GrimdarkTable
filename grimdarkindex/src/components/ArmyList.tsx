@@ -58,6 +58,15 @@ const ArmyList: React.FC<Props> = ({
     groupedUnits[unit.category].push(unit);
   });
 
+  const toggleWargear = (unitId: string) => {
+    console.log("Toggling wargear for unit:", unitId);
+    setShowWargear((prevShowWargear) =>
+      prevShowWargear.includes(unitId)
+        ? prevShowWargear.filter((id) => id !== unitId)
+        : [...prevShowWargear, unitId]
+    );
+  };
+
   return (
     <div style={{ maxHeight: "800px", overflowY: "auto" }}>
       <h2 className="armylist-headers">Army List</h2>
@@ -94,13 +103,7 @@ const ArmyList: React.FC<Props> = ({
                   </button>
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={() => {
-                      setShowWargear((prevShowWargear) =>
-                        prevShowWargear.includes(unit.id)
-                          ? prevShowWargear.filter((id) => id !== unit.id)
-                          : [...prevShowWargear, unit.id]
-                      );
-                    }}
+                    onClick={() => toggleWargear(unit.id)}
                   >
                     Wargear
                   </button>
