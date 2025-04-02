@@ -7,7 +7,6 @@ import { SelectedUnit } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import factionsData from "./factions.json"; // Import factions.json dynamically
 
-// Define the structure of a unit
 type Unit = {
   name: string;
   unitComposition: string;
@@ -19,6 +18,8 @@ type Unit = {
     points: number;
   }[]; // Array of model counts and their respective points
   wargearOptions?: string[]; // Add wargearOptions as an optional property
+  rangedWeapons?: { name: string; quantity: number }[]; // Add rangedWeapons as an optional property
+  meleeWeapons?: { name: string; quantity: number }[]; // Add meleeWeapons as an optional property
 };
 
 // Define the structure of a faction
@@ -50,25 +51,12 @@ function App() {
     category: string,
     pointCost: number[],
     numberOfModels: number[],
-    weapons: { name: string; characteristics: { range: string } }[] = [],
+    rangedWeapons: { name: string; quantity: number }[] = [],
+    meleeWeapons: { name: string; quantity: number }[] = [],
     miscellaneous: { name: string; quantity: number }[] = [],
     enhancements: { name: string; pointCost: number }[] = [],
     wargearOptions: string[] = []
   ) => {
-    // Transform weapons to include characteristics if missing
-    const transformedWeapons = weapons.map((weapon) => ({
-      ...weapon,
-      characteristics: weapon.characteristics || { range: "unknown" },
-    }));
-
-    // Separate weapons into ranged and melee based on the "range" property
-    const meleeWeapons = transformedWeapons.filter(
-      (weapon) => weapon.characteristics.range.toLowerCase() === "melee"
-    );
-    const rangedWeapons = transformedWeapons.filter(
-      (weapon) => weapon.characteristics.range.toLowerCase() !== "melee"
-    );
-
     // Initialize all weapons with a quantity of 0
     const defaultRangedWeapons = rangedWeapons.map((weapon) => ({
       name: weapon.name,
@@ -237,6 +225,8 @@ function App() {
                           })),
                           points: cost.points,
                         })), // Transform pointCosts to match the expected structure
+                        rangedWeapons: unit.weapons?.rangedWeapons || [], // Pass ranged weapons
+                        meleeWeapons: unit.weapons?.meleeWeapons || [], // Pass melee weapons
                         wargearOptions: unit.wargearOptions || [], // Pass wargearOptions if available
                       }}
                       addUnitToArmyList={addUnitToArmyList}

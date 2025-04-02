@@ -12,14 +12,16 @@ interface Props {
       points: number; // Points for the corresponding count
     }[]; // Array of model counts and their respective points
     wargearOptions?: string[]; // Add wargearOptions as an optional property
-    weapons?: { name: string; quantity: number }[]; // Add weapons as an optional property
+    rangedWeapons?: { name: string; quantity: number }[]; // Add rangedWeapons as an optional property
+    meleeWeapons?: { name: string; quantity: number }[]; // Add meleeWeapons as an optional property
   };
   addUnitToArmyList: (
     name: string,
     category: string,
     pointCost: number[],
     numberOfModels: number[],
-    weapons?: { name: string; quantity: number }[],
+    rangedWeapons?: { name: string; quantity: number }[],
+    meleeWeapons?: { name: string; quantity: number }[],
     miscellaneous?: { name: string; quantity: number }[],
     enhancements?: { name: string; pointCost: number }[],
     wargearOptions?: string[] // Add wargearOptions as an optional parameter
@@ -97,11 +99,14 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
                 0
               )
             ), // Extract total model count
-            unit.weapons?.map((weapon) => ({
+            unit.rangedWeapons?.map((weapon) => ({
               name: weapon.name,
               quantity: weapon.quantity, // Preserve the quantity property
-              characteristics: { range: "unknown" }, // Add default characteristics
-            })) || [], // Transform weapons to include both quantity and characteristics
+            })) || [], // Transform rangedWeapons to include quantity
+            unit.meleeWeapons?.map((weapon) => ({
+              name: weapon.name,
+              quantity: weapon.quantity, // Preserve the quantity property
+            })) || [], // Transform meleeWeapons to include quantity
             [], // Default miscellaneous
             [], // Default enhancements
             unit.wargearOptions || [] // Pass wargear options if available

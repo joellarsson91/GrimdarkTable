@@ -117,81 +117,85 @@ const ArmyList: React.FC<Props> = ({
                 </div>
                 {showWargear.includes(unit.id) && (
                   <div>
-                    {unit.rangedWeapons.length > 0 && (
-                      <div>
-                        <h5 className="wargear-headers">Ranged Weapons</h5>
-                        {unit.rangedWeapons.map((weapon, index) => (
-                          <div key={index} className="wargear-item">
-                            <span>
-                              {weapon.name}: {weapon.quantity}
-                            </span>
-                            <button
-                              className="btn btn-success btn-sm"
-                              onClick={() =>
-                                updateWargearQuantity(
-                                  unit.id,
-                                  "ranged",
-                                  index,
-                                  1
-                                )
-                              }
-                            >
-                              +
-                            </button>
-                            <button
-                              className="btn btn-danger btn-sm"
-                              onClick={() =>
-                                updateWargearQuantity(
-                                  unit.id,
-                                  "ranged",
-                                  index,
-                                  -1
-                                )
-                              }
-                            >
-                              -
-                            </button>
-                          </div>
-                        ))}
-                      </div>
+                    {/* Ranged Weapons */}
+                    {unit.rangedWeapons.length > 0 && <h3>Ranged Weapons</h3>}
+                    {unit.rangedWeapons.length > 0 ? (
+                      unit.rangedWeapons.map((weapon, index) => (
+                        <div
+                          key={index}
+                          className="weapon-item"
+                          style={{ fontSize: "0.9rem" }}
+                        >
+                          <button
+                            className="btn btn-success btn-sm"
+                            onClick={() =>
+                              updateWargearQuantity(unit.id, "ranged", index, 1)
+                            }
+                          >
+                            +
+                          </button>
+                          <span style={{ margin: "0 8px" }}>
+                            {weapon.quantity}
+                          </span>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() =>
+                              updateWargearQuantity(
+                                unit.id,
+                                "ranged",
+                                index,
+                                -1
+                              )
+                            }
+                            disabled={weapon.quantity <= 0}
+                          >
+                            -
+                          </button>
+                          <span style={{ marginLeft: "8px" }}>
+                            {weapon.name}
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      <p></p>
                     )}
-                    {unit.meleeWeapons.length > 0 && (
-                      <div>
-                        <h5 className="wargear-headers">Melee Weapons</h5>
-                        {unit.meleeWeapons.map((weapon, index) => (
-                          <div key={index} className="wargear-item">
-                            <span>
-                              {weapon.name}: {weapon.quantity}
-                            </span>
-                            <button
-                              className="btn btn-success btn-sm"
-                              onClick={() =>
-                                updateWargearQuantity(
-                                  unit.id,
-                                  "melee",
-                                  index,
-                                  1
-                                )
-                              }
-                            >
-                              +
-                            </button>
-                            <button
-                              className="btn btn-danger btn-sm"
-                              onClick={() =>
-                                updateWargearQuantity(
-                                  unit.id,
-                                  "melee",
-                                  index,
-                                  -1
-                                )
-                              }
-                            >
-                              -
-                            </button>
-                          </div>
-                        ))}
-                      </div>
+
+                    {/* Melee Weapons */}
+                    {unit.meleeWeapons.length > 0 && <h3>Melee Weapons</h3>}
+                    {unit.meleeWeapons.length > 0 ? (
+                      unit.meleeWeapons.map((weapon, index) => (
+                        <div
+                          key={index}
+                          className="weapon-item"
+                          style={{ fontSize: "0.9rem" }}
+                        >
+                          <button
+                            className="btn btn-success btn-sm"
+                            onClick={() =>
+                              updateWargearQuantity(unit.id, "melee", index, 1)
+                            }
+                          >
+                            +
+                          </button>
+                          <span style={{ margin: "0 8px" }}>
+                            {weapon.quantity}
+                          </span>
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() =>
+                              updateWargearQuantity(unit.id, "melee", index, -1)
+                            }
+                            disabled={weapon.quantity <= 0}
+                          >
+                            -
+                          </button>
+                          <span style={{ marginLeft: "8px" }}>
+                            {weapon.name}
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      <p></p>
                     )}
                   </div>
                 )}
