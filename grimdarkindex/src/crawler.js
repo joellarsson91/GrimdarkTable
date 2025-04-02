@@ -3,6 +3,7 @@ import fs from 'fs';
 import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import pLimit from 'p-limit';
+import { parseEquippedWeapons } from './helpers.js';
 
 const baseUrl = 'https://39k.pro';
 const limit = pLimit(5);
@@ -135,7 +136,7 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     const collapsibleHeaders = await page.$$('.collapsible_header');
     for (const header of collapsibleHeaders) {
       await header.click();
-      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for content to load
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Wait for content to load
     }
 
     const content = await page.content();
@@ -192,7 +193,6 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
             abilities,
           };
 
-          // Classify as ranged or melee based on the "range" characteristic
           if (characteristics.range && characteristics.range.toLowerCase() === 'melee') {
             meleeWeapons.push(weaponData);
           } else {
@@ -230,6 +230,9 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
         unitComposition += compositionText + '\n';
       }
     });
+
+    // Parse equipped weapons from unitComposition
+    const equipped = parseEquippedWeapons(unitComposition);
 
     // Extract point costs
     const pointCosts = [];
@@ -284,13 +287,13 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     if (keywords.length === 0) {
       const keywordsText = $('.datacard .keywords').text().trim();
       if (keywordsText) {
-        keywords.push(...keywordsText.split(',').map(k => k.trim()));
+        keywords.push(...keywordsText.split(',').map((k) => k.trim()));
       }
     }
 
     return {
       name: datasheetName || name,
-      characteristics, // Updated characteristics extraction
+      characteristics,
       invulnerableSave,
       weapons: {
         rangedWeapons,
@@ -300,7 +303,8 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
         factionAbilities,
         datasheetAbilities,
       },
-      unitComposition: unitComposition.trim(), // Save as a single string
+      equipped, // Add equipped weapons
+      unitComposition: unitComposition.trim(),
       pointCosts,
       wargearOptions,
       ledBy,
