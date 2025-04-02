@@ -3,7 +3,6 @@ import fs from 'fs';
 import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import pLimit from 'p-limit';
-import { parseEquippedWeapons } from './helpers.js';
 
 const baseUrl = 'https://39k.pro';
 const limit = pLimit(5);
@@ -99,6 +98,48 @@ async function fetchPage(url, expectEnhancements = false, expectStratagems = fal
   }
 }
 
+// Helper function to parse equipped weapons
+function parseEquippedWeapons(unitComposition, rangedWeapons, meleeWeapons) {
+  console.log("Parsing equipped weapons...");
+  console.log("Unit Composition:", unitComposition);
+
+  const equippedWeapons = [];
+  const weaponRegex = /(\d+)?\s*([\w\s'-]+?)(?=;|$)/g; // Regex to match "2 Flamestorm Cannons" or "Twin Assault Cannon"
+
+  // Extract the part of the string after "This model is equipped with:"
+  const equippedSectionMatch = unitComposition.match(/This model is equipped with:(.*)/i);
+  if (!equippedSectionMatch) {
+    console.log("No 'This model is equipped with:' section found.");
+    return equippedWeapons;
+  }
+
+  const equippedSection = equippedSectionMatch[1].trim();
+  console.log("Equipped Section:", equippedSection);
+
+  // Parse each weapon in the equipped section
+  let match;
+  while ((match = weaponRegex.exec(equippedSection)) !== null) {
+    const quantity = match[1] ? parseInt(match[1], 10) : 1; // Default to 1 if no quantity is specified
+    const weaponName = match[2].trim();
+
+    console.log("Matched Weapon:", { quantity, weaponName });
+
+    // Determine if the weapon is ranged or melee
+    const type = rangedWeapons.some((weapon) => weapon.name.toLowerCase() === weaponName.toLowerCase())
+      ? "ranged"
+      : meleeWeapons.some((weapon) => weapon.name.toLowerCase() === weaponName.toLowerCase())
+      ? "melee"
+      : "unknown";
+
+    console.log("Weapon Type:", type);
+
+    equippedWeapons.push({ name: weaponName, quantity, type });
+  }
+
+  console.log("Final Equipped Weapons:", equippedWeapons);
+  return equippedWeapons;
+}
+
 async function extractDetachmentData(detachmentLink, detachmentName) {
   console.log(`Fetching detachment page: ${baseUrl + detachmentLink}`);
   const pageData = await fetchPage(baseUrl + detachmentLink, true, true);
@@ -124,16 +165,17 @@ async function extractDetachmentData(detachmentLink, detachmentName) {
   };
 }
 
+// Updated extractDatasheetData function
 async function extractDatasheetData(datasheetLink, datasheetName) {
   console.log(`Fetching datasheet: ${baseUrl + datasheetLink}`);
   await launchBrowser();
   const page = await browser.newPage();
   try {
-    await page.goto(baseUrl + datasheetLink, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    await page.waitForSelector('.datacard', { timeout: 15000 });
+    await page.goto(baseUrl + datasheetLink, { waitUntil: "domcontentloaded", timeout: 30000 });
+    await page.waitForSelector(".datacard", { timeout: 15000 });
 
     // Uncollapse all collapsible headers
-    const collapsibleHeaders = await page.$$('.collapsible_header');
+    const collapsibleHeaders = await page.$$(".collapsible_header");
     for (const header of collapsibleHeaders) {
       await header.click();
       await new Promise((resolve) => setTimeout(resolve, 500)); // Wait for content to load
@@ -142,40 +184,40 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     const content = await page.content();
     const $ = cheerio.load(content);
 
-    const name = $('.datacard .name').text().trim();
+    const name = $(".datacard .name").text().trim();
 
     // Extract characteristics
     const characteristics = {};
-    $('.datacard .characteristics_header div').each((index, el) => {
+    $(".datacard .characteristics_header div").each((index, el) => {
       const key = $(el).text().trim(); // Get the characteristic name (e.g., M, T, SV)
-      const value = $('.datacard .characteristics div').eq(index).text().trim(); // Get the corresponding value
+      const value = $(".datacard .characteristics div").eq(index).text().trim(); // Get the corresponding value
       if (key && value) {
         characteristics[key] = value;
       }
     });
 
     // Extract toughness separately
-    const toughness = $('.datacard .characteristics .toughness div').text().trim();
+    const toughness = $(".datacard .characteristics .toughness div").text().trim();
     if (toughness) {
-      characteristics['T'] = toughness; // Override the toughness value in characteristics
+      characteristics["T"] = toughness; // Override the toughness value in characteristics
     }
 
     // Extract invulnerable save
-    const invulnerableSave = $('.datacard .invulnerable_save').text().trim() || '';
+    const invulnerableSave = $(".datacard .invulnerable_save").text().trim() || "";
 
     // Extract weapons and separate into ranged and melee
     const rangedWeapons = [];
     const meleeWeapons = [];
-    $('.datacard .weapons_ranged, .datacard .weapons_melee').each((_, section) => {
-      $(section).find('.weapon').each((_, weapon) => {
-        const weaponNames = $(weapon).find('.weapon_name').map((_, el) => $(el).text().trim()).get();
-        const weaponCharacteristics = $(weapon).find('.weapon_characteristics');
-        const weaponAbilities = $(weapon).find('.weapon_abilities');
+    $(".datacard .weapons_ranged, .datacard .weapons_melee").each((_, section) => {
+      $(section).find(".weapon").each((_, weapon) => {
+        const weaponNames = $(weapon).find(".weapon_name").map((_, el) => $(el).text().trim()).get();
+        const weaponCharacteristics = $(weapon).find(".weapon_characteristics");
+        const weaponAbilities = $(weapon).find(".weapon_abilities");
 
         weaponNames.forEach((weaponName, index) => {
           const characteristics = {};
-          weaponCharacteristics.eq(index).find('div').each((i, char) => {
-            const key = $('.weapon_headers div').eq(i).text().trim();
+          weaponCharacteristics.eq(index).find("div").each((i, char) => {
+            const key = $(".weapon_headers div").eq(i).text().trim();
             const value = $(char).text().trim();
             if (key && value) {
               characteristics[key.toLowerCase()] = value;
@@ -183,7 +225,7 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
           });
 
           const abilities = [];
-          weaponAbilities.eq(index).find('.weapon_ability').each((_, ability) => {
+          weaponAbilities.eq(index).find(".weapon_ability").each((_, ability) => {
             abilities.push($(ability).text().trim());
           });
 
@@ -193,7 +235,7 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
             abilities,
           };
 
-          if (characteristics.range && characteristics.range.toLowerCase() === 'melee') {
+          if (characteristics.range && characteristics.range.toLowerCase() === "melee") {
             meleeWeapons.push(weaponData);
           } else {
             rangedWeapons.push(weaponData);
@@ -204,18 +246,18 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
 
     // Extract faction abilities
     const factionAbilities = [];
-    $('.datacard .abilities').find('.faction_ability').each((_, el) => {
+    $(".datacard .abilities").find(".faction_ability").each((_, el) => {
       const abilityName = $(el).text().trim();
       if (abilityName) {
         factionAbilities.push(abilityName);
       }
     });
 
-    // Extract datasheet abilities
+    // Extract datasheet abilities (restored from old function)
     const datasheetAbilities = [];
-    $('.datacard .abilities .ability').each((_, ability) => {
-      const abilityName = $(ability).find('.ability_name').text().trim();
-      const abilityRule = $(ability).find('.ability_rule').text().trim();
+    $(".datacard .abilities .ability").each((_, ability) => {
+      const abilityName = $(ability).find(".ability_name").text().trim();
+      const abilityRule = $(ability).find(".ability_rule").text().trim();
       datasheetAbilities.push({
         name: abilityName,
         rule: abilityRule,
@@ -223,28 +265,28 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     });
 
     // Extract unit composition as a single string
-    let unitComposition = '';
-    $('.datacard .unit_composition .composition').each((_, el) => {
+    let unitComposition = "";
+    $(".datacard .unit_composition .composition").each((_, el) => {
       const compositionText = $(el).text().trim();
       if (compositionText) {
-        unitComposition += compositionText + '\n';
+        unitComposition += compositionText + "\n";
       }
     });
 
     // Parse equipped weapons from unitComposition
-    const equipped = parseEquippedWeapons(unitComposition);
+    const equipped = parseEquippedWeapons(unitComposition, rangedWeapons, meleeWeapons);
 
     // Extract point costs
     const pointCosts = [];
-    $('.datacard .unit_composition table tbody tr').each((_, row) => {
-      const modelNames = $(row).find('td').eq(0).find('div').map((_, el) => $(el).text().trim()).get();
-      const counts = $(row).find('td').eq(1).find('div').map((_, el) => $(el).text().trim()).get();
-      const points = parseInt($(row).find('td').eq(2).text().trim(), 10);
+    $(".datacard .unit_composition table tbody tr").each((_, row) => {
+      const modelNames = $(row).find("td").eq(0).find("div").map((_, el) => $(el).text().trim()).get();
+      const counts = $(row).find("td").eq(1).find("div").map((_, el) => $(el).text().trim()).get();
+      const points = parseInt($(row).find("td").eq(2).text().trim(), 10);
 
       if (modelNames.length && counts.length && !isNaN(points)) {
         const combinedModels = modelNames.map((modelName, index) => ({
           modelName,
-          count: counts[index] || '',
+          count: counts[index] || "",
         }));
         pointCosts.push({ models: combinedModels, points });
       }
@@ -252,7 +294,7 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
 
     // Extract wargear options
     const wargearOptions = [];
-    $('.datacard .wargear_rule').each((_, el) => {
+    $(".datacard .wargear_rule").each((_, el) => {
       const wargearText = $(el).text().trim();
       if (wargearText) {
         wargearOptions.push(wargearText);
@@ -261,10 +303,10 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
 
     // Extract "Led By"
     const ledBy = [];
-    $('.datacard .collapsible_header').each((index, el) => {
+    $(".datacard .collapsible_header").each((index, el) => {
       const headerText = $(el).text().trim();
-      if (headerText === 'Led By') {
-        const leaders = $(el).next('div').find('ul li a');
+      if (headerText === "Led By") {
+        const leaders = $(el).next("div").find("ul li a");
         leaders.each((_, a) => {
           const leaderName = $(a).text().trim();
           if (leaderName) {
@@ -275,9 +317,9 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     });
 
     // Extract keywords
-    const factionKeywords = $('.datacard .faction_keywords').text().trim();
+    const factionKeywords = $(".datacard .faction_keywords").text().trim();
     const keywords = [];
-    $('.datacard .keywords .keyword').each((_, el) => {
+    $(".datacard .keywords .keyword").each((_, el) => {
       const keyword = $(el).text().trim();
       if (keyword) {
         keywords.push(keyword);
@@ -285,9 +327,9 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
     });
 
     if (keywords.length === 0) {
-      const keywordsText = $('.datacard .keywords').text().trim();
+      const keywordsText = $(".datacard .keywords").text().trim();
       if (keywordsText) {
-        keywords.push(...keywordsText.split(',').map((k) => k.trim()));
+        keywords.push(...keywordsText.split(",").map((k) => k.trim()));
       }
     }
 
@@ -301,7 +343,7 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       },
       abilities: {
         factionAbilities,
-        datasheetAbilities,
+        datasheetAbilities, // Include datasheet abilities
       },
       equipped, // Add equipped weapons
       unitComposition: unitComposition.trim(),
