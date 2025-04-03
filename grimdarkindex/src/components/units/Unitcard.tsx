@@ -11,9 +11,10 @@ interface Props {
       }[];
       points: number; // Points for the corresponding count
     }[]; // Array of model counts and their respective points
-    wargearOptions?: string[]; // Add wargearOptions as an optional property
-    rangedWeapons?: { name: string; quantity: number }[]; // Add rangedWeapons as an optional property
-    meleeWeapons?: { name: string; quantity: number }[]; // Add meleeWeapons as an optional property
+    wargearOptions?: string[]; // Optional wargear options
+    rangedWeapons?: { name: string; quantity: number }[]; // Optional ranged weapons
+    meleeWeapons?: { name: string; quantity: number }[]; // Optional melee weapons
+    equipped?: { name: string; quantity: number; type: string }[]; // Optional equipped array
   };
   addUnitToArmyList: (
     name: string,
@@ -24,7 +25,8 @@ interface Props {
     meleeWeapons?: { name: string; quantity: number }[],
     miscellaneous?: { name: string; quantity: number }[],
     enhancements?: { name: string; pointCost: number }[],
-    wargearOptions?: string[] // Add wargearOptions as an optional parameter
+    wargearOptions?: string[],
+    equipped?: { name: string; quantity: number; type: string }[]
   ) => void;
 }
 
@@ -51,6 +53,26 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
 
     findImagePath();
   }, [unit.name]);
+
+  const handleAddUnit = () => {
+    addUnitToArmyList(
+      unit.name,
+      "Troops", // Example category
+      unit.pointCosts.map((cost) => cost.points),
+      unit.pointCosts.map((cost) =>
+        cost.models.reduce(
+          (total, model) => total + parseInt(model.count, 10),
+          0
+        )
+      ),
+      unit.rangedWeapons || [],
+      unit.meleeWeapons || [],
+      [], // Miscellaneous
+      [], // Enhancements
+      unit.wargearOptions || [],
+      unit.equipped || []
+    );
+  };
 
   return (
     <div className="unit-card">
@@ -86,33 +108,7 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
             ))}
         </ul>
       </p>
-      <button
-        className="add-unit-button"
-        onClick={() =>
-          addUnitToArmyList(
-            unit.name,
-            "Troops", // Example category
-            unit.pointCosts.map((cost) => cost.points), // Extract points
-            unit.pointCosts.map((cost) =>
-              cost.models.reduce(
-                (total, model) => total + parseInt(model.count),
-                0
-              )
-            ), // Extract total model count
-            unit.rangedWeapons?.map((weapon) => ({
-              name: weapon.name,
-              quantity: weapon.quantity, // Preserve the quantity property
-            })) || [], // Transform rangedWeapons to include quantity
-            unit.meleeWeapons?.map((weapon) => ({
-              name: weapon.name,
-              quantity: weapon.quantity, // Preserve the quantity property
-            })) || [], // Transform meleeWeapons to include quantity
-            [], // Default miscellaneous
-            [], // Default enhancements
-            unit.wargearOptions || [] // Pass wargear options if available
-          )
-        }
-      >
+      <button className="add-unit-button" onClick={handleAddUnit}>
         Add to Army
       </button>
     </div>

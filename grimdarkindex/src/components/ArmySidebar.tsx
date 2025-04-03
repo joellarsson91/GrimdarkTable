@@ -9,14 +9,15 @@ interface Props {
   updateWargearQuantity: (
     id: string,
     wargearIndex: number,
-    increment: number
+    increment: number,
+    wargearType: "ranged" | "melee"
   ) => void;
   updateEnhancementQuantity: (
     id: string,
     enhancementIndex: number,
     increment: number
   ) => void;
-  enhancementQuantities: number[][]; // Ensure this matches the type passed from App.tsx
+  enhancementQuantities: number[]; // Ensure this is a flat array of numbers
   expanded: boolean;
   toggleArmySidebar: () => void;
   toggleArmySidebarVisibility: () => void;
@@ -62,9 +63,13 @@ const ArmySidebar: React.FC<Props> = ({
         selectedUnits={selectedUnits}
         updateUnitQuantity={updateUnitQuantity}
         removeUnit={removeUnit}
-        updateWargearQuantity={(id, wargearIndex, increment) =>
-          updateWargearQuantity(id, Number(wargearIndex), increment)
-        }
+        updateWargearQuantity={(id, wargearIndex, increment, wargearType) => {
+          if (wargearType === "ranged" || wargearType === "melee") {
+            updateWargearQuantity(id, wargearIndex, increment, wargearType);
+          } else {
+            console.error(`Invalid wargearType: ${wargearType}`);
+          }
+        }}
         updateEnhancementQuantity={updateEnhancementQuantity}
       />
 

@@ -11483,7 +11483,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "Guardian spear",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Guardian spear",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **4-5 Custodian Guard**\n\n**Every model is equipped with**: guardian spear. Model NameCountPointsCustodian Guard4170Custodian Guard5215",
         "pointCosts": [
           {
@@ -11757,7 +11768,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "lastrum storm bolter",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "solerite power gauntlet",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **4-5 Custodian Wardens**\n\n**Every model is equipped with**: guardian spear. Model NameCountPointsCustodian Warden4210Custodian Warden5260",
         "pointCosts": [
           {

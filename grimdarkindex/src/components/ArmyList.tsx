@@ -5,15 +5,15 @@ interface Props {
   selectedUnits: SelectedUnit[];
   updateUnitQuantity: (id: string, increment: number) => void;
   removeUnit: (id: string) => void;
+  updateWargearQuantity: (
+    id: string,
+    wargearIndex: number,
+    increment: number,
+    wargearType: string
+  ) => void;
   updateEnhancementQuantity: (
     id: string,
     enhancementIndex: number,
-    increment: number
-  ) => void;
-  updateWargearQuantity: (
-    id: string,
-    wargearType: string,
-    wargearIndex: number,
     increment: number
   ) => void;
 }
@@ -119,84 +119,63 @@ const ArmyList: React.FC<Props> = ({
                   <div>
                     {/* Ranged Weapons */}
                     {unit.rangedWeapons.length > 0 && <h3>Ranged Weapons</h3>}
-                    {unit.rangedWeapons.length > 0 ? (
-                      unit.rangedWeapons.map((weapon, index) => (
-                        <div
-                          key={index}
-                          className="weapon-item"
-                          style={{ fontSize: "0.9rem" }}
+                    {unit.rangedWeapons.map((weapon, index) => (
+                      <div
+                        key={index}
+                        className="weapon-item"
+                        style={{ fontSize: "0.9rem" }}
+                      >
+                        <button
+                          className="btn btn-success btn-sm"
+                          onClick={() =>
+                            updateWargearQuantity(unit.id, index, 1, "ranged")
+                          }
                         >
-                          <button
-                            className="btn btn-success btn-sm"
-                            onClick={() =>
-                              updateWargearQuantity(unit.id, "ranged", index, 1)
-                            }
-                          >
-                            +
-                          </button>
-                          <span style={{ margin: "0 8px" }}>
-                            {weapon.quantity}
-                          </span>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() =>
-                              updateWargearQuantity(
-                                unit.id,
-                                "ranged",
-                                index,
-                                -1
-                              )
-                            }
-                            disabled={weapon.quantity <= 0}
-                          >
-                            -
-                          </button>
-                          <span style={{ marginLeft: "8px" }}>
-                            {weapon.name}
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <p></p>
-                    )}
+                          +
+                        </button>
+                        <span style={{ margin: "0 8px" }}>{weapon.quantity}</span>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() =>
+                            updateWargearQuantity(unit.id, index, -1, "ranged")
+                          }
+                          disabled={weapon.quantity <= 0}
+                        >
+                          -
+                        </button>
+                        <span style={{ marginLeft: "8px" }}>{weapon.name}</span>
+                      </div>
+                    ))}
 
                     {/* Melee Weapons */}
                     {unit.meleeWeapons.length > 0 && <h3>Melee Weapons</h3>}
-                    {unit.meleeWeapons.length > 0 ? (
-                      unit.meleeWeapons.map((weapon, index) => (
-                        <div
-                          key={index}
-                          className="weapon-item"
-                          style={{ fontSize: "0.9rem" }}
+                    {unit.meleeWeapons.map((weapon, index) => (
+                      <div
+                        key={index}
+                        className="weapon-item"
+                        style={{ fontSize: "0.9rem" }}
+                      >
+                        <button
+                          className="btn btn-success btn-sm"
+                          onClick={() =>
+                            updateWargearQuantity(unit.id, index, 1, "melee")
+                          }
                         >
-                          <button
-                            className="btn btn-success btn-sm"
-                            onClick={() =>
-                              updateWargearQuantity(unit.id, "melee", index, 1)
-                            }
-                          >
-                            +
-                          </button>
-                          <span style={{ margin: "0 8px" }}>
-                            {weapon.quantity}
-                          </span>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() =>
-                              updateWargearQuantity(unit.id, "melee", index, -1)
-                            }
-                            disabled={weapon.quantity <= 0}
-                          >
-                            -
-                          </button>
-                          <span style={{ marginLeft: "8px" }}>
-                            {weapon.name}
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <p></p>
-                    )}
+                          +
+                        </button>
+                        <span style={{ margin: "0 8px" }}>{weapon.quantity}</span>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() =>
+                            updateWargearQuantity(unit.id, index, -1, "melee")
+                          }
+                          disabled={weapon.quantity <= 0}
+                        >
+                          -
+                        </button>
+                        <span style={{ marginLeft: "8px" }}>{weapon.name}</span>
+                      </div>
+                    ))}
                   </div>
                 )}
                 {showEnhancements.includes(unit.id) && (

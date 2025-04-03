@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 import ArmySidebar from "./components/ArmySidebar";
 import Unitcard from "./components/units/Unitcard";
+import ArmyList from "./components/ArmyList"; // Import ArmyList component
 import { SelectedUnit } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import factionsData from "./factions.json"; // Import factions.json dynamically
@@ -17,11 +18,12 @@ type Unit = {
     }[];
     points: number;
   }[]; // Array of model counts and their respective points
-  wargearOptions?: string[]; // Add wargearOptions as an optional property
+  wargearOptions?: string[]; // Optional wargear options
   weapons?: {
     rangedWeapons?: { name: string; quantity: number }[];
     meleeWeapons?: { name: string; quantity: number }[];
-  }; // Add the weapons property
+  }; // Optional weapons property
+  equipped?: { name: string; quantity: number; type: string }[]; // Add equipped property
 };
 
 type Faction = {
@@ -63,17 +65,34 @@ function App() {
     meleeWeapons: { name: string; quantity: number }[] = [],
     miscellaneous: { name: string; quantity: number }[] = [],
     enhancements: { name: string; pointCost: number }[] = [],
-    wargearOptions: string[] = []
+    wargearOptions: string[] = [],
+    equipped: { name: string; quantity: number; type: string }[] = []
   ) => {
-    // Initialize all weapons with a quantity of 0
-    const defaultRangedWeapons = rangedWeapons.map((weapon) => ({
-      name: weapon.name,
-      quantity: 0,
-    }));
-    const defaultMeleeWeapons = meleeWeapons.map((weapon) => ({
-      name: weapon.name,
-      quantity: 0,
-    }));
+    const modelCount = numberOfModels[0];
+
+    const defaultRangedWeapons = rangedWeapons.map((weapon) => {
+      const equippedWeapon = equipped.find(
+        (eq) =>
+          eq.name.toLowerCase().trim() === weapon.name.toLowerCase().trim() &&
+          eq.type === "ranged"
+      );
+      return {
+        ...weapon,
+        quantity: equippedWeapon ? equippedWeapon.quantity * modelCount : 0,
+      };
+    });
+
+    const defaultMeleeWeapons = meleeWeapons.map((weapon) => {
+      const equippedWeapon = equipped.find(
+        (eq) =>
+          eq.name.toLowerCase().trim() === weapon.name.toLowerCase().trim() &&
+          eq.type === "melee"
+      );
+      return {
+        ...weapon,
+        quantity: equippedWeapon ? equippedWeapon.quantity * modelCount : 0,
+      };
+    });
 
     setSelectedUnits((prevSelectedUnits) => [
       ...prevSelectedUnits,
@@ -82,7 +101,7 @@ function App() {
         name,
         category,
         pointCost,
-        quantity: numberOfModels[0], // Add the minimum number of models
+        quantity: modelCount,
         numberOfModels: [...numberOfModels],
         currentIndex: 0,
         rangedWeapons: defaultRangedWeapons,
@@ -93,15 +112,58 @@ function App() {
         ).fill(0),
         enhancementQuantities: new Array(enhancements.length).fill(0),
         enhancements,
-        wargearOptions, // Include wargearOptions in the unit structure
+        wargearOptions,
       },
     ]);
-
-    // Set sidebarVisible to true when adding the first unit
-    setArmySidebarVisible(true);
   };
 
+  const updateWargearQuantity = (
+    id: string,
+    wargearIndex: number,
+    increment: number,
+    wargearType: "ranged" | "melee" // Strict type
+  ) => {
+    console.log("updateWargearQuantity called with:", {
+      id,
+      wargearType,
+      wargearIndex,
+      increment,
+    });
 
+    setSelectedUnits((prevSelectedUnits) => {
+      const updatedUnits = prevSelectedUnits.map((unit) => {
+        if (unit.id === id) {
+          const updatedWeapons =
+            wargearType === "ranged"
+              ? unit.rangedWeapons.map((weapon, index) =>
+                  index === wargearIndex
+                    ? {
+                        ...weapon,
+                        quantity: Math.max(0, weapon.quantity + increment), // Remove upper limit
+                      }
+                    : weapon
+                )
+              : unit.meleeWeapons.map((weapon, index) =>
+                  index === wargearIndex
+                    ? {
+                        ...weapon,
+                        quantity: Math.max(0, weapon.quantity + increment), // Remove upper limit
+                      }
+                    : weapon
+                );
+
+          return {
+            ...unit,
+            [wargearType === "ranged" ? "rangedWeapons" : "meleeWeapons"]:
+              updatedWeapons,
+          };
+        }
+        return unit;
+      });
+
+      return updatedUnits;
+    });
+  };
 
   return (
     <div>
@@ -140,23 +202,7 @@ function App() {
               prevSelectedUnits.filter((unit) => unit.id !== id)
             );
           }}
-          updateWargearQuantity={(id, wargearIndex, increment) => {
-            setSelectedUnits((prevSelectedUnits) =>
-              prevSelectedUnits.map((unit) =>
-                unit.id === id
-                  ? {
-                      ...unit,
-                      wargearQuantities: unit.wargearQuantities.map(
-                        (quantity, index) =>
-                          index === wargearIndex
-                            ? Math.max(0, quantity + increment)
-                            : quantity
-                      ),
-                    }
-                  : unit
-              )
-            );
-          }}
+          updateWargearQuantity={updateWargearQuantity} // Pass the function here
           updateEnhancementQuantity={(id, enhancementIndex, increment) => {
             setSelectedUnits((prevSelectedUnits) =>
               prevSelectedUnits.map((unit) =>
@@ -174,9 +220,7 @@ function App() {
               )
             );
           }}
-          enhancementQuantities={selectedUnits.map(
-            (unit) => unit.enhancementQuantities
-          )}
+          enhancementQuantities={selectedUnits.map((unit) => unit.enhancementQuantities).flat()} // Flatten the array
           expanded={sidebarExpanded}
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
@@ -206,6 +250,7 @@ function App() {
                         rangedWeapons: unit.weapons?.rangedWeapons || [], // Pass ranged weapons
                         meleeWeapons: unit.weapons?.meleeWeapons || [], // Pass melee weapons
                         wargearOptions: unit.wargearOptions || [], // Pass wargearOptions if available
+                        equipped: unit.equipped || [], // Pass equipped array
                       }}
                       addUnitToArmyList={addUnitToArmyList}
                     />
