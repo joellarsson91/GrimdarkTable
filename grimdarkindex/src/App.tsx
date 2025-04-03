@@ -18,20 +18,28 @@ type Unit = {
     points: number;
   }[]; // Array of model counts and their respective points
   wargearOptions?: string[]; // Add wargearOptions as an optional property
-  rangedWeapons?: { name: string; quantity: number }[]; // Add rangedWeapons as an optional property
-  meleeWeapons?: { name: string; quantity: number }[]; // Add meleeWeapons as an optional property
+  weapons?: {
+    rangedWeapons?: { name: string; quantity: number }[];
+    meleeWeapons?: { name: string; quantity: number }[];
+  }; // Add the weapons property
 };
 
-// Define the structure of a faction
 type Faction = {
   faction: string;
-  rules: string[];
-  detachments: string[];
+  armyRules: { name: string; rules: string }[]; // Replace 'rules' with 'armyRules'
+  detachments: {
+    name: string;
+    detachmentRules: { rule: string }[];
+    enhancements: { name: string; points: number; rules: string }[];
+    stratagems: { name: string; description: string }[];
+  }[];
   datasheets: Unit[];
 };
 
-const factions: Faction[] = factionsData as Faction[];
-
+const factions: Faction[] = (factionsData as any).map((faction: any) => ({
+  ...faction,
+  rules: faction.rules || [], // Add a default empty array for 'rules'
+}));
 function App() {
   const [selectedUnits, setSelectedUnits] = useState<SelectedUnit[]>([]);
   const [sidebarVisible, setArmySidebarVisible] = useState(false);
@@ -93,37 +101,7 @@ function App() {
     setArmySidebarVisible(true);
   };
 
-  const calculateTotalPoints = () => {
-    return selectedUnits.reduce((totalPoints, unit) => {
-      const unitPoints = unit.pointCost[unit.currentIndex];
-      return totalPoints + unitPoints;
-    }, 0);
-  };
 
-  const updateWargearQuantity = (
-    id: string,
-    weaponType: "ranged" | "melee",
-    weaponIndex: number,
-    increment: number
-  ) => {
-    setSelectedUnits((prevSelectedUnits) =>
-      prevSelectedUnits.map((unit) =>
-        unit.id === id
-          ? {
-              ...unit,
-              [weaponType]: unit[weaponType].map((weapon, index) =>
-                index === weaponIndex
-                  ? {
-                      ...weapon,
-                      quantity: Math.max(0, weapon.quantity + increment),
-                    }
-                  : weapon
-              ),
-            }
-          : unit
-      )
-    );
-  };
 
   return (
     <div>

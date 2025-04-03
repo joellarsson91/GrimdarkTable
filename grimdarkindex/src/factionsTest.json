@@ -345,9 +345,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsCommander Dante1130",
+            "name": "the Axe Mortalis",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Commander Dante – EPIC HERO**\n\n**This model is equipped with:** Perdition Pistol; the Axe Mortalis. Model NameCountPointsCommander Dante1130",
@@ -489,18 +489,7 @@
             }
           ]
         },
-        "equipped": [
-          {
-            "name": "heavy bolt pistol",
-            "quantity": 1,
-            "type": "ranged"
-          },
-          {
-            "name": "crafted chainsword Model NameCountPointsDeath Company Captain170",
-            "quantity": 1,
-            "type": "unknown"
-          }
-        ],
+        "equipped": [],
         "unitComposition": "■ **1 Death Company Captain**\n\n**This model is equipped with:** heavy bolt pistol; master‐crafted chainsword Model NameCountPointsDeath Company Captain170",
         "pointCosts": [
           {
@@ -681,9 +670,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsDeath Company Captain with Jump Pack175",
+            "name": "Astartes chainsword",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Death Company Captain with Jump Pack**\n\n**This model is equipped with:** heavy bolt pistol; Astartes chainsword. Model NameCountPointsDeath Company Captain with Jump Pack175",
@@ -877,9 +866,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsDeath Company Dreadnought1180",
+            "name": "blood fists",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Death Company Dreadnought**\n\n**This model is equipped with:** twin Icarus ironhail heavy stubber; twin heavy bolter; blood fist bolt rifles; blood fists. Model NameCountPointsDeath Company Dreadnought1180",
@@ -1085,7 +1074,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "heavy bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Astartes chainsword",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **5-10 Death Company Marines**\n\n**Every model is equipped with:** heavy bolt pistol; Astartes chainsword. Model NameCountPointsDeath Company Marine585Death Company Marine6-10160",
         "pointCosts": [
           {
@@ -1260,9 +1260,9 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsChief Librarian Mephiston1135",
+            "name": "Vitarus",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Chief Librarian Mephiston – EPIC HERO**\n\n**This model is equipped with:** plasma pistol; Fury of the Ancients; Vitarus. Model NameCountPointsChief Librarian Mephiston1135",
@@ -1457,7 +1457,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "heavy bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Astartes chainsword",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **5-10 Death Company Marines with Jump Packs**\n\n**Every model is equipped with:** heavy bolt pistol; Astartes chainsword. Model NameCountPointsDeath Company Marine with Jump Packs5130Death Company Marine with Jump Packs6-10240",
         "pointCosts": [
           {
@@ -1583,9 +1594,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsLemartes1110",
+            "name": "the Blood Crozius",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Lemartes – EPIC HERO**\n\n**This model is equipped with:** absolvor bolt pistol; the Blood Crozius. Model NameCountPointsLemartes1110",
@@ -1713,7 +1724,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "Angelus boltgun",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "encarmine blade",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **3‐6 Sanguinary Guard**\n\n**Every model is equipped with:** Angelus boltgun; encarmine blade. Model NameCountPointsSanguinary Guard3130Sanguinary Guard4-6260",
         "pointCosts": [
           {
@@ -1825,9 +1847,9 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsSanguinary Priest190",
+            "name": "Astartes chainsword",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Sanguinary Priest**\n\n**This model is equipped with:** absolver bolt pistol; Astartes chainsword. Model NameCountPointsSanguinary Priest190",
@@ -1915,9 +1937,9 @@
         },
         "equipped": [
           {
-            "name": "Model NameCountPointsThe Sanguinor1140",
+            "name": "encarmine broadsword",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 The Sanguinor – EPIC HERO**\n\n**This model is equipped with:** encarmine broadsword. Model NameCountPointsThe Sanguinor1140",
@@ -2175,7 +2197,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "bolt rifle",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **5-10 Death Company Intercessors with Bolt Rifles**\n\n**Every model is equipped with:** bolt pistol; bolt rifle; close combat weapon. Model NameCountPointsDeath Company Marine with Bolt Rifle585Death Company Marine with Bolt Rifle6-10160",
         "pointCosts": [
           {
@@ -2319,18 +2357,7 @@
             }
           ]
         },
-        "equipped": [
-          {
-            "name": "heavy bolt pistol",
-            "quantity": 1,
-            "type": "ranged"
-          },
-          {
-            "name": "crafted chainsword Model NameCountPointsBlood Angels Captain180",
-            "quantity": 1,
-            "type": "unknown"
-          }
-        ],
+        "equipped": [],
         "unitComposition": "■ **1 Blood Angels Captain**\n\n**This model is equipped with:** heavy bolt pistol; master‐crafted chainsword Model NameCountPointsBlood Angels Captain180",
         "pointCosts": [
           {
@@ -2502,9 +2529,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsBaal Predator1135",
+            "name": "armoured tracks",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Baal Predator**\n\n**This model is equipped with:** twin assault cannon; armoured tracks. Model NameCountPointsBaal Predator1135",
@@ -2592,7 +2619,7 @@
         },
         "equipped": [
           {
-            "name": "Model NameCountPointsAstorath1105",
+            "name": "s Axe",
             "quantity": 1,
             "type": "unknown"
           }
@@ -3257,7 +3284,7 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsEzekial175",
+            "name": "Book of Salvation",
             "quantity": 1,
             "type": "unknown"
           }
@@ -3498,7 +3525,7 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsLazarus170",
+            "name": "s Edge",
             "quantity": 1,
             "type": "unknown"
           }
@@ -3647,9 +3674,9 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsLand Speeder Vengeance1120",
+            "name": "close combat weapon",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Ravenwing Land Speeder Vengeance**\n\n**This model is equipped with:** heavy bolter; plasma storm battery; close combat weapon. Model NameCountPointsLand Speeder Vengeance1120",
@@ -3786,7 +3813,7 @@
             "type": "unknown"
           },
           {
-            "name": "Jonson1315",
+            "name": "Fealty",
             "quantity": 1,
             "type": "unknown"
           }
@@ -3937,9 +3964,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsNephilim Jetfighter1195",
+            "name": "armoured hull",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Nephilim Jetfighter**\n\n**This model is equipped with:** avenger mega bolter; blacksword missiles; twin heavy bolter; armoured hull. Model NameCountPointsNephilim Jetfighter1195",
@@ -4081,7 +4108,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "plasma talon",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "Black Knight combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Ravenwing Huntmaster**\n■ **2-5 Ravenwing Black Knights**\n\n**Every model is equipped with:** bolt pistol; plasma talon; Black Knight combat weapon. Model NameCountPointsRavenwing Black KnightRavenwing Huntmaster2190Ravenwing HuntmasterRavenwing Black Knight13-5180",
         "pointCosts": [
           {
@@ -4351,9 +4394,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsRavenwing Darkshroud1115",
+            "name": "close combat weapon",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Ravenwing Darkshroud**\n\n**This model is equipped with:** heavy bolter; close combat weapon. Model NameCountPointsRavenwing Darkshroud1115",
@@ -4473,9 +4516,9 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsRavenwing Dark Talon1210",
+            "name": "armoured hull",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Ravenwing Dark Talon**\n\n**This model is equipped with:** rift cannon; 2 hurricane bolters; armoured hull. Model NameCountPointsRavenwing Dark Talon1210",
@@ -4614,9 +4657,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsSammael1115",
+            "name": "the Raven Sword",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Sammael – EPIC HERO**\n\n**This model is equipped with:** bolt pistol; master-crafted plasma cannon; twin storm bolter; the Raven Sword. Model NameCountPointsSammael1115",
@@ -4896,9 +4939,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsBelial185",
+            "name": "the Sword of Silence",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Belial – EPIC HERO**\n\n**This model is equipped with:** master-crafted storm bolter; the Sword of Silence. Model NameCountPointsBelial185",
@@ -5011,7 +5054,7 @@
             "type": "melee"
           },
           {
-            "name": "Model NameCountPointsAzrael1115",
+            "name": "the Lion Helm",
             "quantity": 1,
             "type": "unknown"
           }
@@ -5126,7 +5169,7 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsAsmodai170",
+            "name": "crozius arcanum and power weapon",
             "quantity": 1,
             "type": "unknown"
           }
@@ -5597,9 +5640,9 @@
         },
         "equipped": [
           {
-            "name": "Model NameCountPointsCanoness with Jump Pack175",
+            "name": "blessed halberd",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Canoness with Jump Pack**\n\n**This model is equipped with:** blessed halberd. Model NameCountPointsCanoness with Jump Pack175",
@@ -5759,9 +5802,9 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsCastigator1170",
+            "name": "armoured tracks",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Castigator**\n\n**This model is equipped with:** Castigator autocannons; 3 heavy bolters; armoured tracks. Model NameCountPointsCastigator1170",
@@ -5934,7 +5977,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "hallowed mace",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Sacresant Superior**\n■ **4-9 Celestian Sacresants**\n\n**Every model is equipped with:** bolt pistol; hallowed mace. Model NameCountPointsSacresant SuperiorCelestian Sacresant1470Celestian SacresantSacresant Superior5-91130",
         "pointCosts": [
           {
@@ -6177,9 +6231,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsDialogus140",
+            "name": "Dialogus staff",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Dialogus**\n\n**This model is equipped with:** bolt pistol; Dialogus staff. Model NameCountPointsDialogus140",
@@ -6275,9 +6329,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsDogmata145",
+            "name": "mace of the righteous",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Dogmata**\n\n**This model is equipped with:** bolt pistol; mace of the righteous. Model NameCountPointsDogmata145",
@@ -6549,7 +6603,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "boltgun",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Dominion Superior**\n■ **9 Dominions**\n\n**Every model is equipped with:** bolt pistol; boltgun; close combat weapon. Model NameCountPointsDominion SuperiorDominion19115",
         "pointCosts": [
           {
@@ -6707,9 +6777,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsExorcist1210",
+            "name": "armoured tracks",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Exorcist**\n\n**This model is equipped with:** Exorcist missile launcher; heavy bolter; armoured tracks. Model NameCountPointsExorcist1210",
@@ -6919,9 +6989,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsCanoness150",
+            "name": "hallowed chainsword",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Canoness**\n\n**This model is equipped with:** bolt pistol; hallowed chainsword. Model NameCountPointsCanoness150",
@@ -7042,9 +7112,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsImagifier165",
+            "name": "close combat weapon",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Imagifier**\n\n**This model is equipped with:** bolt pistol; boltgun; close combat weapon. Model NameCountPointsImagifier165",
@@ -7201,9 +7271,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsImmolator1125",
+            "name": "armoured tracks",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Immolator**\n\n**This model is equipped with:** heavy bolter; immolation flamers; armoured tracks. Model NameCountPointsImmolator1125",
@@ -7310,9 +7380,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsJunith Eruita190",
+            "name": "Mace of Castigation",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Junith Eruita – EPIC HERO**\n\n**This model is equipped with:** twin Ministorum heavy flamer; Mace of Castigation. Model NameCountPointsJunith Eruita190",
@@ -7432,7 +7502,7 @@
         },
         "equipped": [
           {
-            "name": "Model NameCountPointsMinistorum Priest150",
+            "name": "s vindictor",
             "quantity": 1,
             "type": "unknown"
           }
@@ -7592,7 +7662,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "2 heavy bolters",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "twin penitent buzz-blades",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1-2 Mortifiers**\n\n**Every model is equipped with:** 2 heavy bolters; twin penitent buzz-blades. Model NameCountPointsMortifier170Mortifier2140",
         "pointCosts": [
           {
@@ -7700,7 +7781,7 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsHospitaller150",
+            "name": "s tools",
             "quantity": 1,
             "type": "unknown"
           }
@@ -7827,9 +7908,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsPalatine150",
+            "name": "Palatine blade",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Palatine**\n\n**This model is equipped with:** bolt pistol; Palatine blade. Model NameCountPointsPalatine150",
@@ -7997,7 +8078,28 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "heavy bolter",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Paragon storm bolters",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Paragon war blade",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Paragon Superior**\n■ **2 Paragons**\n\n**Every model is equipped with:** bolt pistol; heavy bolter; Paragon storm bolters; Paragon war blade. Model NameCountPointsParagonParagon Superior21220",
         "pointCosts": [
           {
@@ -8144,7 +8246,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "penitent flamers",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "twin penitent buzz-blades",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1-2 Penitent Engines**\n\n**Every model is equipped with:** penitent flamers; twin penitent buzz-blades. Model NameCountPointsPenitent Engine2150Penitent Engine175",
         "pointCosts": [
           {
@@ -8826,7 +8939,7 @@
             "type": "unknown"
           },
           {
-            "name": "Model NameCountPointsMorvenn Vahl1170",
+            "name": "Lance of Illumination",
             "quantity": 1,
             "type": "unknown"
           }
@@ -8999,7 +9112,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "2 bolt pistols",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Seraphim Superior**\n■ **4-9 Seraphim**\n\n**Every model is equipped with:** 2 bolt pistols; close combat weapon. Model NameCountPointsSeraphimSeraphim Superior4185SeraphimSeraphim Superior5-91170",
         "pointCosts": [
           {
@@ -9350,9 +9474,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsSororitas Rhino175",
+            "name": "armoured tracks",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Sororitas Rhino**\n\n**This model is equipped with:** storm bolter; armoured tracks. Model NameCountPointsSororitas Rhino175",
@@ -9452,9 +9576,9 @@
             "type": "ranged"
           },
           {
-            "name": "Model NameCountPointsTriumph of Saint Katherine1250",
+            "name": "relic weapons",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Triumph of Saint Katherine – EPIC HERO**\n\n**This model is equipped with:** bolt pistols; relic weapons. Model NameCountPointsTriumph of Saint Katherine1250",
@@ -9574,7 +9698,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "power weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Zephyrim Superior**\n■ **4-9 Zephyrim**\n\n**Every model is equipped with:** bolt pistol; power weapon. Model NameCountPointsZephyrimZephyrim Superior4180ZephyrimZephyrim Superior5-91160",
         "pointCosts": [
           {
@@ -10136,7 +10271,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "boltgun",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Sister Superior**\n■ **9 Battle Sisters**\n\n**Every model is equipped with:** bolt pistol; boltgun; close combat weapon. Model NameCountPointsSister SuperiorBattle Sister19105",
         "pointCosts": [
           {
@@ -10229,7 +10380,13 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "arco-flails",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **3-10 Arco-flagellants**\n\n**Every model is equipped with:** arco-flails. Model NameCountPointsArco-flagellant345Arco-flagellant4-10140",
         "pointCosts": [
           {

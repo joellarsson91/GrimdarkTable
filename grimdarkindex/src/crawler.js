@@ -106,14 +106,14 @@ function parseEquippedWeapons(unitComposition, rangedWeapons, meleeWeapons) {
   const equippedWeapons = [];
   const weaponRegex = /(\d+)?\s*([\w\s'-]+?)(?=;|$)/g; // Regex to match "2 Flamestorm Cannons" or "Twin Assault Cannon"
 
-  // Extract the part of the string after "This model is equipped with:"
-  const equippedSectionMatch = unitComposition.match(/This model is equipped with:(.*)/i);
+  // Extract the part of the string after "This model is equipped with:" or "Every model is equipped with:" and before the first dot (".")
+  const equippedSectionMatch = unitComposition.match(/(?:This model is equipped with:|Every model is equipped with:)(.*?\.)/i);
   if (!equippedSectionMatch) {
-    console.log("No 'This model is equipped with:' section found.");
+    console.log("No 'This model is equipped with:' or 'Every model is equipped with:' section found.");
     return equippedWeapons;
   }
 
-  const equippedSection = equippedSectionMatch[1].trim();
+  const equippedSection = equippedSectionMatch[1].trim().slice(0, -1); // Remove the trailing dot
   console.log("Equipped Section:", equippedSection);
 
   // Parse each weapon in the equipped section
