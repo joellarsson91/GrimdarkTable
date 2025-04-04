@@ -42,11 +42,13 @@ const factions: Faction[] = (factionsData as any).map((faction: any) => ({
   ...faction,
   rules: faction.rules || [], // Add a default empty array for 'rules'
 }));
+
 function App() {
   const [selectedUnits, setSelectedUnits] = useState<SelectedUnit[]>([]);
   const [sidebarVisible, setArmySidebarVisible] = useState(false);
   const [sidebarExpanded, setArmySidebarExpanded] = useState(true);
   const [visibleFactions, setVisibleFactions] = useState<string[]>([]);
+  const [armySidebarTitle, setArmySidebarTitle] = useState<string>("");
 
   const toggleArmySidebar = () => {
     setArmySidebarExpanded(!sidebarExpanded);
@@ -54,6 +56,11 @@ function App() {
 
   const toggleArmySidebarVisibility = () => {
     setArmySidebarVisible(!sidebarVisible);
+  };
+
+  // Function to clear the army list
+  const clearArmyList = () => {
+    setSelectedUnits([]);
   };
 
   const addUnitToArmyList = (
@@ -174,6 +181,10 @@ function App() {
         sidebarExpanded={sidebarExpanded}
         toggleArmySidebar={toggleArmySidebar}
         toggleArmySidebarVisibility={toggleArmySidebarVisibility}
+        setArmySidebarTitle={setArmySidebarTitle}
+        clearArmyList={clearArmyList} // Pass the function to Navbar
+        selectedUnits={selectedUnits} // Pass selectedUnits here
+        
       />
 
       {sidebarVisible && (
@@ -202,7 +213,46 @@ function App() {
               prevSelectedUnits.filter((unit) => unit.id !== id)
             );
           }}
-          updateWargearQuantity={updateWargearQuantity} // Pass the function here
+          updateWargearQuantity={(id, wargearIndex, increment, wargearType) => {
+            setSelectedUnits((prevSelectedUnits) =>
+              prevSelectedUnits.map((unit) => {
+                if (unit.id === id) {
+                  const updatedWeapons =
+                    wargearType === "ranged"
+                      ? unit.rangedWeapons.map((weapon, index) =>
+                          index === wargearIndex
+                            ? {
+                                ...weapon,
+                                quantity: Math.max(
+                                  0,
+                                  weapon.quantity + increment
+                                ),
+                              }
+                            : weapon
+                        )
+                      : unit.meleeWeapons.map((weapon, index) =>
+                          index === wargearIndex
+                            ? {
+                                ...weapon,
+                                quantity: Math.max(
+                                  0,
+                                  weapon.quantity + increment
+                                ),
+                              }
+                            : weapon
+                        );
+
+                  return {
+                    ...unit,
+                    [wargearType === "ranged"
+                      ? "rangedWeapons"
+                      : "meleeWeapons"]: updatedWeapons,
+                  };
+                }
+                return unit;
+              })
+            );
+          }}
           updateEnhancementQuantity={(id, enhancementIndex, increment) => {
             setSelectedUnits((prevSelectedUnits) =>
               prevSelectedUnits.map((unit) =>
@@ -220,10 +270,13 @@ function App() {
               )
             );
           }}
-          enhancementQuantities={selectedUnits.map((unit) => unit.enhancementQuantities).flat()} // Flatten the array
+          enhancementQuantities={selectedUnits.map(
+            (unit) => unit.enhancementQuantities
+          ).flat()}
           expanded={sidebarExpanded}
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
+          armySidebarTitle={armySidebarTitle}
         />
       )}
 
@@ -242,15 +295,15 @@ function App() {
                         name: unit.name,
                         pointCosts: unit.pointCosts.map((cost) => ({
                           models: cost.models.map((model) => ({
-                            modelName: model.modelName || "Unknown Model", // Fallback for undefined modelName
-                            count: model.count || "0", // Fallback for undefined count
+                            modelName: model.modelName || "Unknown Model",
+                            count: model.count || "0",
                           })),
                           points: cost.points,
-                        })), // Transform pointCosts to match the expected structure
-                        rangedWeapons: unit.weapons?.rangedWeapons || [], // Pass ranged weapons
-                        meleeWeapons: unit.weapons?.meleeWeapons || [], // Pass melee weapons
-                        wargearOptions: unit.wargearOptions || [], // Pass wargearOptions if available
-                        equipped: unit.equipped || [], // Pass equipped array
+                        })),
+                        rangedWeapons: unit.weapons?.rangedWeapons || [],
+                        meleeWeapons: unit.weapons?.meleeWeapons || [],
+                        wargearOptions: unit.wargearOptions || [],
+                        equipped: unit.equipped || [],
                       }}
                       addUnitToArmyList={addUnitToArmyList}
                     />

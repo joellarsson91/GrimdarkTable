@@ -1,0 +1,25 @@
+/* Default styling for smaller screens */
+.army-list-container {
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+/* Adjust height for larger screens */
+@media (min-height: 900px) {
+  .army-list-container {
+    max-height: 85vh; /* Use 85% of the viewport height */
+  }
+}
+
+@media (min-height: 1200px) {
+  .army-list-container {
+    max-height: 95vh; /* Use 90% of the viewport height */
+  }
+}
+
+.armylist-title{
+  text-align: center;
+  font-size: 3em;
+  text-decoration: underline;
+  color: #2467d1
+}

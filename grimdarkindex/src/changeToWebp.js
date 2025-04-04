@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define the directory containing the images
-const imagesDir = path.resolve(__dirname, "../images/changeExtension");
+const imagesDir = path.resolve(__dirname, "../images");
 
 // Check if the directory exists
 if (!fs.existsSync(imagesDir)) {

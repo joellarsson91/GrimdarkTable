@@ -21,7 +21,21 @@ interface Props {
   expanded: boolean;
   toggleArmySidebar: () => void;
   toggleArmySidebarVisibility: () => void;
+  armySidebarTitle: string; // Ensure this is included
 }
+
+export const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
+  return selectedUnits.reduce((totalPoints, unit) => {
+    const unitPoints = unit.pointCost[unit.currentIndex];
+    const enhancementPoints = unit.enhancements.reduce(
+      (enhancementTotal, enhancement, index) =>
+        enhancementTotal +
+        enhancement.pointCost * (unit.enhancementQuantities[index] || 0),
+      0
+    );
+    return totalPoints + unitPoints + enhancementPoints;
+  }, 0);
+};
 
 const ArmySidebar: React.FC<Props> = ({
   selectedUnits,
@@ -33,21 +47,9 @@ const ArmySidebar: React.FC<Props> = ({
   expanded,
   toggleArmySidebar,
   toggleArmySidebarVisibility,
+  armySidebarTitle,
 }) => {
   const ArmySidebarClass = expanded ? "sidebar expanded" : "sidebar minimized";
-
-  const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
-    return selectedUnits.reduce((totalPoints, unit) => {
-      const unitPoints = unit.pointCost[unit.currentIndex];
-      const enhancementPoints = unit.enhancements.reduce(
-        (enhancementTotal, enhancement, index) =>
-          enhancementTotal +
-          enhancement.pointCost * (unit.enhancementQuantities[index] || 0),
-        0
-      );
-      return totalPoints + unitPoints + enhancementPoints;
-    }, 0);
-  };
 
   return (
     <div className={ArmySidebarClass}>
@@ -59,6 +61,7 @@ const ArmySidebar: React.FC<Props> = ({
           {expanded ? "check_box_outline_blank" : "dock_to_left"}
         </button>
       </div>
+
       <ArmyList
         selectedUnits={selectedUnits}
         updateUnitQuantity={updateUnitQuantity}
@@ -71,6 +74,7 @@ const ArmySidebar: React.FC<Props> = ({
           }
         }}
         updateEnhancementQuantity={updateEnhancementQuantity}
+        armySidebarTitle={armySidebarTitle}
       />
 
       <div className="total-points">

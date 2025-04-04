@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SelectedUnit } from "../types";
+import "./ArmyList.css"; // Import your CSS file for styling
 
 interface Props {
   selectedUnits: SelectedUnit[];
@@ -16,6 +17,7 @@ interface Props {
     enhancementIndex: number,
     increment: number
   ) => void;
+  armySidebarTitle: string; // New prop for the army title
 }
 
 const ArmyList: React.FC<Props> = ({
@@ -24,6 +26,7 @@ const ArmyList: React.FC<Props> = ({
   removeUnit,
   updateWargearQuantity,
   updateEnhancementQuantity,
+  armySidebarTitle,
 }) => {
   const calculateTotalPointCost = (unit: SelectedUnit): number => {
     return unit.pointCost[unit.currentIndex];
@@ -59,8 +62,8 @@ const ArmyList: React.FC<Props> = ({
   };
 
   return (
-    <div style={{ maxHeight: "800px", overflowY: "auto" }}>
-      <h2 className="armylist-headers">Army List</h2>
+    <div className="army-list-container">
+      <h2 className="armylist-title">{armySidebarTitle || "Army List"}</h2>
       {Object.keys(groupedUnits).map((category, categoryIndex) => (
         <div key={categoryIndex}>
           <h3 className="armylist-headers">{category}</h3>

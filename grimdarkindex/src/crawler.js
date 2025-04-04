@@ -98,42 +98,61 @@ async function fetchPage(url, expectEnhancements = false, expectStratagems = fal
   }
 }
 
+function normalizeWeaponName(name) {
+  return name.replace(/—.*/, "").trim(); // Remove mode suffix and trim whitespace
+}
+// Helper function to singularize weapon names
+function singularizeWeaponName(name) {
+  return name.endsWith("s") ? name.slice(0, -1) : name;
+}
 // Helper function to parse equipped weapons
 function parseEquippedWeapons(unitComposition, rangedWeapons, meleeWeapons) {
   console.log("Parsing equipped weapons...");
-  console.log("Unit Composition:", unitComposition);
+  console.log("Original Unit Composition:", unitComposition);
+
+  // Clean the unitComposition string
+  unitComposition = unitComposition.replace(/<table.*?>.*?<\/table>/gs, "").trim(); // Remove tables
+  console.log("Cleaned Unit Composition:", unitComposition);
 
   const equippedWeapons = [];
-  const weaponRegex = /(\d+)?\s*([\w\s'-]+?)(?=;|$)/g; // Regex to match "2 Flamestorm Cannons" or "Twin Assault Cannon"
+  const weaponRegex = /(?:^|\s|;)(\d+)?\s*([\w\s'’\-‐—]+?)(?=;|$)/g; // Updated regex to handle numbers and special characters
+  const equipmentSectionRegex = /(?:The .*? is equipped with:|Every .*? is equipped with:|This model is equipped with:|Each .*? is equipped with:|.*? is equipped with:)(.*?)(?:\.|Model Name|$)/gi;
 
-  // Extract the part of the string after "This model is equipped with:" or "Every model is equipped with:" and before the first dot (".")
-  const equippedSectionMatch = unitComposition.match(/(?:This model is equipped with:|Every model is equipped with:)(.*?\.)/i);
-  if (!equippedSectionMatch) {
-    console.log("No 'This model is equipped with:' or 'Every model is equipped with:' section found.");
+  // Extract all equipment sections
+  const equipmentSections = [...unitComposition.matchAll(equipmentSectionRegex)];
+  if (equipmentSections.length === 0) {
+    console.log("No equipment sections found.");
     return equippedWeapons;
   }
 
-  const equippedSection = equippedSectionMatch[1].trim().slice(0, -1); // Remove the trailing dot
-  console.log("Equipped Section:", equippedSection);
+  // Parse each equipment section
+  for (const section of equipmentSections) {
+    const equippedSection = section[1].trim(); // Trim the matched section
+    console.log("Equipped Section:", equippedSection);
 
-  // Parse each weapon in the equipped section
-  let match;
-  while ((match = weaponRegex.exec(equippedSection)) !== null) {
-    const quantity = match[1] ? parseInt(match[1], 10) : 1; // Default to 1 if no quantity is specified
-    const weaponName = match[2].trim();
+    // Parse each weapon in the equipped section
+    let match;
+    while ((match = weaponRegex.exec(equippedSection)) !== null) {
+      const quantity = match[1] ? parseInt(match[1], 10) : 1; // Default to 1 if no quantity is specified
+      let weaponName = match[2].trim();
 
-    console.log("Matched Weapon:", { quantity, weaponName });
+      // Singularize the weapon name if necessary
+      weaponName = singularizeWeaponName(weaponName);
 
-    // Determine if the weapon is ranged or melee
-    const type = rangedWeapons.some((weapon) => weapon.name.toLowerCase() === weaponName.toLowerCase())
-      ? "ranged"
-      : meleeWeapons.some((weapon) => weapon.name.toLowerCase() === weaponName.toLowerCase())
-      ? "melee"
-      : "unknown";
+      console.log("Matched Weapon:", { quantity, weaponName });
 
-    console.log("Weapon Type:", type);
+      // Determine if the weapon is ranged or melee
+      const normalizedWeaponName = normalizeWeaponName(weaponName);
+      const type = rangedWeapons.some((weapon) => normalizeWeaponName(weapon.name).toLowerCase() === normalizedWeaponName.toLowerCase())
+        ? "ranged"
+        : meleeWeapons.some((weapon) => normalizeWeaponName(weapon.name).toLowerCase() === normalizedWeaponName.toLowerCase())
+        ? "melee"
+        : "unknown";
 
-    equippedWeapons.push({ name: weaponName, quantity, type });
+      console.log("Weapon Type:", type);
+
+      equippedWeapons.push({ name: weaponName, quantity, type });
+    }
   }
 
   console.log("Final Equipped Weapons:", equippedWeapons);
@@ -282,7 +301,7 @@ async function extractDatasheetData(datasheetLink, datasheetName) {
       const modelNames = $(row).find("td").eq(0).find("div").map((_, el) => $(el).text().trim()).get();
       const counts = $(row).find("td").eq(1).find("div").map((_, el) => $(el).text().trim()).get();
       const points = parseInt($(row).find("td").eq(2).text().trim(), 10);
-
+      
       if (modelNames.length && counts.length && !isNaN(points)) {
         const combinedModels = modelNames.map((modelName, index) => ({
           modelName,

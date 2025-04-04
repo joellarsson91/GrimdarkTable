@@ -345,9 +345,9 @@
             "type": "ranged"
           },
           {
-            "name": "the Axe Mortalis",
+            "name": "the Axe Mortali",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Commander Dante – EPIC HERO**\n\n**This model is equipped with:** Perdition Pistol; the Axe Mortalis. Model NameCountPointsCommander Dante1130",
@@ -489,7 +489,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "heavy bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "master‐crafted chainsword",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Death Company Captain**\n\n**This model is equipped with:** heavy bolt pistol; master‐crafted chainsword Model NameCountPointsDeath Company Captain170",
         "pointCosts": [
           {
@@ -861,14 +872,14 @@
             "type": "ranged"
           },
           {
-            "name": "blood fist bolt rifles",
+            "name": "blood fist bolt rifle",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
-            "name": "blood fists",
+            "name": "blood fist",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Death Company Dreadnought**\n\n**This model is equipped with:** twin Icarus ironhail heavy stubber; twin heavy bolter; blood fist bolt rifles; blood fists. Model NameCountPointsDeath Company Dreadnought1180",
@@ -1255,14 +1266,14 @@
             "type": "unknown"
           },
           {
-            "name": "Fury of the Ancients",
+            "name": "Fury of the Ancient",
             "quantity": 1,
             "type": "unknown"
           },
           {
-            "name": "Vitarus",
+            "name": "Vitaru",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Chief Librarian Mephiston – EPIC HERO**\n\n**This model is equipped with:** plasma pistol; Fury of the Ancients; Vitarus. Model NameCountPointsChief Librarian Mephiston1135",
@@ -1594,9 +1605,9 @@
             "type": "ranged"
           },
           {
-            "name": "the Blood Crozius",
+            "name": "the Blood Croziu",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Lemartes – EPIC HERO**\n\n**This model is equipped with:** absolvor bolt pistol; the Blood Crozius. Model NameCountPointsLemartes1110",
@@ -2357,7 +2368,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "heavy bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "master‐crafted chainsword",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Blood Angels Captain**\n\n**This model is equipped with:** heavy bolt pistol; master‐crafted chainsword Model NameCountPointsBlood Angels Captain180",
         "pointCosts": [
           {
@@ -2529,9 +2551,9 @@
             "type": "ranged"
           },
           {
-            "name": "armoured tracks",
+            "name": "armoured track",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Baal Predator**\n\n**This model is equipped with:** twin assault cannon; armoured tracks. Model NameCountPointsBaal Predator1135",
@@ -2619,9 +2641,9 @@
         },
         "equipped": [
           {
-            "name": "s Axe",
+            "name": "the Executioner’s Axe",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Astorath – EPIC HERO**\n\n**This model is equipped with:** the Executioner’s Axe. Model NameCountPointsAstorath1105",
@@ -3102,7 +3124,28 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "storm bolter",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "power weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "storm bolter",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "power fist",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Deathwing Sergeant**\n■ **4-9 Deathwing Terminators**\n\n**The Deathwing Sergeant is equipped with:** storm bolter; power weapon.\n**Every Deathwing Terminator is equipped with:** storm bolter; power fist. Model NameCountPointsDeathwing SergeantDeathwing Terminator15-9360Deathwing SergeantDeathwing Terminator14180",
         "pointCosts": [
           {
@@ -3279,9 +3322,9 @@
             "type": "unknown"
           },
           {
-            "name": "s Bane",
+            "name": "Traitor’s Bane",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           },
           {
             "name": "Book of Salvation",
@@ -3392,7 +3435,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "heavy bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Calibanite greatsword",
+            "quantity": 1,
+            "type": "unknown"
+          }
+        ],
         "unitComposition": "■ **3-6 Inner Circle Companions**\n\n**Every Inner Circle Companion is equipped with:** heavy bolt pistol; Calibanite greatsword. Model NameCountPointsInner Circle Companion4-6180Inner Circle Companion390",
         "pointCosts": [
           {
@@ -3525,9 +3579,9 @@
             "type": "ranged"
           },
           {
-            "name": "s Edge",
+            "name": "Enmity’s Edge",
             "quantity": 1,
-            "type": "unknown"
+            "type": "melee"
           }
         ],
         "unitComposition": "■ **1 Lazarus – EPIC HERO**\n\n**This model is equipped with:** bolt pistol; Enmity’s Edge. Model NameCountPointsLazarus170",
@@ -3808,7 +3862,7 @@
         },
         "equipped": [
           {
-            "name": "Arma Luminis",
+            "name": "Arma Lumini",
             "quantity": 1,
             "type": "unknown"
           },
@@ -3954,9 +4008,9 @@
             "type": "ranged"
           },
           {
-            "name": "blacksword missiles",
+            "name": "blacksword missile",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
             "name": "twin heavy bolter",
@@ -4267,7 +4321,18 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "great weapon of the Unforgiven",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "mace of absolution",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Knight Master**\n■ **4 Deathwing Knights**\n\n**The Knight Master is equipped with:** great weapon of the Unforgiven.\n**Every Deathwing Knight is equipped with:** mace of absolution. Model NameCountPointsDeathwing KnightKnight Master41250",
         "pointCosts": [
           {
@@ -4511,7 +4576,7 @@
             "type": "ranged"
           },
           {
-            "name": "2 hurricane bolters",
+            "name": "2 hurricane bolter",
             "quantity": 1,
             "type": "unknown"
           },
@@ -4826,7 +4891,38 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "plasma talon",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "master-crafted power weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "plasma talon",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "Black Knight combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Ravenwing Champion**\n■ **1 Ravenwing Apothecary**\n■ **1 Ravenwing Ancient**\n\n**The Ravenwing Champion is equipped with:** bolt pistol; plasma talon; master-crafted power weapon.\n**Every other model is equipped with:** bolt pistol; plasma talon; Black Knight combat weapon. Model NameCountPointsRavenwing ApothecaryRavenwing ChampionRavenwing Ancient111120",
         "pointCosts": [
           {
@@ -5044,14 +5140,14 @@
         },
         "equipped": [
           {
-            "name": "s Wrath",
+            "name": "Lion’s Wrath",
             "quantity": 1,
-            "type": "unknown"
+            "type": "ranged"
           },
           {
-            "name": "the Sword of Secrets",
+            "name": "the Sword of Secret",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           },
           {
             "name": "the Lion Helm",
@@ -5792,19 +5888,19 @@
         },
         "equipped": [
           {
-            "name": "Castigator autocannons",
-            "quantity": 1,
-            "type": "ranged"
-          },
-          {
-            "name": "3 heavy bolters",
+            "name": "Castigator autocannon",
             "quantity": 1,
             "type": "unknown"
           },
           {
-            "name": "armoured tracks",
+            "name": "3 heavy bolter",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
+          },
+          {
+            "name": "armoured track",
+            "quantity": 1,
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Castigator**\n\n**This model is equipped with:** Castigator autocannons; 3 heavy bolters; armoured tracks. Model NameCountPointsCastigator1170",
@@ -6131,7 +6227,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Sanctity",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "the Outcast’s Weapon",
+            "quantity": 1,
+            "type": "unknown"
+          }
+        ],
         "unitComposition": "■ **1 Ephrael Stern – EPIC HERO**\n■ **1 Kyganil of the Bloody Tears – EPIC HERO**\n\n**Ephrael Stern is equipped with:** bolt pistol; Sanctity.\n**Kyganil of the Bloody Tears is equipped with:** the Outcast’s Weapons. Model NameCountPointsKyganil of the Bloody TearsEphrael Stern1185",
         "pointCosts": [
           {
@@ -6329,9 +6441,9 @@
             "type": "ranged"
           },
           {
-            "name": "mace of the righteous",
+            "name": "mace of the righteou",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Dogmata**\n\n**This model is equipped with:** bolt pistol; mace of the righteous. Model NameCountPointsDogmata145",
@@ -6777,9 +6889,9 @@
             "type": "ranged"
           },
           {
-            "name": "armoured tracks",
+            "name": "armoured track",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Exorcist**\n\n**This model is equipped with:** Exorcist missile launcher; heavy bolter; armoured tracks. Model NameCountPointsExorcist1210",
@@ -7266,14 +7378,14 @@
             "type": "ranged"
           },
           {
-            "name": "immolation flamers",
+            "name": "immolation flamer",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
-            "name": "armoured tracks",
+            "name": "armoured track",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Immolator**\n\n**This model is equipped with:** heavy bolter; immolation flamers; armoured tracks. Model NameCountPointsImmolator1125",
@@ -7502,9 +7614,9 @@
         },
         "equipped": [
           {
-            "name": "s vindictor",
+            "name": "zealot’s vindictor",
             "quantity": 1,
-            "type": "unknown"
+            "type": "ranged"
           }
         ],
         "unitComposition": "■ **1 Ministorum Priest**\n\n**This model is equipped with:** zealot’s vindictor. Model NameCountPointsMinistorum Priest150",
@@ -7664,14 +7776,14 @@
         },
         "equipped": [
           {
-            "name": "2 heavy bolters",
-            "quantity": 1,
-            "type": "unknown"
+            "name": "heavy bolter",
+            "quantity": 2,
+            "type": "ranged"
           },
           {
-            "name": "twin penitent buzz-blades",
+            "name": "twin penitent buzz-blade",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1-2 Mortifiers**\n\n**Every model is equipped with:** 2 heavy bolters; twin penitent buzz-blades. Model NameCountPointsMortifier170Mortifier2140",
@@ -7781,7 +7893,7 @@
             "type": "ranged"
           },
           {
-            "name": "s tools",
+            "name": "chirurgeon’s tool",
             "quantity": 1,
             "type": "unknown"
           }
@@ -8090,9 +8202,9 @@
             "type": "ranged"
           },
           {
-            "name": "Paragon storm bolters",
+            "name": "Paragon storm bolter",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
             "name": "Paragon war blade",
@@ -8248,14 +8360,14 @@
         },
         "equipped": [
           {
-            "name": "penitent flamers",
+            "name": "penitent flamer",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
-            "name": "twin penitent buzz-blades",
+            "name": "twin penitent buzz-blade",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1-2 Penitent Engines**\n\n**Every model is equipped with:** penitent flamers; twin penitent buzz-blades. Model NameCountPointsPenitent Engine2150Penitent Engine175",
@@ -8368,7 +8480,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "neural whip",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "penitent eviscerator",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Repentia Superior**\n■ **4-9 Sisters Repentia**\n\n**The Repentia Superior is equipped with:** bolt pistol; neural whips.\n**Each Sister Repentia is equipped with:** penitent eviscerator. Model NameCountPointsRepentia SuperiorSister Repentia1485Repentia SuperiorSister Repentia15-9170",
         "pointCosts": [
           {
@@ -8645,7 +8773,38 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "boltgun",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "heavy bolter",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Retributor Superior**\n■ **4 Retributors**\n\n**The Retributor Superior is equipped with:** bolt pistol; boltgun; close combat weapon.\n**Each Retributor is equipped with:** bolt pistol; heavy bolter; close combat weapon. Model NameCountPointsRetributor SuperiorRetributor14125",
         "pointCosts": [
           {
@@ -8786,7 +8945,23 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "the Ardent Blade",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "power weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Celestine – EPIC HERO**\n■ **2 Geminae Superia**\n\n**Saint Celestine is equipped with:** the Ardent Blade.\n**Each Geminae Superia is equipped with:** bolt pistol; power weapon. Model NameCountPointsGeminae SuperiaCelestine21160",
         "pointCosts": [
           {
@@ -8929,9 +9104,9 @@
         },
         "equipped": [
           {
-            "name": "Fidelis",
+            "name": "Fideli",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
             "name": "Paragon missile launcher",
@@ -9114,9 +9289,9 @@
         },
         "equipped": [
           {
-            "name": "2 bolt pistols",
-            "quantity": 1,
-            "type": "unknown"
+            "name": "bolt pistol",
+            "quantity": 2,
+            "type": "ranged"
           },
           {
             "name": "close combat weapon",
@@ -9349,7 +9524,38 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "boltgun",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "autopistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "autogun",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Novitiate Superior**\n■ **9 Sisters Novitiate**\n\n**The Novitiate Superior is equipped with:** bolt pistol; boltgun; close combat weapon.\n**Each Sister Novitiate is equipped with:** autopistol; autogun; close combat weapon. Model NameCountPointsNovitiate SuperiorSister Novitiate19100",
         "pointCosts": [
           {
@@ -9474,9 +9680,9 @@
             "type": "ranged"
           },
           {
-            "name": "armoured tracks",
+            "name": "armoured track",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Sororitas Rhino**\n\n**This model is equipped with:** storm bolter; armoured tracks. Model NameCountPointsSororitas Rhino175",
@@ -9571,14 +9777,14 @@
         },
         "equipped": [
           {
-            "name": "bolt pistols",
+            "name": "bolt pistol",
             "quantity": 1,
-            "type": "ranged"
+            "type": "unknown"
           },
           {
-            "name": "relic weapons",
+            "name": "relic weapon",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **1 Triumph of Saint Katherine – EPIC HERO**\n\n**This model is equipped with:** bolt pistols; relic weapons. Model NameCountPointsTriumph of Saint Katherine1250",
@@ -9944,7 +10150,63 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "holy fire",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "burning hand",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "close combat weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "Salvationist medikit",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "Death Cult blade",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "plasma gun",
+            "quantity": 1,
+            "type": "unknown"
+          },
+          {
+            "name": "Sanctifier melee weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "Ministorum flamer",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Sanctifier melee weapon",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "Ministorum hand flamer",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Sanctifier melee weapon",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Miraculist**\n■ **1 Salvationist**\n■ **1 Death Cult Assassin**\n■ **2 Missionaries**\n■ **4 Sanctifiers**\n\n**The Miraculist is equipped with:** holy fire; burning hands.\n**The Salvationist is equipped with:** close combat weapon; Salvationist medikit.\n**The Death Cult Assassin is equipped with:** Death Cult blades.\n**1 Missionary is equipped with:** plasma gun; Sanctifier melee weapon.\n**1 Missionary is equipped with:** Ministorum flamer; Sanctifier melee weapon.\n**Every Sanctifier is equipped with:** Ministorum hand flamer; Sanctifier melee weapon. Model NameCountPointsSanctifierDeath Cult AssassinMiraculistMissionarySalvationist41121100",
         "pointCosts": [
           {
@@ -10382,9 +10644,9 @@
         },
         "equipped": [
           {
-            "name": "arco-flails",
+            "name": "arco-flail",
             "quantity": 1,
-            "type": "melee"
+            "type": "unknown"
           }
         ],
         "unitComposition": "■ **3-10 Arco-flagellants**\n\n**Every model is equipped with:** arco-flails. Model NameCountPointsArco-flagellant345Arco-flagellant4-10140",
@@ -10496,7 +10758,28 @@
             }
           ]
         },
-        "equipped": [],
+        "equipped": [
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "Blade of Vigil",
+            "quantity": 1,
+            "type": "melee"
+          },
+          {
+            "name": "bolt pistol",
+            "quantity": 1,
+            "type": "ranged"
+          },
+          {
+            "name": "scribe’s staff",
+            "quantity": 1,
+            "type": "melee"
+          }
+        ],
         "unitComposition": "■ **1 Aestred Thurga – EPIC HERO**\n■ **1 Agathae Dolan – EPIC HERO**\n\n**Aestred Thurga is equipped with:** bolt pistol; Blade of Vigil.\n**Agathae Dolan is equipped with:** bolt pistol; scribe’s staff. Model NameCountPointsAgathae DolanAestred Thurga1185",
         "pointCosts": [
           {
