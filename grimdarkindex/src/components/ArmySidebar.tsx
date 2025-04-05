@@ -17,11 +17,12 @@ interface Props {
     enhancementIndex: number,
     increment: number
   ) => void;
-  enhancementQuantities: number[]; // Ensure this is a flat array of numbers
+  enhancementQuantities: number[];
   expanded: boolean;
   toggleArmySidebar: () => void;
   toggleArmySidebarVisibility: () => void;
-  armySidebarTitle: string; // Ensure this is included
+  armySidebarTitle: string;
+  detachmentTitle: string; // Add detachmentTitle here
 }
 
 export const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
@@ -48,6 +49,7 @@ const ArmySidebar: React.FC<Props> = ({
   toggleArmySidebar,
   toggleArmySidebarVisibility,
   armySidebarTitle,
+  detachmentTitle, // Destructure detachmentTitle
 }) => {
   const ArmySidebarClass = expanded ? "sidebar expanded" : "sidebar minimized";
 
@@ -75,6 +77,7 @@ const ArmySidebar: React.FC<Props> = ({
         }}
         updateEnhancementQuantity={updateEnhancementQuantity}
         armySidebarTitle={armySidebarTitle}
+        detachmentTitle={detachmentTitle} // Pass detachmentTitle to ArmyList
       />
 
       <div className="total-points">

@@ -49,6 +49,21 @@ function App() {
   const [sidebarExpanded, setArmySidebarExpanded] = useState(true);
   const [visibleFactions, setVisibleFactions] = useState<string[]>([]);
   const [armySidebarTitle, setArmySidebarTitle] = useState<string>("");
+  const [selectedDetachment, setSelectedDetachment] = useState<string>(""); // Add selectedDetachment state
+  const [detachmentTitle, setDetachmentTitle] = useState<string>(""); // New state for detachment title
+
+  const updateSelectedDetachment: React.Dispatch<React.SetStateAction<string>> = (value) => {
+    if (typeof value === "function") {
+      setSelectedDetachment((prevState) => {
+        const newValue = value(prevState);
+        console.log("App.tsx - Updating selectedDetachment to:", newValue); // Debugging log
+        return newValue;
+      });
+    } else {
+      console.log("App.tsx - Updating selectedDetachment to:", value); // Debugging log
+      setSelectedDetachment(value);
+    }
+  };
 
   const toggleArmySidebar = () => {
     setArmySidebarExpanded(!sidebarExpanded);
@@ -182,9 +197,12 @@ function App() {
         toggleArmySidebar={toggleArmySidebar}
         toggleArmySidebarVisibility={toggleArmySidebarVisibility}
         setArmySidebarTitle={setArmySidebarTitle}
-        clearArmyList={clearArmyList} // Pass the function to Navbar
-        selectedUnits={selectedUnits} // Pass selectedUnits here
-        
+        setDetachmentTitle={setDetachmentTitle} // Pass the setter for detachment title
+        clearArmyList={clearArmyList}
+        selectedUnits={selectedUnits}
+        setSelectedDetachment={setSelectedDetachment}
+        detachmentTitle={detachmentTitle} // Pass detachmentTitle as a prop
+
       />
 
       {sidebarVisible && (
@@ -277,8 +295,15 @@ function App() {
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
           armySidebarTitle={armySidebarTitle}
+          detachmentTitle={detachmentTitle} // Pass the detachment title here
         />
       )}
+
+      {/* Debugging log moved outside JSX */}
+      {(() => {
+        console.log("App.tsx - selectedDetachment after update:", selectedDetachment);
+        return null;
+      })()}
 
       {visibleFactions.map((factionName) => (
         <div key={factionName}>

@@ -40,6 +40,10 @@ interface Props {
   setArmySidebarTitle: React.Dispatch<React.SetStateAction<string>>;
   clearArmyList: () => void;
   selectedUnits: SelectedUnit[]; // Add selectedUnits here
+  setSelectedDetachment: React.Dispatch<React.SetStateAction<string>>; // Add this prop
+  setDetachmentTitle: React.Dispatch<React.SetStateAction<string>>; // Add this prop
+  detachmentTitle: string; // Add detachmentTitle as a prop
+
 }
 
 const Navbar: React.FC<Props> = ({
@@ -52,6 +56,9 @@ const Navbar: React.FC<Props> = ({
   setArmySidebarTitle,
   clearArmyList,
   selectedUnits, // Destructure selectedUnits here
+  setDetachmentTitle, // Destructure setDetachmentTitle here
+  detachmentTitle, // Destructure detachmentTitle
+
 }: Props) => {
   const [openPopup, setOpenPopup] = useState(false);
   const [openExportDialog, setOpenExportDialog] = useState(false); // State for export dialog
@@ -81,7 +88,9 @@ const Navbar: React.FC<Props> = ({
   };
 
   const handleDetachmentChange = (event: SelectChangeEvent<string>) => {
-    setSelectedDetachment(event.target.value);
+    const detachmentName = event.target.value;
+    console.log("Navbar.tsx - Selected Detachment:", detachmentName); // Debugging log
+    setSelectedDetachment(detachmentName); // Update the global state directly
   };
 
   const handleNewArmyClick = () => {
@@ -101,11 +110,15 @@ const Navbar: React.FC<Props> = ({
         : [...prevState, factionName]
     );
   };
-
   const handleOkClick = () => {
     if (selectedFaction && selectedDetachment && armyName) {
+      console.log("Navbar.tsx - Setting Detachment:", selectedDetachment); // Debugging log
+
       // Set the army name as the sidebar title
       setArmySidebarTitle(armyName);
+
+      // Set the detachment title
+      setDetachmentTitle(selectedDetachment || ""); // Update the detachment title
 
       // Unhide the sidebar if it's hidden
       if (!sidebarVisible) {
@@ -144,36 +157,40 @@ const Navbar: React.FC<Props> = ({
       exportContainer.style.padding = "20px"; // Add padding for better spacing
       exportContainer.style.fontFamily = "Arial, sans-serif"; // Use a clean font
 
-      // Add the army name as a header
+      // Combine the army name and detachment title
+      const exportTitle = `${armyName || "Army List"} - ${detachmentTitle || ""}`;
+
+      // Add the army name and detachment title as a header
       const armyNameElement = document.createElement("h1");
-      armyNameElement.textContent = armyName || "Army List";
-      armyNameElement.style.textAlign = "center";
+      armyNameElement.textContent = exportTitle.trim(); // Trim to remove extra spaces
+      armyNameElement.style.textAlign = "left"; // Align to the left
       armyNameElement.style.fontSize = "36px"; // Larger font size for the header
-      armyNameElement.style.marginBottom = "20px";
+      armyNameElement.style.marginBottom = "10px"; // Add spacing below the title
       exportContainer.appendChild(armyNameElement);
 
-      // Add the total points
+      // Add the total points directly under the title, aligned to the left
       const totalPointsElement = document.createElement("p");
       totalPointsElement.textContent = `Total Points: ${calculateTotalPoints(
         selectedUnits
       )}`;
-      totalPointsElement.style.textAlign = "center";
+      totalPointsElement.style.textAlign = "left"; // Align to the left
       totalPointsElement.style.fontSize = "18px";
-      totalPointsElement.style.marginBottom = "30px";
+      totalPointsElement.style.marginTop = "0"; // Align directly under the title
+      totalPointsElement.style.marginBottom = "30px"; // Add spacing below the points
       exportContainer.appendChild(totalPointsElement);
 
       // Create a container for the units
       const unitsContainer = document.createElement("div");
       unitsContainer.style.display = "flex";
       unitsContainer.style.flexWrap = "wrap"; // Allow wrapping to the next row
-      unitsContainer.style.justifyContent = "center";
+      unitsContainer.style.justifyContent = "flex-start"; // Align all items to the left
       unitsContainer.style.gap = "20px"; // Add spacing between units
       exportContainer.appendChild(unitsContainer);
 
       // Add each unit
       selectedUnits.forEach((unit) => {
         const unitContainer = document.createElement("div");
-        unitContainer.style.textAlign = "center";
+        unitContainer.style.textAlign = "left"; // Align the content of each unit to the left
         unitContainer.style.width = "150px"; // Fixed width for each unit card
 
         // Add the unit image
@@ -215,7 +232,7 @@ const Navbar: React.FC<Props> = ({
         // Create a download link
         const link = document.createElement("a");
         link.href = image;
-        link.download = `${armyName || "ArmyList"}.png`;
+        link.download = `${exportTitle.trim()}.png`; // Use the combined title for the filename
         link.click();
       } catch (error) {
         console.error("Error generating image:", error);

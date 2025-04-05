@@ -17,7 +17,8 @@ interface Props {
     enhancementIndex: number,
     increment: number
   ) => void;
-  armySidebarTitle: string; // New prop for the army title
+  armySidebarTitle: string; // Prop for the army title
+  detachmentTitle?: string; // Add detachmentTitle as a prop
 }
 
 const ArmyList: React.FC<Props> = ({
@@ -27,7 +28,10 @@ const ArmyList: React.FC<Props> = ({
   updateWargearQuantity,
   updateEnhancementQuantity,
   armySidebarTitle,
+  detachmentTitle, // Use detachmentTitle prop
 }) => {
+  console.log("ArmyList.tsx - detachmentTitle:", detachmentTitle);
+
   const calculateTotalPointCost = (unit: SelectedUnit): number => {
     return unit.pointCost[unit.currentIndex];
   };
@@ -64,6 +68,9 @@ const ArmyList: React.FC<Props> = ({
   return (
     <div className="army-list-container">
       <h2 className="armylist-title">{armySidebarTitle || "Army List"}</h2>
+      {detachmentTitle && (
+        <p className="armylist-detachment">{detachmentTitle}</p>
+      )}
       {Object.keys(groupedUnits).map((category, categoryIndex) => (
         <div key={categoryIndex}>
           <h3 className="armylist-headers">{category}</h3>
