@@ -19,9 +19,8 @@
 
 .armylist-title{
   text-align: center;
-  font-size: 3em;
-  text-decoration: underline;
-  color: #2467d1
+  font-size: 2em;
+  margin-top: 0.5em;
 }
 
 .armylist-detachment{
@@ -57,4 +56,24 @@
 
 .sidebar-button .material-symbols-outlined:hover {
   color: #007bff; /* Change color on hover */
+}
+
+/* Style for section titles (e.g., Ranged Weapons, Melee Weapons, Enhancements) */
+.army-list-section-title {
+  font-size: 1.2rem; /* Match the size of the Enhancements title */
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Style for the text of weapons and enhancements */
+.army-list-item-text {
+  font-size: 0.9rem; /* Match the size of the weapons text */
+  margin-left: 8px; /* Add spacing for better alignment */
+}
+
+/* Style for the quantity display to ensure consistent width */
+.weapon-quantity {
+  display: inline-block;
+  width: 2rem; /* Fixed width to accommodate up to "99" */
+  text-align: center; /* Center-align the number */
 }

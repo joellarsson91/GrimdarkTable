@@ -56,8 +56,27 @@ function App() {
   const [detachmentTitle, setDetachmentTitle] = useState<string>(""); // New state for detachment title
   const [warlordId, setWarlordId] = useState<string | null>(null);
   const [armyCreated, setArmyCreated] = useState<boolean>(false); // Add armyCreated state
+  const [detachmentEnhancements, setDetachmentEnhancements] = useState<
+    { name: string; points: number; rules: string }[]
+  >([]);
 
   useEffect(() => {}, [warlordId]);
+
+  useEffect(() => {
+    if (detachmentTitle) {
+      const selectedFaction = factions.find((faction) =>
+        faction.detachments.some(
+          (detachment) => detachment.name === detachmentTitle
+        )
+      );
+
+      const selectedDetachment = selectedFaction?.detachments.find(
+        (detachment) => detachment.name === detachmentTitle
+      );
+
+      setDetachmentEnhancements(selectedDetachment?.enhancements || []);
+    }
+  }, [detachmentTitle]);
 
   const updateSelectedDetachment: React.Dispatch<
     React.SetStateAction<string>
@@ -237,11 +256,13 @@ function App() {
         warlordId={warlordId} // Pass warlordId here
         armyCreated={armyCreated} // Pass armyCreated state
         setArmyCreated={setArmyCreated} // Pass setArmyCreated function
+        detachmentEnhancements={detachmentEnhancements} // Pass detachmentEnhancements here
       />
 
       {sidebarVisible && (
         <ArmySidebar
           selectedUnits={selectedUnits}
+          setSelectedUnits={setSelectedUnits} // Pass the setter function
           updateUnitQuantity={(id, increment) => {
             setSelectedUnits((prevSelectedUnits) =>
               prevSelectedUnits.map((unit) =>
@@ -329,6 +350,7 @@ function App() {
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
           armySidebarTitle={armySidebarTitle}
+          detachmentEnhancements={detachmentEnhancements} // Pass detachmentEnhancements here
           detachmentTitle={detachmentTitle} // Pass the detachment title here
           warlordId={warlordId} // Pass warlordId here
           setWarlordId={setWarlordId} // Pass setWarlordId here

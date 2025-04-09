@@ -46,6 +46,7 @@ interface Props {
   warlordId: string | null; // Add warlordId here
   armyCreated: boolean; // Add armyCreated
   setArmyCreated: React.Dispatch<React.SetStateAction<boolean>>; // Add setArmyCreated
+  detachmentEnhancements: { name: string; points: number; rules: string }[]; // Add this
 }
 
 const Navbar: React.FC<Props> = ({
@@ -63,6 +64,7 @@ const Navbar: React.FC<Props> = ({
   warlordId, // Destructure warlordId here
   armyCreated,
   setArmyCreated,
+  detachmentEnhancements,
 }: Props) => {
   console.log("Navbar.tsx - Received Warlord ID:", warlordId); // Add this log here
 
@@ -179,7 +181,8 @@ const Navbar: React.FC<Props> = ({
       // Add the total points directly under the title, aligned to the left
       const totalPointsElement = document.createElement("p");
       totalPointsElement.textContent = `Total Points: ${calculateTotalPoints(
-        selectedUnits
+        selectedUnits,
+        detachmentEnhancements // Pass detachmentEnhancements here
       )}`;
       totalPointsElement.style.textAlign = "left"; // Align to the left
       totalPointsElement.style.fontSize = "18px";
@@ -232,6 +235,22 @@ const Navbar: React.FC<Props> = ({
           warlordLabel.style.color = "red"; // Highlight the label in red
           warlordLabel.style.margin = "0"; // Remove extra margin
           unitContainer.appendChild(warlordLabel);
+        }
+
+        // Add the selected enhancement if the unit is a character and has one
+        if (
+          unit.keywords.some(
+            (keyword) => keyword.toLowerCase() === "character"
+          ) &&
+          unit.selectedEnhancement
+        ) {
+          const enhancementLabel = document.createElement("p");
+          enhancementLabel.textContent = `Enhancement: ${unit.selectedEnhancement}`;
+          enhancementLabel.style.fontSize = "12px";
+          enhancementLabel.style.fontWeight = "bold";
+          enhancementLabel.style.color = "green"; // Highlight the enhancement in green
+          enhancementLabel.style.margin = "0"; // Remove extra margin
+          unitContainer.appendChild(enhancementLabel);
         }
 
         // Add the model count

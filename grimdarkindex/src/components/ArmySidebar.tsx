@@ -5,6 +5,7 @@ import "./ArmySidebar.css"; // Import your CSS file for styling
 
 interface Props {
   selectedUnits: SelectedUnit[];
+  setSelectedUnits: React.Dispatch<React.SetStateAction<SelectedUnit[]>>;
   updateUnitQuantity: (id: string, increment: number) => void;
   removeUnit: (id: string) => void;
   updateWargearQuantity: (
@@ -23,26 +24,30 @@ interface Props {
   toggleArmySidebar: () => void;
   toggleArmySidebarVisibility: () => void;
   armySidebarTitle: string;
-  detachmentTitle: string; // Add detachmentTitle here
-  warlordId: string | null; // Add warlordId
-  setWarlordId: React.Dispatch<React.SetStateAction<string | null>>; // Add setWarlordId
+  detachmentTitle: string;
+  detachmentEnhancements: { name: string; points: number; rules: string }[];
+  warlordId: string | null;
+  setWarlordId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
+export const calculateTotalPoints = (
+  selectedUnits: SelectedUnit[],
+  detachmentEnhancements: { name: string; points: number; rules: string }[]
+) => {
   return selectedUnits.reduce((totalPoints, unit) => {
     const unitPoints = unit.pointCost[unit.currentIndex];
-    const enhancementPoints = unit.enhancements.reduce(
-      (enhancementTotal, enhancement, index) =>
-        enhancementTotal +
-        enhancement.pointCost * (unit.enhancementQuantities[index] || 0),
-      0
-    );
+    const enhancementPoints = unit.selectedEnhancement
+      ? detachmentEnhancements.find(
+          (enhancement) => enhancement.name === unit.selectedEnhancement
+        )?.points || 0
+      : 0;
     return totalPoints + unitPoints + enhancementPoints;
   }, 0);
 };
 
 const ArmySidebar: React.FC<Props> = ({
   selectedUnits,
+  setSelectedUnits,
   updateUnitQuantity,
   removeUnit,
   updateWargearQuantity,
@@ -53,6 +58,7 @@ const ArmySidebar: React.FC<Props> = ({
   toggleArmySidebarVisibility,
   armySidebarTitle,
   detachmentTitle,
+  detachmentEnhancements,
   warlordId,
   setWarlordId,
 }) => {
@@ -78,6 +84,7 @@ const ArmySidebar: React.FC<Props> = ({
 
       <ArmyList
         selectedUnits={selectedUnits}
+        setSelectedUnits={setSelectedUnits} // Pass the setter function
         updateUnitQuantity={updateUnitQuantity}
         removeUnit={removeUnit}
         updateWargearQuantity={(id, wargearIndex, increment, wargearType) => {
@@ -90,12 +97,16 @@ const ArmySidebar: React.FC<Props> = ({
         updateEnhancementQuantity={updateEnhancementQuantity}
         armySidebarTitle={armySidebarTitle}
         detachmentTitle={detachmentTitle}
+        detachmentEnhancements={detachmentEnhancements} // Pass enhancements
         warlordId={warlordId}
         setWarlordId={setWarlordId}
       />
 
       <div className="total-points">
-        <p>Total: {calculateTotalPoints(selectedUnits)} points</p>
+        <p>
+          Total: {calculateTotalPoints(selectedUnits, detachmentEnhancements)}{" "}
+          points
+        </p>
       </div>
     </div>
   );

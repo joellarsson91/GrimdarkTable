@@ -15,6 +15,7 @@ export interface SelectedUnit {
   miscellaneous: { name: string; quantity: number }[]; // Add the 'miscellaneous' property
   wargearQuantities: number[];
   enhancements: { name: string; pointCost: number }[];
+  selectedEnhancement?: string | null; // Track the selected enhancement
   enhancementQuantities: number[];
   keywords: string[]; // Add the 'keywords' property
 }
