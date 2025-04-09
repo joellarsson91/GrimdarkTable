@@ -4,6 +4,7 @@ import { SelectedUnit } from "../types";
 import "./ArmySidebar.css"; // Import your CSS file for styling
 
 interface Props {
+  className?: string; // Add this property to accept a className
   selectedUnits: SelectedUnit[];
   setSelectedUnits: React.Dispatch<React.SetStateAction<SelectedUnit[]>>;
   updateUnitQuantity: (id: string, increment: number) => void;

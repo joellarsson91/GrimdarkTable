@@ -115,3 +115,13 @@
 .wargear-headers{
     margin-top: 5px;
 }
+
+/* Unit card container */
+.unit-card-container {
+  transition: width 0.3s ease; /* Smooth transition for resizing */
+  width: 100%; /* Default width when the sidebar is hidden */
+}
+
+.unit-card-container.with-sidebar {
+  width: calc(100% - 400px); /* Adjust width when the sidebar is visible */
+}

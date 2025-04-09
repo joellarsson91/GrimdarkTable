@@ -259,73 +259,18 @@ function App() {
         detachmentEnhancements={detachmentEnhancements} // Pass detachmentEnhancements here
       />
 
-      {sidebarVisible && (
+      <div className="app-container">
         <ArmySidebar
+          className={`sidebar ${sidebarExpanded ? "expanded" : "minimized"}`}
           selectedUnits={selectedUnits}
-          setSelectedUnits={setSelectedUnits} // Pass the setter function
-          updateUnitQuantity={(id, increment) => {
-            setSelectedUnits((prevSelectedUnits) =>
-              prevSelectedUnits.map((unit) =>
-                unit.id === id
-                  ? {
-                      ...unit,
-                      currentIndex: Math.max(
-                        0,
-                        Math.min(
-                          unit.numberOfModels.length - 1,
-                          unit.currentIndex + increment
-                        )
-                      ),
-                    }
-                  : unit
-              )
-            );
-          }}
+          setSelectedUnits={setSelectedUnits}
+          updateUnitQuantity={updateUnitQuantity}
           removeUnit={(id) => {
             setSelectedUnits((prevSelectedUnits) =>
               prevSelectedUnits.filter((unit) => unit.id !== id)
             );
           }}
-          updateWargearQuantity={(id, wargearIndex, increment, wargearType) => {
-            setSelectedUnits((prevSelectedUnits) =>
-              prevSelectedUnits.map((unit) => {
-                if (unit.id === id) {
-                  const updatedWeapons =
-                    wargearType === "ranged"
-                      ? unit.rangedWeapons.map((weapon, index) =>
-                          index === wargearIndex
-                            ? {
-                                ...weapon,
-                                quantity: Math.max(
-                                  0,
-                                  weapon.quantity + increment
-                                ),
-                              }
-                            : weapon
-                        )
-                      : unit.meleeWeapons.map((weapon, index) =>
-                          index === wargearIndex
-                            ? {
-                                ...weapon,
-                                quantity: Math.max(
-                                  0,
-                                  weapon.quantity + increment
-                                ),
-                              }
-                            : weapon
-                        );
-
-                  return {
-                    ...unit,
-                    [wargearType === "ranged"
-                      ? "rangedWeapons"
-                      : "meleeWeapons"]: updatedWeapons,
-                  };
-                }
-                return unit;
-              })
-            );
-          }}
+          updateWargearQuantity={updateWargearQuantity}
           updateEnhancementQuantity={(id, enhancementIndex, increment) => {
             setSelectedUnits((prevSelectedUnits) =>
               prevSelectedUnits.map((unit) =>
@@ -350,47 +295,53 @@ function App() {
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
           armySidebarTitle={armySidebarTitle}
-          detachmentEnhancements={detachmentEnhancements} // Pass detachmentEnhancements here
-          detachmentTitle={detachmentTitle} // Pass the detachment title here
-          warlordId={warlordId} // Pass warlordId here
-          setWarlordId={setWarlordId} // Pass setWarlordId here
+          detachmentEnhancements={detachmentEnhancements}
+          detachmentTitle={detachmentTitle}
+          warlordId={warlordId}
+          setWarlordId={setWarlordId}
         />
-      )}
 
-      {visibleFactions.map((factionName) => (
-        <div key={factionName}>
-          {factions
-            .filter((faction) => faction.faction === factionName)
-            .map((faction) => (
-              <div key={faction.faction}>
-                <h2>{faction.faction}</h2>
-                <div className="unit-card-container">
-                  {faction.datasheets.map((unit) => (
-                    <Unitcard
-                      key={unit.name}
-                      unit={{
-                        name: unit.name,
-                        pointCosts: unit.pointCosts.map((cost) => ({
-                          models: cost.models.map((model) => ({
-                            modelName: model.modelName || "Unknown Model",
-                            count: model.count || "0",
-                          })),
-                          points: cost.points,
-                        })),
-                        rangedWeapons: unit.weapons?.rangedWeapons || [],
-                        meleeWeapons: unit.weapons?.meleeWeapons || [],
-                        wargearOptions: unit.wargearOptions || [],
-                        equipped: unit.equipped || [],
-                        keywords: unit.keywords?.keywords || [], // Access the keywords array
-                      }}
-                      addUnitToArmyList={addUnitToArmyList}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
+        <div
+          className={`unit-card-container ${
+            sidebarVisible && sidebarExpanded ? "with-sidebar" : ""
+          }`}
+        >
+          {visibleFactions.map((factionName) => (
+            <div key={factionName}>
+              {factions
+                .filter((faction) => faction.faction === factionName)
+                .map((faction) => (
+                  <div key={faction.faction}>
+                    <h2>{faction.faction}</h2>
+                    <div className="unit-card-container">
+                      {faction.datasheets.map((unit) => (
+                        <Unitcard
+                          key={unit.name}
+                          unit={{
+                            name: unit.name,
+                            pointCosts: unit.pointCosts.map((cost) => ({
+                              models: cost.models.map((model) => ({
+                                modelName: model.modelName || "Unknown Model",
+                                count: model.count || "0",
+                              })),
+                              points: cost.points,
+                            })),
+                            rangedWeapons: unit.weapons?.rangedWeapons || [],
+                            meleeWeapons: unit.weapons?.meleeWeapons || [],
+                            wargearOptions: unit.wargearOptions || [],
+                            equipped: unit.equipped || [],
+                            keywords: unit.keywords?.keywords || [], // Access the keywords array
+                          }}
+                          addUnitToArmyList={addUnitToArmyList}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
