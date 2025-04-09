@@ -39,11 +39,13 @@ interface Props {
   toggleArmySidebarVisibility: () => void;
   setArmySidebarTitle: React.Dispatch<React.SetStateAction<string>>;
   clearArmyList: () => void;
-  selectedUnits: SelectedUnit[]; // Add selectedUnits here
-  setSelectedDetachment: React.Dispatch<React.SetStateAction<string>>; // Add this prop
-  setDetachmentTitle: React.Dispatch<React.SetStateAction<string>>; // Add this prop
-  detachmentTitle: string; // Add detachmentTitle as a prop
-
+  selectedUnits: SelectedUnit[];
+  setSelectedDetachment: React.Dispatch<React.SetStateAction<string>>;
+  setDetachmentTitle: React.Dispatch<React.SetStateAction<string>>;
+  detachmentTitle: string;
+  warlordId: string | null; // Add warlordId here
+  armyCreated: boolean; // Add armyCreated
+  setArmyCreated: React.Dispatch<React.SetStateAction<boolean>>; // Add setArmyCreated
 }
 
 const Navbar: React.FC<Props> = ({
@@ -58,8 +60,12 @@ const Navbar: React.FC<Props> = ({
   selectedUnits, // Destructure selectedUnits here
   setDetachmentTitle, // Destructure setDetachmentTitle here
   detachmentTitle, // Destructure detachmentTitle
-
+  warlordId, // Destructure warlordId here
+  armyCreated,
+  setArmyCreated,
 }: Props) => {
+  console.log("Navbar.tsx - Received Warlord ID:", warlordId); // Add this log here
+
   const [openPopup, setOpenPopup] = useState(false);
   const [openExportDialog, setOpenExportDialog] = useState(false); // State for export dialog
   const [selectedFaction, setSelectedFaction] = useState<string | null>(null);
@@ -89,7 +95,6 @@ const Navbar: React.FC<Props> = ({
 
   const handleDetachmentChange = (event: SelectChangeEvent<string>) => {
     const detachmentName = event.target.value;
-    console.log("Navbar.tsx - Selected Detachment:", detachmentName); // Debugging log
     setSelectedDetachment(detachmentName); // Update the global state directly
   };
 
@@ -112,13 +117,11 @@ const Navbar: React.FC<Props> = ({
   };
   const handleOkClick = () => {
     if (selectedFaction && selectedDetachment && armyName) {
-      console.log("Navbar.tsx - Setting Detachment:", selectedDetachment); // Debugging log
-
       // Set the army name as the sidebar title
       setArmySidebarTitle(armyName);
 
       // Set the detachment title
-      setDetachmentTitle(selectedDetachment || ""); // Update the detachment title
+      setDetachmentTitle(selectedDetachment || "");
 
       // Unhide the sidebar if it's hidden
       if (!sidebarVisible) {
@@ -130,6 +133,9 @@ const Navbar: React.FC<Props> = ({
 
       // Clear the army list
       clearArmyList();
+
+      // Mark the army as created
+      setArmyCreated(true); // Add this line
 
       // Close the popup
       setOpenPopup(false);
@@ -158,7 +164,9 @@ const Navbar: React.FC<Props> = ({
       exportContainer.style.fontFamily = "Arial, sans-serif"; // Use a clean font
 
       // Combine the army name and detachment title
-      const exportTitle = `${armyName || "Army List"} - ${detachmentTitle || ""}`;
+      const exportTitle = `${armyName || "Army List"} - ${
+        detachmentTitle || ""
+      }`;
 
       // Add the army name and detachment title as a header
       const armyNameElement = document.createElement("h1");
@@ -211,9 +219,26 @@ const Navbar: React.FC<Props> = ({
         unitName.style.fontWeight = "bold";
         unitContainer.appendChild(unitName);
 
+        // Add the "Warlord" label if this unit is the Warlord
+        if (warlordId === unit.id) {
+          console.log(
+            `Navbar.tsx - Adding Warlord label to unit: ${unit.name}`
+          );
+
+          const warlordLabel = document.createElement("p");
+          warlordLabel.textContent = "Warlord";
+          warlordLabel.style.fontSize = "12px";
+          warlordLabel.style.fontWeight = "bold";
+          warlordLabel.style.color = "red"; // Highlight the label in red
+          warlordLabel.style.margin = "0"; // Remove extra margin
+          unitContainer.appendChild(warlordLabel);
+        }
+
         // Add the model count
         const modelCount = document.createElement("p");
-        modelCount.textContent = `Models: ${unit.numberOfModels[unit.currentIndex]}`;
+        modelCount.textContent = `Models: ${
+          unit.numberOfModels[unit.currentIndex]
+        }`;
         modelCount.style.fontSize = "12px";
         modelCount.style.margin = "0"; // Remove extra margin
         unitContainer.appendChild(modelCount);
@@ -240,6 +265,7 @@ const Navbar: React.FC<Props> = ({
         // Remove the temporary container
         document.body.removeChild(exportContainer);
       }
+      console.log("Navbar.tsx - Export process completed.");
     }
   };
 
@@ -324,6 +350,25 @@ const Navbar: React.FC<Props> = ({
             >
               Export
             </Button>
+            {/* Expand Sidebar Button */}
+            {armyCreated &&
+              !sidebarVisible && ( // Only show the button when an army is created and the sidebar is hidden
+                <button
+                  className="sidebar-toggle"
+                  onClick={toggleArmySidebarVisibility}
+                  title="Expand Sidebar"
+                  style={{
+                    marginLeft: "auto", // Push the button to the far right
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span className="material-symbols-outlined">
+                    dock_to_left
+                  </span>
+                </button>
+              )}
           </div>
           {/* Popup for creating a new army */}
           <Dialog
@@ -413,7 +458,9 @@ const Navbar: React.FC<Props> = ({
                   control={
                     <Checkbox
                       checked={exportOptions.compactStyle}
-                      onChange={() => handleExportCheckboxChange("compactStyle")}
+                      onChange={() =>
+                        handleExportCheckboxChange("compactStyle")
+                      }
                     />
                   }
                   label="Compact-style"

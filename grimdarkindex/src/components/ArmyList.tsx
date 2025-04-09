@@ -17,8 +17,10 @@ interface Props {
     enhancementIndex: number,
     increment: number
   ) => void;
-  armySidebarTitle: string; // Prop for the army title
-  detachmentTitle?: string; // Add detachmentTitle as a prop
+  armySidebarTitle: string;
+  detachmentTitle?: string;
+  warlordId: string | null; // Add warlordId
+  setWarlordId: React.Dispatch<React.SetStateAction<string | null>>; // Add setWarlordId
 }
 
 const ArmyList: React.FC<Props> = ({
@@ -29,9 +31,9 @@ const ArmyList: React.FC<Props> = ({
   updateEnhancementQuantity,
   armySidebarTitle,
   detachmentTitle, // Use detachmentTitle prop
+  warlordId,
+  setWarlordId,
 }) => {
-  console.log("ArmyList.tsx - detachmentTitle:", detachmentTitle);
-
   const calculateTotalPointCost = (unit: SelectedUnit): number => {
     return unit.pointCost[unit.currentIndex];
   };
@@ -41,6 +43,13 @@ const ArmyList: React.FC<Props> = ({
   const [enhancementQuantities, setEnhancementQuantities] = useState<{
     [id: string]: number;
   }>({});
+
+  const handleWarlordSelection = (unitId: string) => {
+    setWarlordId((prevWarlordId) => {
+      const newWarlordId = prevWarlordId === unitId ? null : unitId;
+      return newWarlordId;
+    });
+  };
 
   useEffect(() => {
     // Initialize showWargear and showEnhancements states with an empty array
@@ -86,13 +95,17 @@ const ArmyList: React.FC<Props> = ({
                   </span>
                   <button
                     className="btn btn-success btn-sm"
-                    onClick={() => updateUnitQuantity(unit.id, 1)}
+                    onClick={() => updateUnitQuantity(unit.id, 1)} // Increment
+                    disabled={
+                      unit.currentIndex >= unit.numberOfModels.length - 1
+                    } // Disable if at max
                   >
                     +
                   </button>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => updateUnitQuantity(unit.id, -1)}
+                    onClick={() => updateUnitQuantity(unit.id, -1)} // Decrement
+                    disabled={unit.currentIndex <= 0} // Disable if at min
                   >
                     -
                   </button>
@@ -108,22 +121,30 @@ const ArmyList: React.FC<Props> = ({
                   >
                     Wargear
                   </button>
-                  {unit.enhancements.length > 0 && (
-                    <button
-                      className="btn btn-dark btn-sm"
-                      onClick={() => {
-                        setShowEnhancements((prevShowEnhancements) =>
-                          prevShowEnhancements.includes(unit.id)
-                            ? prevShowEnhancements.filter(
-                                (id) => id !== unit.id
-                              )
-                            : [...prevShowEnhancements, unit.id]
-                        );
-                      }}
-                    >
-                      Enhancements
-                    </button>
-                  )}
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => {
+                      console.log(
+                        `Enhancements button clicked for unit ID: ${unit.id}`
+                      );
+                      // Placeholder for future functionality
+                    }}
+                  >
+                    Enhancements
+                  </button>
+                  {unit.keywords.some(
+                    (keyword) => keyword.toLowerCase() === "character"
+                  ) &&
+                    (warlordId === null || warlordId === unit.id) && ( // Only show the checkbox if no Warlord is selected or this unit is the Warlord
+                      <label style={{ marginLeft: "10px" }}>
+                        <input
+                          type="checkbox"
+                          checked={warlordId === unit.id}
+                          onChange={() => handleWarlordSelection(unit.id)}
+                        />
+                        WL
+                      </label>
+                    )}
                 </div>
                 {showWargear.includes(unit.id) && (
                   <div>
@@ -143,7 +164,9 @@ const ArmyList: React.FC<Props> = ({
                         >
                           +
                         </button>
-                        <span style={{ margin: "0 8px" }}>{weapon.quantity}</span>
+                        <span style={{ margin: "0 8px" }}>
+                          {weapon.quantity}
+                        </span>
                         <button
                           className="btn btn-danger btn-sm"
                           onClick={() =>
@@ -173,7 +196,9 @@ const ArmyList: React.FC<Props> = ({
                         >
                           +
                         </button>
-                        <span style={{ margin: "0 8px" }}>{weapon.quantity}</span>
+                        <span style={{ margin: "0 8px" }}>
+                          {weapon.quantity}
+                        </span>
                         <button
                           className="btn btn-danger btn-sm"
                           onClick={() =>

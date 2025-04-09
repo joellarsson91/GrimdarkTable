@@ -1,6 +1,7 @@
 import React from "react";
 import ArmyList from "./ArmyList";
 import { SelectedUnit } from "../types";
+import "./ArmySidebar.css"; // Import your CSS file for styling
 
 interface Props {
   selectedUnits: SelectedUnit[];
@@ -23,6 +24,8 @@ interface Props {
   toggleArmySidebarVisibility: () => void;
   armySidebarTitle: string;
   detachmentTitle: string; // Add detachmentTitle here
+  warlordId: string | null; // Add warlordId
+  setWarlordId: React.Dispatch<React.SetStateAction<string | null>>; // Add setWarlordId
 }
 
 export const calculateTotalPoints = (selectedUnits: SelectedUnit[]) => {
@@ -49,7 +52,9 @@ const ArmySidebar: React.FC<Props> = ({
   toggleArmySidebar,
   toggleArmySidebarVisibility,
   armySidebarTitle,
-  detachmentTitle, // Destructure detachmentTitle
+  detachmentTitle,
+  warlordId,
+  setWarlordId,
 }) => {
   const ArmySidebarClass = expanded ? "sidebar expanded" : "sidebar minimized";
 
@@ -58,9 +63,16 @@ const ArmySidebar: React.FC<Props> = ({
       <div className="sidebar-button">
         <button
           className="material-symbols-outlined"
-          onClick={expanded ? toggleArmySidebar : toggleArmySidebarVisibility}
+          onClick={toggleArmySidebarVisibility} // Hide the sidebar
+          title="Hide Sidebar"
+          style={{
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "24px", // Adjust the size of the icon
+          }}
         >
-          {expanded ? "check_box_outline_blank" : "dock_to_left"}
+          arrow_forward_ios
         </button>
       </div>
 
@@ -77,7 +89,9 @@ const ArmySidebar: React.FC<Props> = ({
         }}
         updateEnhancementQuantity={updateEnhancementQuantity}
         armySidebarTitle={armySidebarTitle}
-        detachmentTitle={detachmentTitle} // Pass detachmentTitle to ArmyList
+        detachmentTitle={detachmentTitle}
+        warlordId={warlordId}
+        setWarlordId={setWarlordId}
       />
 
       <div className="total-points">

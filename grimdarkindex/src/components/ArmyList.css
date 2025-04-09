@@ -24,8 +24,37 @@
   color: #2467d1
 }
 
-
 .armylist-detachment{
   text-align: center;
   font-weight: bold;
+}
+
+/* Style the WL checkbox to match the button height */
+.army-list-unit input[type="checkbox"] {
+  width: 1.5rem; /* Adjust width to match button size */
+  height: 1.5rem; /* Adjust height to match button size */
+  margin-right: 0.5rem; /* Space between checkbox and text */
+  vertical-align: middle; /* Align vertically with text and buttons */
+  cursor: pointer; /* Add pointer cursor for better UX */
+}
+
+/* Sidebar button styles */
+.sidebar-button {
+  display: flex;
+  justify-content: flex-end; /* Align the button to the right */
+  padding: 10px;
+  background: transparent; /* Remove the background color */
+}
+
+.sidebar-button .material-symbols-outlined {
+  background: transparent; /* Ensure the icon itself has no background */
+  color: #000; /* Set the arrow color to black */
+  border: none; /* Remove any border */
+  font-size: 24px; /* Adjust the size of the icon */
+  cursor: pointer; /* Add a pointer cursor for better UX */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.sidebar-button .material-symbols-outlined:hover {
+  color: #007bff; /* Change color on hover */
 }

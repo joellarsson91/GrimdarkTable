@@ -15,6 +15,7 @@ interface Props {
     rangedWeapons?: { name: string; quantity: number }[]; // Optional ranged weapons
     meleeWeapons?: { name: string; quantity: number }[]; // Optional melee weapons
     equipped?: { name: string; quantity: number; type: string }[]; // Optional equipped array
+    keywords?: string[]; // Add the keywords property
   };
   addUnitToArmyList: (
     name: string,
@@ -26,7 +27,8 @@ interface Props {
     miscellaneous?: { name: string; quantity: number }[],
     enhancements?: { name: string; pointCost: number }[],
     wargearOptions?: string[],
-    equipped?: { name: string; quantity: number; type: string }[]
+    equipped?: { name: string; quantity: number; type: string }[],
+    keywords?: string[]
   ) => void;
 }
 
@@ -55,22 +57,39 @@ const Unitcard: React.FC<Props> = ({ unit, addUnitToArmyList }) => {
   }, [unit.name]);
 
   const handleAddUnit = () => {
+    const numberOfModels: number[] = [];
+    const pointCosts: number[] = [];
+
+    unit.pointCosts.forEach((cost) => {
+      cost.models.forEach((model) => {
+        const count = model.count;
+        if (count.includes("-")) {
+          // Handle ranges like "6-10"
+          const [min, max] = count.split("-").map(Number);
+          for (let i = min; i <= max; i++) {
+            numberOfModels.push(i);
+            pointCosts.push(cost.points); // Assign the same point cost for all counts in the range
+          }
+        } else {
+          // Handle single numbers like "5"
+          numberOfModels.push(parseInt(count, 10));
+          pointCosts.push(cost.points);
+        }
+      });
+    });
+
     addUnitToArmyList(
       unit.name,
       "Troops", // Example category
-      unit.pointCosts.map((cost) => cost.points),
-      unit.pointCosts.map((cost) =>
-        cost.models.reduce(
-          (total, model) => total + parseInt(model.count, 10),
-          0
-        )
-      ),
+      pointCosts, // Pass the expanded point costs
+      numberOfModels, // Pass the expanded number of models
       unit.rangedWeapons || [],
       unit.meleeWeapons || [],
       [], // Miscellaneous
       [], // Enhancements
       unit.wargearOptions || [],
-      unit.equipped || []
+      unit.equipped || [],
+      unit.keywords || [] // Pass keywords
     );
   };
 

@@ -1,0 +1,35 @@
+/* Sidebar container styles */
+.sidebar {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  width: 300px; /* Adjust width as needed */
+  background-color: #f4f4f4; /* Light background for the sidebar */
+  border-right: 1px solid #ccc; /* Add a border to separate the sidebar */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.sidebar.expanded {
+  width: 400px; /* Adjust width when expanded */
+}
+
+.sidebar.minimized {
+  width: 50px; /* Adjust width when minimized */
+}
+
+/* Sidebar button styles */
+.sidebar-button {
+  display: flex;
+  justify-content: flex-end; /* Align the button to the right */
+  padding: 10px;
+  background: transparent; /* Ensure the icon itself has no background */
+}
+
+/* Total points section */
+.total-points {
+  margin-top: auto; /* Push the total points section to the bottom */
+  padding: 10px;
+  background-color: #e0e0e0; /* Light gray background for the total points */
+  font-weight: bold;
+  text-align: center;
+  border-top: 1px solid #ccc; /* Add a border above the total points */
+}

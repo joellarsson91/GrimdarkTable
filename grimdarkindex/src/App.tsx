@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import ArmySidebar from "./components/ArmySidebar";
@@ -24,6 +24,9 @@ type Unit = {
     meleeWeapons?: { name: string; quantity: number }[];
   }; // Optional weapons property
   equipped?: { name: string; quantity: number; type: string }[]; // Add equipped property
+  keywords?: {
+    keywords: string[]; // Add the keywords array inside the keywords object
+  }; // Optional keywords property
 };
 
 type Faction = {
@@ -45,22 +48,26 @@ const factions: Faction[] = (factionsData as any).map((faction: any) => ({
 
 function App() {
   const [selectedUnits, setSelectedUnits] = useState<SelectedUnit[]>([]);
-  const [sidebarVisible, setArmySidebarVisible] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const [sidebarExpanded, setArmySidebarExpanded] = useState(true);
   const [visibleFactions, setVisibleFactions] = useState<string[]>([]);
   const [armySidebarTitle, setArmySidebarTitle] = useState<string>("");
   const [selectedDetachment, setSelectedDetachment] = useState<string>(""); // Add selectedDetachment state
   const [detachmentTitle, setDetachmentTitle] = useState<string>(""); // New state for detachment title
+  const [warlordId, setWarlordId] = useState<string | null>(null);
+  const [armyCreated, setArmyCreated] = useState<boolean>(false); // Add armyCreated state
 
-  const updateSelectedDetachment: React.Dispatch<React.SetStateAction<string>> = (value) => {
+  useEffect(() => {}, [warlordId]);
+
+  const updateSelectedDetachment: React.Dispatch<
+    React.SetStateAction<string>
+  > = (value) => {
     if (typeof value === "function") {
       setSelectedDetachment((prevState) => {
         const newValue = value(prevState);
-        console.log("App.tsx - Updating selectedDetachment to:", newValue); // Debugging log
         return newValue;
       });
     } else {
-      console.log("App.tsx - Updating selectedDetachment to:", value); // Debugging log
       setSelectedDetachment(value);
     }
   };
@@ -70,7 +77,7 @@ function App() {
   };
 
   const toggleArmySidebarVisibility = () => {
-    setArmySidebarVisible(!sidebarVisible);
+    setSidebarVisible((prevVisible) => !prevVisible);
   };
 
   // Function to clear the army list
@@ -88,7 +95,8 @@ function App() {
     miscellaneous: { name: string; quantity: number }[] = [],
     enhancements: { name: string; pointCost: number }[] = [],
     wargearOptions: string[] = [],
-    equipped: { name: string; quantity: number; type: string }[] = []
+    equipped: { name: string; quantity: number; type: string }[] = [],
+    keywords: string[] = [] // Add keywords as a parameter
   ) => {
     const modelCount = numberOfModels[0];
 
@@ -135,6 +143,7 @@ function App() {
         enhancementQuantities: new Array(enhancements.length).fill(0),
         enhancements,
         wargearOptions,
+        keywords, // Include keywords here
       },
     ]);
   };
@@ -187,6 +196,29 @@ function App() {
     });
   };
 
+  const updateUnitQuantity = (id: string, increment: number) => {
+    setSelectedUnits((prevSelectedUnits) =>
+      prevSelectedUnits.map((unit) => {
+        if (unit.id === id) {
+          const newIndex = Math.max(
+            0,
+            Math.min(
+              unit.numberOfModels.length - 1,
+              unit.currentIndex + increment
+            )
+          );
+
+          return {
+            ...unit,
+            currentIndex: newIndex,
+            quantity: unit.numberOfModels[newIndex], // Update quantity based on new index
+          };
+        }
+        return unit;
+      })
+    );
+  };
+
   return (
     <div>
       <Navbar
@@ -197,12 +229,14 @@ function App() {
         toggleArmySidebar={toggleArmySidebar}
         toggleArmySidebarVisibility={toggleArmySidebarVisibility}
         setArmySidebarTitle={setArmySidebarTitle}
-        setDetachmentTitle={setDetachmentTitle} // Pass the setter for detachment title
+        setDetachmentTitle={setDetachmentTitle}
         clearArmyList={clearArmyList}
         selectedUnits={selectedUnits}
         setSelectedDetachment={setSelectedDetachment}
-        detachmentTitle={detachmentTitle} // Pass detachmentTitle as a prop
-
+        detachmentTitle={detachmentTitle}
+        warlordId={warlordId} // Pass warlordId here
+        armyCreated={armyCreated} // Pass armyCreated state
+        setArmyCreated={setArmyCreated} // Pass setArmyCreated function
       />
 
       {sidebarVisible && (
@@ -288,22 +322,18 @@ function App() {
               )
             );
           }}
-          enhancementQuantities={selectedUnits.map(
-            (unit) => unit.enhancementQuantities
-          ).flat()}
-          expanded={sidebarExpanded}
+          enhancementQuantities={selectedUnits
+            .map((unit) => unit.enhancementQuantities)
+            .flat()}
+          expanded={sidebarVisible}
           toggleArmySidebar={toggleArmySidebar}
           toggleArmySidebarVisibility={toggleArmySidebarVisibility}
           armySidebarTitle={armySidebarTitle}
           detachmentTitle={detachmentTitle} // Pass the detachment title here
+          warlordId={warlordId} // Pass warlordId here
+          setWarlordId={setWarlordId} // Pass setWarlordId here
         />
       )}
-
-      {/* Debugging log moved outside JSX */}
-      {(() => {
-        console.log("App.tsx - selectedDetachment after update:", selectedDetachment);
-        return null;
-      })()}
 
       {visibleFactions.map((factionName) => (
         <div key={factionName}>
@@ -329,6 +359,7 @@ function App() {
                         meleeWeapons: unit.weapons?.meleeWeapons || [],
                         wargearOptions: unit.wargearOptions || [],
                         equipped: unit.equipped || [],
+                        keywords: unit.keywords?.keywords || [], // Access the keywords array
                       }}
                       addUnitToArmyList={addUnitToArmyList}
                     />

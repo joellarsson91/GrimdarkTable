@@ -16,6 +16,7 @@ export interface SelectedUnit {
   wargearQuantities: number[];
   enhancements: { name: string; pointCost: number }[];
   enhancementQuantities: number[];
+  keywords: string[]; // Add the 'keywords' property
 }
 
 export interface Detachment {
